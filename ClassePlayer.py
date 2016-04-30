@@ -14,22 +14,22 @@ class Player():
         pl.pos[0] = pl.pos[0] + 1
     def up():
         pl.pos[0] = pl.pos[0] - 1
-
-start_pos = [8,8]
         
-pl = Player(20,0,start_pos)  #weapon ta como 0 por que ainda n definimos os ides das armas.
+    def set_player():
+        start_pos = [8,8]  
+        pl = Player(20,0,start_pos)  #weapon ta como 0 por que ainda n definimos os ides das armas.
 
 #----------------------------------------------- TESTE---------------------------------------
-while True:
-    print (pl.pos)
-    teste = input ("que direção - up , left , right , down")
-    if teste == "left":
-        Player.left()
-    elif teste == "down":
-        Player.down()
-    elif teste == "up":
-        Player.up()
-    elif teste == "right":
-        Player.right()
-    else:
-        print ("escreve certo")
+#while True:
+#    print (pl.pos)
+#    teste = input ("que direção - up , left , right , down")
+#    if teste == "left":
+#        Player.left()
+#    elif teste == "down":
+#        Player.down()
+#    elif teste == "up":
+#        Player.up()
+#    elif teste == "right":
+#        Player.right()
+#    else:
+#        print ("escreve certo")

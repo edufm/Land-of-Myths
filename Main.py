@@ -9,10 +9,11 @@ from tkinter import *
 import numpy as np
 
 
+import ClassePlayer
 from ClasseEnemys import Enemys
 from ClasseGun import Gun
 from ClasseMapa import Mapa
-from ClassePlayer import Player
+
 
                
 window = Tk()

@@ -1,7 +1,7 @@
 
 from tkinter import *
 import numpy as np
-
+import ClassePlayer
 
 class Mapa():
     def __init__(self, matriz):
@@ -297,7 +297,11 @@ class Mapa():
         [b00_13, b01_13, b02_13, b03_13, b04_13, b05_13, b06_13, b07_13, b08_13, b09_13, b10_13, b11_13, b12_13, b13_13, b14_13, b15_13],
         [b00_14, b01_14, b02_14, b03_14, b04_14, b05_14, b06_14, b07_14, b08_14, b09_14, b10_14, b11_14, b12_14, b13_14, b14_14, b15_14],
         [b00_15, b01_15, b02_15, b03_15, b04_15, b05_15, b06_15, b07_15, b08_15, b09_15, b10_15, b11_15, b12_15, b13_15, b14_15, b15_15]]
-
+        
+        Player.set_player()
+        
+        b[pl.pos[0]][pl.pos[1]] = Button(window, text = "PL")
+        
         Mapa.create_button(b)
         
     def create_button(b):
