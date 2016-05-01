@@ -1,14 +1,79 @@
 
 from tkinter import *
 import numpy as np
-import ClassePlayer
 
 class Mapa():
     def __init__(self, matriz):
-        self.matriz = np.zeros([15,15])
+        self.matriz = matriz
+        
+    def detect_click(X, Y, matriz, b):
+        print(matriz)
+        if X == 0 or Y == 0 or X == 14 or Y == 14 and X == 1000:
+            if X == 0 and Y == 0:
+                if matriz[X][Y] == 0 and (matriz[X+1][Y] == 1 or matriz[X][Y+1] == 1):
+                    matriz[X][Y] == 1
+                    b[X+1][Y+1].config(text = "X")
+                if matriz[X][Y] > 0:
+                    Enemys.Take_Damage(pl.weapon)
+                    
+            if X == 14 and Y == 0:
+                if matriz[X][Y] == 0 and (matriz[X][Y+1] == 1 or matriz[X-1][Y] == 1):
+                    matriz[X][Y] == 1
+                    b[X+1][Y+1].config(text = "X")
+                if matriz[X][Y] > 0:
+                    Enemys.Take_Damage(pl.weapon)
+                    
+            if X == 0 and Y == 14:
+                if matriz[X][Y] == 0 and (matriz[X+1][Y] == 1 or matriz[X][Y-1] == 1):
+                    matriz[X][Y] == 1
+                    b[X+1][Y+1].config(text = "X")
+                if matriz[X][Y] > 0:
+                    Enemys.Take_Damage(pl.weapon)
+            
+            if X == 14 and Y == 14:
+                if matriz[X][Y] == 0 and (matriz[X-1][Y] == 1 or matriz[X][Y-1] == 1):
+                    matriz[X][Y] == 1
+                    b[X+1][Y+1].config(text = "X")
+                if matriz[X][Y] > 0:
+                    Enemys.Take_Damage(pl.weapon)
+            
+            if X == 0 and Y != 0 and Y != 14:
+                if matriz[X][Y] == 0 and (matriz[X+1][Y] == 1 or matriz[X][Y-1] == 1 or matriz[X][Y+1] == 1):
+                    matriz[X][Y] == 1
+                    b[X+1][Y+1].config(text = "X")
+                if matriz[X][Y] > 0:
+                    Enemys.Take_Damage(pl.weapon)
+                
+            if Y == 0 and X != 0 and X != 14:
+                if matriz[X][Y] == 0 and (matriz[X+1][Y] == 1 or matriz[X-1][Y] == 1 or matriz[X][Y+1] == 1):
+                    matriz[X][Y] == 1
+                    b[X+1][Y+1].config(text = "X")
+                if matriz[X][Y] > 0:
+                    Enemys.Take_Damage(pl.weapon)
+                    
+            if X == 14 and Y != 0 and Y != 14:
+                if matriz[X][Y] == 0 and (matriz[X-1][Y] == 1 or matriz[X][Y-1] == 1 or matriz[X][Y+1] == 1):
+                    matriz[X][Y] == 1
+                    b[X+1][Y+1].config(text = "X")
+                if matriz[X][Y] > 0:
+                    Enemys.Take_Damage(pl.weapon)
+                
+            if Y == 14 and X != 0 and X != 14:
+                if matriz[X][Y] == 0 and (matriz[X+1][Y] == 1 or matriz[X][Y-1] == 1 or matriz[X-1][Y] == 1):
+                    matriz[X][Y] == 1
+                    b[X+1][Y+1].config(text = "X")
+                if matriz[X][Y] > 0:
+                    Enemys.Take_Damage(pl.weapon)
+
+        else:
+            if matriz[X][Y] == 0:
+                matriz[X][Y] == 1
+                b[X+1][Y+1].config(text = "X")
+            if matriz[X][Y] > 0:
+                Enemys.Take_Damage(pl.weapon)
      
     def load_map(window):
-        
+           
         b00_00 = Button(window, text = "")
         b01_00 = Button(window, text = "")
         b02_00 = Button(window, text = "")
@@ -297,15 +362,17 @@ class Mapa():
         [b00_13, b01_13, b02_13, b03_13, b04_13, b05_13, b06_13, b07_13, b08_13, b09_13, b10_13, b11_13, b12_13, b13_13, b14_13, b15_13],
         [b00_14, b01_14, b02_14, b03_14, b04_14, b05_14, b06_14, b07_14, b08_14, b09_14, b10_14, b11_14, b12_14, b13_14, b14_14, b15_14],
         [b00_15, b01_15, b02_15, b03_15, b04_15, b05_15, b06_15, b07_15, b08_15, b09_15, b10_15, b11_15, b12_15, b13_15, b14_15, b15_15]]
+               
+        matriz = np.zeros([15, 15])
+        matriz[7][7] = 1
         
-        Player.set_player()
+        Mapa.create_button(b, matriz)
         
-        b[pl.pos[0]][pl.pos[1]] = Button(window, text = "PL")
+        return b, matriz
         
-        Mapa.create_button(b)
-        
-    def create_button(b):
-        for i in range(0,15):
-            for j in range(0,15):
+    def create_button(b, matriz):
+        for i in range(0,14):
+            for j in range(0,14):
+                b[i][j].config(command=lambda: Mapa.detect_click(i,j, matriz, b))
                 b[i][j].config( height = 2, width = 4)
                 b[i][j].grid(row=i, column=j)
