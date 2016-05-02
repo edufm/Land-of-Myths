@@ -19,11 +19,11 @@ class Main:
         self.name = name
 
     def Start_Game():
-        Map = Mapa(np.zeros([15, 15]))        
+        Map = Mapa(np.zeros([15, 15]), [])        
         Map.matriz[7][7] = 1
-        b = Mapa.load_map(Map, window)
+        Mapa.load_map(Map, window)
         pl = Player(20, "none", [7,7])
-        Player.set_player(b)
+        Player.set_player(pl, Map)
 
 window = Tk()
 window.title("Não sabemos ainda")
