@@ -18,7 +18,7 @@ class Player():
     def set_player(self, Map):
         self.pos = [7,7]
         Map.b[self.pos[0]][ self.pos[1]].config(text = "X")
-
+        
 #----------------------------------------------- TESTE---------------------------------------
 #pl = Player(20,0,[7,7])
 #

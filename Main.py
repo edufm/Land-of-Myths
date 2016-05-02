@@ -20,9 +20,9 @@ class Main:
 
     def Start_Game():
         Map = Mapa(np.zeros([15, 15]), [])        
-        Map.matriz[7][7] = 1
-        Mapa.load_map(Map, window)
         pl = Player(20,0,[7,7])
+        Map.matriz[7][7] = 1
+        Mapa.load_map(Map, window, pl)
         Player.set_player(pl, Map)
 
 window = Tk()
