@@ -17,12 +17,11 @@ from ClasseMapa import Mapa
 class Main:
     def __init__(self, name):
         self.name = name
-          
-    def upadate_matriz():
-        return matriz
-    
+
     def Start_Game():
-        b, matriz = Mapa.load_map(window)
+        Map = Mapa(np.zeros([15, 15]))        
+        Map.matriz[7][7] = 1
+        b = Mapa.load_map(Map, window)
         pl = Player(20, "none", [7,7])
         Player.set_player(b)
 
