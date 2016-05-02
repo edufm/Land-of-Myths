@@ -7,11 +7,13 @@ class Mapa():
         self.matriz = matriz
         self.b = b
 
-    def detect_click(self, X, Y):
+    def detect_click(self, m):
+        X = m[0]
+        Y = m[1]
         print(X)
         print(Y)
         print(self.matriz)
-        self.b = b
+        b = self.b
         if X == 0 or Y == 0 or X == 14 or Y == 14:
             if X == 0 and Y == 0:
                 if self.matriz[X][Y] == 0 and (self.matriz[X+1][Y] == 1 or self.matriz[X][Y+1] == 1):
@@ -80,10 +82,10 @@ class Mapa():
                 ClasseEnemys.Take_Damage(pl.weapon)
 
     def load_map(self, window):
-           
+        
         for i in range(15):
             self.b.append([])
             for j in range(15):
-                button = Button(window, text=' ', width=4, height=2,command= lambda m=[i,j]: self.detect_click(self, X, Y))
+                button = Button(window, text=' ', width=4, height=2,command= lambda m=[i,j]: self.detect_click(m))
                 button.grid(row=i, column=j, sticky=W+E+S+N)
                 self.b[i].append(button)

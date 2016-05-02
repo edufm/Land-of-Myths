@@ -22,7 +22,7 @@ class Main:
         Map = Mapa(np.zeros([15, 15]), [])        
         Map.matriz[7][7] = 1
         Mapa.load_map(Map, window)
-        pl = Player(20, "none", [7,7])
+        pl = Player(20,0,[7,7])
         Player.set_player(pl, Map)
 
 window = Tk()

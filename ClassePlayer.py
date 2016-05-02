@@ -17,21 +17,21 @@ class Player():
         
     def set_player(self, Map):
         self.pos = [7,7]
-        Map.b[self.pos[0], self.pos[1]].config(text = "X")
+        Map.b[self.pos[0]][ self.pos[1]].config(text = "X")
 
 #----------------------------------------------- TESTE---------------------------------------
-pl = Player(20,0,[7,7])
-
-while True:
-    print (pl.pos)
-    teste = input ("que direção - up , left , right , down")
-    if teste == "left":
-        Player.left()
-    elif teste == "down":
-        Player.down()
-    elif teste == "up":
-        Player.up()
-    elif teste == "right":
-        Player.right()
-    else:
-        print ("escreve certo")
+#pl = Player(20,0,[7,7])
+#
+#while True:
+#    print (pl.pos)
+#    teste = input ("que direção - up , left , right , down")
+#    if teste == "left":
+#        Player.left()
+#    elif teste == "down":
+#        Player.down()
+#    elif teste == "up":
+#        Player.up()
+#    elif teste == "right":
+#        Player.right()
+#    else:
+#        print ("escreve certo")
