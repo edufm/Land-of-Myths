@@ -59,6 +59,21 @@ class Mapa():
         for i in range(15):
             self.b.append([])
             for j in range(15):
-                button = Button(window, text=' ', width=4, height=2,command= lambda m=[i,j]: self.detect_click(m, pl))
+                button = Button(window, text=' ',command= lambda m=[i,j]: self.detect_click(m, pl))
                 button.grid(row=i, column=j, sticky=W+E+S+N)
+                img = PhotoImage(file="C:\\Users\\Hugo\\Desktop\\nova\\download.png")
+                button.config(image=img)
+                button.image = img
                 self.b[i].append(button)
+                
+                
+    def gui(window):
+        
+         vida = Label(window)
+         vida.configure(text="VIDA:",bg = "orange")
+         vida.configure(height = 2 , width = 4)
+         vida.grid(row=16,column=0)
+         botãodevida1 = Button(window)
+         botãodevida1.configure(bg="light blue")
+         botãodevida1.configure(height = 2 , width = 20)
+         botãodevida1.grid(row= 16,columnspan = 6)

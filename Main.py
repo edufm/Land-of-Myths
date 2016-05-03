@@ -24,10 +24,12 @@ class Main:
         Map.matriz[7][7] = 1
         Mapa.load_map(Map, window, pl)
         Player.set_player(pl, Map)
-
+        Mapa.gui(window)
+        
 window = Tk()
 window.title("Não sabemos ainda")
-window.geometry("1366x728")
+window.configure(bg="orange")
+
 
 Main.Start_Game()
 
