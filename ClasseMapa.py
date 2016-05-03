@@ -61,7 +61,7 @@ class Mapa():
             for j in range(15):
                 button = Button(window, text=' ',command= lambda m=[i,j]: self.detect_click(m, pl))
                 button.grid(row=i, column=j, sticky=W+E+S+N)
-                img = PhotoImage(file="C:\\Users\\Hugo\\Desktop\\nova\\download.png")
+                img = PhotoImage(file=".\\download.png")
                 button.config(image=img)
                 button.image = img
                 self.b[i].append(button)
