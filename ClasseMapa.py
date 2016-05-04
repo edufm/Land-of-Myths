@@ -75,7 +75,7 @@ class Mapa():
     def gui(window):
         
          vida = Label(window)
-         vida.configure(text="VIDA:",bg = "orange")
+         vida.configure(text="VIDA:",font=("castelar"),bg = "orange")
          vida.configure(height = 2 , width = 4)
          vida.grid(row=16,column=0)
          botãodevida1 = Button(window)
@@ -83,15 +83,15 @@ class Mapa():
          botãodevida1.configure(height = 2 , width = 20)
          botãodevida1.grid(row= 16,columnspan = 7)
          munição = Label(window)
-         munição.configure(text="MUNIÇÃO :   x{0}".format(20),bg = "orange")
+         munição.configure(text="MUNIÇÃO :   x{0}".format(20),font=("castelar"),bg = "orange")
          munição.configure(height = 2, width = 15)
          munição.grid(row= 16, columnspan = 22)
          time = Label(window)
-         time.configure(text="Time : {0}s".format(2.5),bg = "orange")
+         time.configure(text="Time : {0}s".format(2.5),font=("castelar"),bg = "orange")
          time.configure(height = 2, width = 7)
          time.grid(row= 16, column = 11,columnspan= 2)
          wave = Label(window)
-         wave.configure(text="WAVE : {0}".format(1),bg = "orange")
+         wave.configure(text="WAVE : {0}".format(1),font=("castelar"),bg = "orange")
          wave.configure(height = 2, width = 7)
          wave.grid(row= 0, column = 7,columnspan= 2)
          
