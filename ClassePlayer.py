@@ -15,9 +15,8 @@ class Player():
     def up():
         pl.pos[0] = pl.pos[0] - 1
         
-    def set_player(self, Map):
+    def set_player(self, Map, imgPl):
         self.pos = [7,7]
-        Map.b[self.pos[0]][ self.pos[1]].config(text = "X")
         
 #----------------------------------------------- TESTE---------------------------------------
 #pl = Player(20,0,[7,7])

@@ -19,17 +19,20 @@ class Main:
         self.name = name
 
     def Start_Game():
+
+        img = PhotoImage(file=".\\download.png")
+        imgPl = PhotoImage(file=".\\player.png")
         Map = Mapa(np.zeros([15, 15]), [])        
-        pl = Player(20,0,[7,7])
+        pl = Player(20, 0, [7,7])
         Map.matriz[7][7] = 1
-        Mapa.load_map(Map, window, pl)
-        Player.set_player(pl, Map)
+        Mapa.load_map(Map, window, pl, img, imgPl)
+        Player.set_player(pl, Map, img)
         Mapa.gui(window)
         
+
 window = Tk()
 window.title("Não sabemos ainda")
 window.configure(bg="orange")
-
 
 Main.Start_Game()
 

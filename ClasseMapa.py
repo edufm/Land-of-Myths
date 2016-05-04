@@ -7,43 +7,51 @@ class Mapa():
         self.matriz = matriz
         self.b = b
 
-    def detect_click(self, m, pl):
+    def detect_click(self, m, pl, img, imgPl):
+
         X = m[0]
         Y = m[1]
         Xp = pl.pos[0]
         Yp = pl.pos[1]
         
-        print(X)
-        print(Y)
-        
         b = self.b
         
-        if self.matriz[X][Y] == 0 and X+1 == Xp:
+        if self.matriz[X][Y] == 0 and X+1 == Xp and Y == Yp:
+            #Adiciona o player no novo lugar
             self.matriz[X][Y] = 1
-            b[X][Y].config(text = "X")
+            b[X][Y].config(image=imgPl)
+            b[X][Y].image = imgPl
+            #Remove o "Rastro" do player
             self.matriz[Xp][Y] = 0
-            b[Xp][Yp].config(text = "")
+            b[Xp][Yp].config(image=img)
+            b[Xp][Yp].image = img
             pl.pos = [X,Y]
             
-        if self.matriz[X][Y] == 0 and X-1 == Xp :
+        if self.matriz[X][Y] == 0 and X-1 == Xp and Y == Yp:
             self.matriz[X][Y] = 1
-            b[X][Y].config(text = "X")
+            b[X][Y].config(image=imgPl)
+            b[X][Y].image = imgPl
             self.matriz[Xp][Y] = 0
-            b[Xp][Yp].config(text = "")
+            b[Xp][Yp].config(image=img)
+            b[Xp][Yp].image = img
             pl.pos = [X,Y]            
             
-        if self.matriz[X][Y] == 0 and Y+1 == Yp :
+        if self.matriz[X][Y] == 0 and Y+1 == Yp and X == Xp:
             self.matriz[X][Y] = 1
-            b[X][Y].config(text = "X")
+            b[X][Y].config(image=imgPl)
+            b[X][Y].image = imgPl
             self.matriz[X][Yp] = 0
-            b[Xp][Yp].config(text = "")
+            b[Xp][Yp].config(image=img)
+            b[Xp][Yp].image = img
             pl.pos = [X,Y]
             
-        if self.matriz[X][Y] == 0 and Y-1 == Yp:
+        if self.matriz[X][Y] == 0 and Y-1 == Yp and X == Xp:
             self.matriz[X][Y] = 1
-            b[X][Y].config(text = "X") 
+            b[X][Y].config(image=imgPl)
+            b[X][Y].image = imgPl
             self.matriz[X][Yp] = 0
-            b[Xp][Yp].config(text = "")
+            b[Xp][Yp].config(image=img)
+            b[Xp][Yp].image = img
             pl.pos = [X,Y]
             
         if self.matriz[X][Y] > 1:
@@ -54,18 +62,20 @@ class Mapa():
     def Aiturn():
         pass        
 
-    def load_map(self, window, pl):
+    def load_map(self, window, pl, img, imgPl):
         
         for i in range(15):
             self.b.append([])
             for j in range(15):
-                button = Button(window, text=' ',command= lambda m=[i,j]: self.detect_click(m, pl))
+                button = Button(window, text=' ',command= lambda m=[i,j]: self.detect_click(m, pl, img, imgPl))
                 button.grid(row=i+1, column=j, sticky=W+E+S+N)
-                img = PhotoImage(file=".\\download.png")
                 button.config(image=img)
                 button.configure(height = 30, width = 30,bg = "black")
                 button.image = img
                 self.b[i].append(button)
+                
+        self.b[7][7].config(image=imgPl)
+        self.b[7][7].image = imgPl
                 
     def vida_do_jogador(x,y):
             
