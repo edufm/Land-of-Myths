@@ -1,14 +1,17 @@
 
 from tkinter import *
 import numpy as np
+from ClasseEnemys import Enemys
 
 class Mapa():
-    def __init__(self, matriz, b):
+    def __init__(self, matriz, b, Waves, LEnemys):
         self.matriz = matriz
         self.b = b
+        self.Waves = Waves
+        self.LEnemys = LEnemys
 
-    def detect_click(self, m, pl, img, imgPl):
-
+    def detect_click(self, m, pl, img, imgPl, imgE):
+        
         X = m[0]
         Y = m[1]
         Xp = pl.pos[0]
@@ -34,8 +37,8 @@ class Mapa():
             self.matriz[Xp][Y] = 0
             b[Xp][Yp].config(image=img)
             b[Xp][Yp].image = img
-            pl.pos = [X,Y]            
-            
+            pl.pos = [X,Y]
+
         if self.matriz[X][Y] == 0 and Y+1 == Yp and X == Xp:
             self.matriz[X][Y] = 1
             b[X][Y].config(image=imgPl)
@@ -54,20 +57,25 @@ class Mapa():
             b[Xp][Yp].image = img
             pl.pos = [X,Y]
             
-        if self.matriz[X][Y] > 1:
-            ClasseEnemys.Take_Damage(pl.weapon)
-               
-        Mapa.Aiturn()
+        if self.matriz[X][Y] == 2:
+            Enemys.Take_Damage(pl.weapon)
         
-    def Aiturn():
-        pass        
+        if ((len(self.LEnemys)) == 0):
+            self.Waves += 1
+            Enemys.cria_inimigos(self.Waves, self, imgE)
+        
+        print(self.matriz)
+        Mapa.Aiturn(self.LEnemys, pl ,self, img, imgE)
+        
+    def Aiturn(enemys, pl, Map, img, imgE):
+        for i in enemys:
+            Enemys.jogada(i, pl, Map, img, imgE)
 
-    def load_map(self, window, pl, img, imgPl):
-        
+    def load_map(self, window, pl, img, imgPl, imgE):
         for i in range(15):
             self.b.append([])
             for j in range(15):
-                button = Button(window, text=' ',command= lambda m=[i,j]: self.detect_click(m, pl, img, imgPl))
+                button = Button(window, text=' ',command= lambda m=[i,j]: self.detect_click(m, pl, img, imgPl, imgE))
                 button.grid(row=i+1, column=j, sticky=W+E+S+N)
                 button.config(image=img)
                 button.configure(height = 30, width = 30,bg = "black")
@@ -79,9 +87,8 @@ class Mapa():
                 
     def vida_do_jogador(x,y):
             
-            return x - y #ainda n está sendo usada
-                
-                  
+        return x - y #ainda n está sendo usada
+
     def gui(window):
         
          vida = Label(window)
