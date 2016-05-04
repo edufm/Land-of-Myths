@@ -88,7 +88,7 @@ class Mapa():
          munição.grid(row= 16, columnspan = 22)
          time = Label(window)
          time.configure(text="Time : {0}s".format(2.5),font=("castelar"),bg = "orange")
-         time.configure(height = 2, width = 7)
+         time.configure(height = 2, width = 8)
          time.grid(row= 16, column = 11,columnspan= 2)
          wave = Label(window)
          wave.configure(text="WAVE : {0}".format(1),font=("castelar"),bg = "orange")
