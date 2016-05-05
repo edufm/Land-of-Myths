@@ -4,11 +4,13 @@ import numpy as np
 from ClasseEnemys import Enemys
 
 class Mapa():
-    def __init__(self, matriz, b, Waves, LEnemys):
+    def __init__(self, matriz, b, gadjets, Waves, LEnemys):
         self.matriz = matriz
         self.b = b
+        self.gadjets = gadjets
         self.Waves = Waves
         self.LEnemys = LEnemys
+        
 
     def detect_click(self, m, pl, img, imgPl, imgE):
         
@@ -58,14 +60,15 @@ class Mapa():
             pl.pos = [X,Y]
             
         if self.matriz[X][Y] == 2:
-            Enemys.Take_Damage(pl.weapon)
+            Enemys.Take_Damage([X,Y], pl, self, img)
         
         if ((len(self.LEnemys)) == 0):
             self.Waves += 1
             Enemys.cria_inimigos(self.Waves, self, imgE)
         
-        print(self.matriz)
         Mapa.Aiturn(self.LEnemys, pl ,self, img, imgE)
+        
+        Mapa.updategui(self.gadjets, pl.health, pl.weapon.Ammo, self.Waves)
         
     def Aiturn(enemys, pl, Map, img, imgE):
         for i in enemys:
@@ -85,11 +88,7 @@ class Mapa():
         self.b[7][7].config(image=imgPl)
         self.b[7][7].image = imgPl
                 
-    def vida_do_jogador(x,y):
-            
-        return x - y #ainda n está sendo usada
-
-    def gui(window):
+    def gui(window, Map):
         
          vida = Label(window)
          vida.configure(text="VIDA:",font=("castelar"),bg = "orange")
@@ -112,6 +111,15 @@ class Mapa():
          wave.configure(height = 2, width = 7)
          wave.grid(row= 0, column = 7,columnspan= 2)
          
+         Map.gadjets.append(vida)
+         Map.gadjets.append(botãodevida1)
+         Map.gadjets.append(munição)
+         Map.gadjets.append(time)
+         Map.gadjets.append(wave)
          
+    def updategui(gadjets, vida, ammo, wave):
          
-        
+         gadjets[2].configure(height = 2 , width = vida)
+         gadjets[3].configure(text="MUNIÇÃO :   x{0}".format(ammo),font=("castelar"),bg = "orange")         
+         gadjets[4].configure(text="Time : {0}s".format(2.5),font=("castelar"),bg = "orange")
+         gadjets[5].configure(text="WAVE : {0}".format(wave),font=("castelar"),bg = "orange")

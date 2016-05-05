@@ -28,8 +28,15 @@ class Enemys():
                 E = Enemys(1, 1, 1, [14,i])
                 Map.LEnemys.append(E)
     
-    def take_damage(self, loc):
-        pass
+    def Take_Damage(loc, pl, Map, img):
+        for i in Map.LEnemys:
+            if i.pos == loc:
+                i.health -= pl.weapon.Damage
+                if i.health <= 0:
+                    Map.LEnemys.remove(i)    
+                    Map.matriz[i.pos[0]][i.pos[1]] = 0
+                    Map.b[i.pos[0]][i.pos[1]].config(image=img)
+                    Map.b[i.pos[0]][i.pos[1]].image = img
     
     def left(self):
         self.pos[1] -= 1
@@ -113,7 +120,7 @@ class Enemys():
             
     def atack(self, pl):
         pl.health -= self.damage
-            
+
 #if pl.pos[1] == self.pos[1]:
 #    if distanciax < 0:
 #        self.left()
