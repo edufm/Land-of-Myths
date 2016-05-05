@@ -21,9 +21,9 @@ class Main:
         window.title("Não sabemos ainda")
         window.configure(bg="orange")        
         
-        img = PhotoImage(file=".\\download.png")
-        imgPl = PhotoImage(file=".\\player.png")
-        imgE = PhotoImage(file=".\\enemy.png")
+        img = PhotoImage(file=".\\Imagens\\download.png")
+        imgPl = PhotoImage(file=".\\Imagens\\player.png")
+        imgE = PhotoImage(file=".\\Imagens\\enemy.png")
         
         Map = Mapa(np.zeros([15, 15]), [], [window], 0, [])    
 
