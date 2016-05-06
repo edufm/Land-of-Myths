@@ -19,7 +19,7 @@ class Main:
     def Start_Game():
         window = Tk()
         window.title("Não sabemos ainda")
-        window.configure(bg="orange")        
+        window.configure(bg="black")        
         
         img = PhotoImage(file=".\\Imagens\\download.png")
         imgPl = PhotoImage(file=".\\Imagens\\player.png")
