@@ -1,7 +1,15 @@
 
 from tkinter import *
 import numpy as np
+
+window = Tk()
+window.title("Magic Trap")
+window.configure(bg="black")
+
 from ClasseEnemys import Enemys
+from ClasseGun import Gun
+from ClassePlayer import Player
+import ClasseImagens
 
 class Mapa():
     def __init__(self, matriz, b, gadjets, Waves, LEnemys):
@@ -10,9 +18,30 @@ class Mapa():
         self.gadjets = gadjets
         self.Waves = Waves
         self.LEnemys = LEnemys
+    
+    def Start_Game():
         
+        Map = Mapa(np.zeros([15, 15]), [], [window], 0, [])    
 
-    def detect_click(self, m, pl, img, imgPl, imgE):
+        Pistol = Gun(1, 100, 10, 1)        
+        Lguns = [Pistol]        
+        
+        pl = Player(20, Lguns[0], [7,7])
+        
+        Map.matriz[7][7] = 1
+        Mapa.load_map(Map, window, pl)
+        Player.set_player(pl)
+        
+        Mapa.gui(window, Map)
+        
+        window.mainloop()
+
+    def detect_click(self, m, pl):
+        
+        if ((len(self.LEnemys)) == 0):
+            self.Waves += 1
+            Enemys.cria_inimigos(self.Waves, self)
+            Mapa.update_map(self, pl)
         
         X = m[0]
         Y = m[1]
@@ -24,69 +53,76 @@ class Mapa():
         if self.matriz[X][Y] == 0 and X+1 == Xp and Y == Yp:
             #Adiciona o player no novo lugar
             self.matriz[X][Y] = 1
-            b[X][Y].config(image=imgPl)
-            b[X][Y].image = imgPl
+            b[X][Y].config(image=ClasseImagens.player[1])
+            b[X][Y].image = ClasseImagens.player[1]
             #Remove o "Rastro" do player
             self.matriz[Xp][Y] = 0
-            b[Xp][Yp].config(image=img)
-            b[Xp][Yp].image = img
+            b[Xp][Yp].config(image=ClasseImagens.Tiles[self.Waves])
+            b[Xp][Yp].image = ClasseImagens.Tiles[self.Waves]
             pl.pos = [X,Y]
             
         if self.matriz[X][Y] == 0 and X-1 == Xp and Y == Yp:
             self.matriz[X][Y] = 1
-            b[X][Y].config(image=imgPl)
-            b[X][Y].image = imgPl
+            b[X][Y].config(image=ClasseImagens.player[2])
+            b[X][Y].image = ClasseImagens.player[2]
             self.matriz[Xp][Y] = 0
-            b[Xp][Yp].config(image=img)
-            b[Xp][Yp].image = img
+            b[Xp][Yp].config(image=ClasseImagens.Tiles[self.Waves])
+            b[Xp][Yp].image = ClasseImagens.Tiles[self.Waves]
             pl.pos = [X,Y]
 
         if self.matriz[X][Y] == 0 and Y+1 == Yp and X == Xp:
             self.matriz[X][Y] = 1
-            b[X][Y].config(image=imgPl)
-            b[X][Y].image = imgPl
+            b[X][Y].config(image=ClasseImagens.player[3])
+            b[X][Y].image = ClasseImagens.player[3]
             self.matriz[X][Yp] = 0
-            b[Xp][Yp].config(image=img)
-            b[Xp][Yp].image = img
+            b[Xp][Yp].config(image= ClasseImagens.Tiles[self.Waves])
+            b[Xp][Yp].image = ClasseImagens.Tiles[self.Waves]
             pl.pos = [X,Y]
             
         if self.matriz[X][Y] == 0 and Y-1 == Yp and X == Xp:
             self.matriz[X][Y] = 1
-            b[X][Y].config(image=imgPl)
-            b[X][Y].image = imgPl
+            b[X][Y].config(image= ClasseImagens.player[0])
+            b[X][Y].image = ClasseImagens.player[0]
             self.matriz[X][Yp] = 0
-            b[Xp][Yp].config(image=img)
-            b[Xp][Yp].image = img
+            b[Xp][Yp].config(image= ClasseImagens.Tiles[self.Waves])
+            b[Xp][Yp].image = ClasseImagens.Tiles[self.Waves]
             pl.pos = [X,Y]
             
         if self.matriz[X][Y] == 2:
-            Enemys.Take_Damage([X,Y], pl, self, img)
+            Enemys.Take_Damage([X,Y], pl, self)
         
-        if ((len(self.LEnemys)) == 0):
-            self.Waves += 1
-            Enemys.cria_inimigos(self.Waves, self, imgE)
-        
-        Mapa.Aiturn(self.LEnemys, pl ,self, img, imgE)
+        Mapa.Aiturn(self.LEnemys, pl ,self)
         
         Mapa.updategui(self.gadjets, pl.health, pl.weapon.Ammo, self.Waves)
         
-    def Aiturn(enemys, pl, Map, img, imgE):
+        
+    def Aiturn(enemys, pl, Map):
         for i in enemys:
-            Enemys.jogada(i, pl, Map, img, imgE)
+            Enemys.jogada(i, pl, Map)
+            
+    def update_map(Map, pl):
+        for i in range (15):
+            for j in range(15):
+                Map.b[i][j].config(image=ClasseImagens.Tiles[Map.Waves])
+                Map.b[i][j].image = ClasseImagens.Tiles[Map.Waves]
+                
+        Map.b[pl.pos[0]][pl.pos[1]].config(image = ClasseImagens.player[1])
+        Map.b[pl.pos[0]][pl.pos[1]].image = ClasseImagens.player[1]
 
-    def load_map(self, window, pl, img, imgPl, imgE):
+    def load_map(self, window, pl):
+        
         for i in range(15):
             self.b.append([])
             for j in range(15):
-                button = Button(window, text=' ',command= lambda m=[i,j]: self.detect_click(m, pl, img, imgPl, imgE))
+                button = Button(window, text=' ',command= lambda m=[i,j]: self.detect_click(m, pl))
                 button.grid(row=i+1, column=j, sticky=W+E+S+N)
-                button.config(image=img)
+                button.config(image=ClasseImagens.Tiles[0])
                 button.configure(height = 30, width = 30,bg = "black")
-                button.image = img
+                button.image = ClasseImagens.Tiles[0]
                 self.b[i].append(button)
-                
-        self.b[7][7].config(image=imgPl)
-        self.b[7][7].image = imgPl
+                        
+        self.b[7][7].config(image = ClasseImagens.player[0])
+        self.b[7][7].image = ClasseImagens.player[0]
                 
     def gui(window, Map):
         
