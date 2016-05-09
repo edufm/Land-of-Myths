@@ -1,6 +1,6 @@
 import numpy as np
 import random
-from ClasseMapa import Mapa   #REmover Dps
+
 
 class Gun():
     def __init__(self, ID, Ammo, Range, Damage,Type):
@@ -24,6 +24,17 @@ class Gun():
     def Shotgun_Shoot(self, pl):
         pl.pos
 
+    def Gerar_Guns(Map):
+        x = random.randint(1,101)
+        if x <= 20:
+            Gun.Gerar_Pistol(Map)
+        x = random.randint(1,101)
+        if x <= 10:
+            Gun.Gerar_Shotgun(Map)
+        x = random.randint(1,101)
+        if x <= 5:
+            Gun.Gerar_Sniper(Map)
+        
     def Gerar_Pistol(Map):
         x = random.randint(0,14)
         y = random.randint(0,26)
@@ -31,14 +42,25 @@ class Gun():
             Map.matriz[x][y] = 100
         else:
             Gun.Gerar_Pistol(Map)
-            
+        
+    def Gerar_Shotgun(Map):
+        x = random.randint(0,14)
+        y = random.randint(0,26)
+        if Map.matriz[x][y] == 0:
+            Map.matriz[x][y] = 101
+        else:
+            Gun.Gerar_Shotgun(Map)
+
+    def Gerar_Sniper(Map):
+        x = random.randint(0,14)
+        y = random.randint(0,26)
+        if Map.matriz[x][y] == 0:
+            Map.matriz[x][y] = 102
+        else:
+            Gun.Gerar_Sniper(Map)
             
 Pistol = Gun(100,7,7,1,"Shoot")
 
-Mapa.Start_Game()
+Shotgun = Gun(101,6,3,3,"Burst")
 
-x = 0
-while x <= 12:
-    x +=1
-    Gun.Gerar_Pistol(Map)
-    Print(Map.matriz)
+Sniper = Gun(102,3,50,5,"LongWatch")
