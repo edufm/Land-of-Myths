@@ -26,6 +26,16 @@ class Enemys():
                     Map.matriz[i.pos[0]][i.pos[1]] = 0
                     Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
                     Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
+                    
+    def Take_Damage_SG(loc, pl, Map,Damage): #Função exclusiva do shotgun
+        for i in Map.LEnemys:
+            if i.pos == loc:
+                i.health -= Damage
+                if i.health <= 0:
+                    Map.LEnemys.remove(i)    
+                    Map.matriz[i.pos[0]][i.pos[1]] = 0
+                    Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
+                    Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
     
     def left(self):
         self.pos[1] -= 1

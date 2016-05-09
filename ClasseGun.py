@@ -18,11 +18,41 @@ class Gun():
         else:
             return 0
 
+
     def Pick_Weapon(self, pl):        
         pl.inv[self.ID-100] = self.ammo
+        
             
-    def Shotgun_Shoot(self, pl):
-        pl.pos
+    def Shotgun_Shoot(self, pl, loc,Map):
+        if loc[1] == (pl.pos[1] - 1) and loc[0] == pl.pos[0]:
+            Gun.Shotgun_Left(pl.pos[1] - 1,Map,pl)
+        if loc[1] == (pl.pos[1] + 1) and loc[0] == pl.pos[0]:
+            Gun.Shotgun_Right(pl.pos[1] + 1,Map,pl)
+        if loc[0] == (pl.pos[0] - 1) and loc[1] == pl.pos[1]:
+            Gun.Shotgun_Up(pl.pos[0] - 1,Map,pl)
+        if loc[0] == (pl.pos[0] + 1) and loc[1] == pl.pos[1]:
+            Gun.Shotgun_Down(pl.pos[0] + 1,Map,pl)
+        
+#___________________________________________Shotgun____________________________
+    
+    def Shotgun_Left(loc,Map,pl):
+        x = loc[0]
+        y = loc[1]
+        if Map.Matriz[x][y] < 100:
+            Enemys.Take_Damage_SG(Loc, pl, Map, 3)
+        else:
+            loc[1] -= 1
+            loc[0] -= 1
+            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            loc[0] += 1
+            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            loc[0] += 1
+            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            
+    
+        
+        #_______________________GErador armas_____________________
+        
 
     def Gerar_Guns(Map):
         x = random.randint(1,101)
@@ -58,6 +88,8 @@ class Gun():
             Map.matriz[x][y] = 102
         else:
             Gun.Gerar_Sniper(Map)
+            
+            #_____________________________________________________________
             
 Pistol = Gun(100,7,7,1,"Shoot")
 
