@@ -15,10 +15,10 @@ class Imagem:
         
 
 
-player_front = PhotoImage(file=".//Imagens//Sprites//player.png")
-player_right = PhotoImage(file=".//Imagens//Sprites//player.png")
-player_left =  PhotoImage(file=".//Imagens//Sprites//player.png")
-player_back =  PhotoImage(file=".//Imagens//Sprites//player.png")
+player_front = PhotoImage(file=".//Imagens//Sprites//player_front.png")
+player_right = PhotoImage(file=".//Imagens//Sprites//player_right.png")
+player_left =  PhotoImage(file=".//Imagens//Sprites//player_left.png")
+player_back =  PhotoImage(file=".//Imagens//Sprites//player_back.png")
 
 player = [player_front, player_right, player_left, player_back]
         
