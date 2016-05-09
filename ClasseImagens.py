@@ -42,4 +42,4 @@ stone = PhotoImage(file=".//Imagens//Tiles//stone.png")
 snow = PhotoImage(file=".//Imagens//Tiles//snow.png")
 wood = PhotoImage(file=".//Imagens//Tiles//wood.png")
 
-Tiles = [grass, grass, dirt, stone, snow, wood]
+Tiles = [grass, grass, dirt, stone, snow, wood, wood, wood, wood, wood]

@@ -26,7 +26,7 @@ class Mapa():
         Pistol = Gun(1, 100, 10, 1)        
         Lguns = [Pistol]
         
-        pl = Player(20, Lguns[0], [7,13])
+        pl = Player(20, Lguns[0], [7,13], [7, 0, 0])
         
         Map.matriz[7][13] = 1
         Mapa.load_map(Map, window, pl)
@@ -37,11 +37,6 @@ class Mapa():
         window.mainloop()
 
     def detect_click(self, m, pl):
-        
-        if ((len(self.LEnemys)) == 0):
-            self.Waves += 1
-            Enemys.cria_inimigos(self.Waves, self)
-            Mapa.update_map(self, pl)
         
         X = m[0]
         Y = m[1]
@@ -95,7 +90,11 @@ class Mapa():
         
         Mapa.updategui(self.gadjets, pl.health, pl.weapon.Ammo, self.Waves)
         
-
+        if ((len(self.LEnemys)) == 0):
+            self.Waves += 1
+            Enemys.cria_inimigos(self.Waves, self)
+            Mapa.update_map(self, pl)        
+        
     def Aiturn(enemys, pl, Map):
         for i in enemys:
             Enemys.jogada(i, pl, Map)
@@ -154,7 +153,6 @@ class Mapa():
          Map.gadjets.append(wave)
          
     def updategui(gadjets, vida, ammo, wave):
-         
          gadjets[2].configure(height = 2 , width = vida)
          gadjets[3].configure(text="Ammo :   x{0}".format(ammo),font=("castelar"),bg = "black",foreground = "white")         
          gadjets[4].configure(text="Time : {0}s".format(2.5),font=("castelar"),bg = "black",foreground="white")
