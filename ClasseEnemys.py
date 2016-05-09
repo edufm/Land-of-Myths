@@ -16,6 +16,13 @@ class Enemys():
             Map.b[14][i].config(image = ClasseImagens.enemy1[0])
             Map.b[14][i].image = ClasseImagens.enemy1[0]
             Map.LEnemys.append(E)
+            
+        if waves%5 == 0:
+            E = Enemys(1, 10, 3, [14,27])
+            Map.matriz[14][27] = 2
+            Map.b[14][27].config(image = ClasseImagens.enemy1[0])
+            Map.b[14][27].image = ClasseImagens.enemy1[0]
+            Map.LEnemys.append(E)
                     
     def Take_Damage(loc, pl, Map):
         for i in Map.LEnemys:
