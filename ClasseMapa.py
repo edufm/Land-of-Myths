@@ -22,7 +22,7 @@ class Mapa():
     def Start_Game():
         
         Map = Mapa(np.zeros([15, 27]), [], [window], 0, [])    
-
+        
         Pistol = Gun(1, 100, 10, 1,"shoot")        
         Lguns = [Pistol]
         
@@ -33,7 +33,7 @@ class Mapa():
         Player.set_player(pl)
         
         Mapa.gui(window, Map)
-        
+        print (Map)
         window.mainloop()
 
     def detect_click(self, m, pl):

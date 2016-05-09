@@ -49,7 +49,7 @@ boss1_right = PhotoImage(file=".//Imagens//Sprites//boss1_right.png")
 boss1_left = PhotoImage(file=".//Imagens//Sprites//boss1_left.png")
 boss1_back = PhotoImage(file=".//Imagens//Sprites//boss1_back.png")
 
-boss = [boss1]
+boss = [boss1_front,boss1_right,boss1_left,boss1_back]
 
 Pistol = PhotoImage(file=".//Imagens//Sprites//revolver.png")
 Shotgun = PhotoImage(file=".//Imagens//Sprites//shotgun.png")
