@@ -10,28 +10,13 @@ class Enemys():
         
     def cria_inimigos(waves, Map):
         Map.LEnemys = []
-        if waves == 1:
-            for i in range(5):
-                E = Enemys(1, 1, 1, [14,i])
-                Map.matriz[14][i] = 2
-                Map.b[14][i].config(image = ClasseImagens.enemy1[0])
-                Map.b[14][i].image = ClasseImagens.enemy1[0]
-                Map.LEnemys.append(E)
-                
-        if waves == 2:
-            for i in range(10):
-                E = Enemys(1, 1, 1, [14,i])
-                Map.b[14][i].config(image = ClasseImagens.enemy1[0])
-                Map.b[14][i].image = ClasseImagens.enemy1[0]
-                Map.LEnemys.append(E)
-
-        if waves == 3:
-            for i in range(0, 14):
-                E = Enemys(1, 1, 1, [14,i])
-                Map.b[14][i].config(image = ClasseImagens.enemy1[0])
-                Map.b[14][i].image = ClasseImagens.enemy1[0]
-                Map.LEnemys.append(E)
-    
+        for i in range(waves*3):
+            E = Enemys(1, 1, 1, [14,i])
+            Map.matriz[14][i] = 2
+            Map.b[14][i].config(image = ClasseImagens.enemy1[0])
+            Map.b[14][i].image = ClasseImagens.enemy1[0]
+            Map.LEnemys.append(E)
+                    
     def Take_Damage(loc, pl, Map):
         for i in Map.LEnemys:
             if i.pos == loc:
@@ -54,7 +39,7 @@ class Enemys():
     def jogada(self, pl, Map):
         distanciax = pl.pos[1] - self.pos[1]
         distanciay = pl.pos[0] - self.pos[0]
-        if (distanciax == 0 and distanciay == 1) or (distanciax == 1 and distanciay == 0):
+        if (distanciax == 0 and abs(distanciay) == 1) or (distanciax == 1 and abs(distanciay) == 0):
            self.atack(pl)
         
         elif distanciax > 0 and abs(distanciax) > abs(distanciay) and Map.matriz[self.pos[0]][self.pos[1]+1] == 0:
