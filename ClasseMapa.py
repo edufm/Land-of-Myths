@@ -23,7 +23,7 @@ class Mapa():
         
         Map = Mapa(np.zeros([15, 27]), [], [window], 0, [])    
 
-        Pistol = Gun(1, 100, 10, 1)        
+        Pistol = Gun(1, 100, 10, 1,"shoot")        
         Lguns = [Pistol]
         
         pl = Player(20, Lguns[0], [7,13], [7, 0, 0])
