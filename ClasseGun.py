@@ -13,8 +13,19 @@ class Gun():
     
     def Check_Range(self ,loc, pl):
         distanciax = pl.pos[1] - loc[1]
+        if distanciax < 0:
+            distanciax = loc[1] - pl.pos[1]
         distanciay = pl.pos[0] - loc[0]
+        if distanciay < 0:
+            distanciay = loc[0] - pl.pos[0]
+            
+        print ("Distanciax =",distanciax)
+        print ("Distanciay =",distanciay)
+        print (pl.pos[1],loc[1])
+        print (pl.pos[0], loc [0])
+        
         Distance = distanciax +  distanciay
+        print (Distance)
         if Distance < self.Range:
             return 1
         else:
@@ -23,6 +34,11 @@ class Gun():
 
     def Pick_Weapon(self, pl):        
         pl.inv[self.ID-100] = self.ammo
+    
+    def Weapon_Swap(ID):
+        Weapon = ID - 100
+        pl.Weapon = WeaponList[Weapon]
+        
         
             
     def Shotgun_Shoot(self, pl, loc,Map):
@@ -136,6 +152,8 @@ class Gun():
             #______________________Dano_______________________________________
         
     def Take_Damage_P(loc, pl, Map):
+        RangeTest =Gun.Check_Range(Pistol, loc, pl)
+        if RangeTest == 1:
             for i in Map.LEnemys:
                 if i.pos == loc:
                     i.health -= pl.weapon.Damage
@@ -144,6 +162,8 @@ class Gun():
                         Map.matriz[i.pos[0]][i.pos[1]] = 0
                         Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
                         Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
+        else:
+            print ("funciono poha")
                     
             
     def Take_Damage_SG(loc, pl, Map, Damage): #Função exclusiva do shotgun
@@ -163,3 +183,5 @@ Pistol = Gun(100,7,7,1,"Shoot")
 Shotgun = Gun(101,6,3,3,"Burst")
 
 Sniper = Gun(102,3,50,5,"LongWatch")
+
+WeaponList = [Pistol,Shotgun,Sniper]
