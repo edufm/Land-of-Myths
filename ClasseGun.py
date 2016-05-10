@@ -145,9 +145,13 @@ class Gun():
             
             #______________________Dano_______________________________________
         
+    
     def Take_Damage_P(loc, pl, Map):
+        
         RangeTest =Gun.Check_Range(Pistol, loc, pl)
-        if RangeTest == 1:
+        ammo = Gun.Ammo_Count(pl)
+        
+        if RangeTest == 1 and ammo == 1:
             for i in Map.LEnemys:
                 if i.pos == loc:
                     i.health -= pl.weapon.Damage
@@ -156,20 +160,31 @@ class Gun():
                         Map.matriz[i.pos[0]][i.pos[1]] = 0
                         Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
                         Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
+        Gun.Ammo_Count(pl)
                     
             
     def Take_Damage_SG(loc, pl, Map, Damage): #Função exclusiva do shotgun
-            for i in Map.LEnemys:
-                if i.pos == loc:
-                    i.health -= Damage
-                    if i.health <= 0:
-                        Map.LEnemys.remove(i)    
-                        Map.matriz[i.pos[0]][i.pos[1]] = 0
-                        Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
-                        Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
+        for i in Map.LEnemys:
+            if i.pos == loc:
+                i.health -= Damage
+                if i.health <= 0:
+                       Map.LEnemys.remove(i)    
+                       Map.matriz[i.pos[0]][i.pos[1]] = 0
+                       Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
+                       Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
+        Gun.Ammo_Count(pl)
                     
-            #__________________________________________________________________________
-            
+            #________________________________Ammo__________________________________________
+                    
+    def Ammo_Count(pl):
+        Ammo = pl.weapon.ID - 100
+        if pl.inv[Ammo] > 0:    
+            pl.inv[Ammo] -= 1
+            return 1
+        else:
+            print ("acabou a munição")
+            return 0
+        
 Pistol = Gun(100,7,7,1,"Shoot")
 
 Shotgun = Gun(101,6,3,3,"Burst")
