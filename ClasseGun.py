@@ -18,14 +18,8 @@ class Gun():
         distanciay = pl.pos[0] - loc[0]
         if distanciay < 0:
             distanciay = loc[0] - pl.pos[0]
-            
-        print ("Distanciax =",distanciax)
-        print ("Distanciay =",distanciay)
-        print (pl.pos[1],loc[1])
-        print (pl.pos[0], loc [0])
-        
+
         Distance = distanciax +  distanciay
-        print (Distance)
         if Distance < self.Range:
             return 1
         else:
@@ -162,8 +156,6 @@ class Gun():
                         Map.matriz[i.pos[0]][i.pos[1]] = 0
                         Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
                         Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
-        else:
-            print ("funciono poha")
                     
             
     def Take_Damage_SG(loc, pl, Map, Damage): #Função exclusiva do shotgun
