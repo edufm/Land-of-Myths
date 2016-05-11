@@ -50,8 +50,13 @@ class Mapa():
         Yp = pl.pos[1]
         
         b = self.b
+        V = self.matriz[X][Y] == 0
+        G = self.matriz[X][Y] > 99
+        GN = int(self.matriz[X][Y]) - 100
         
-        if self.matriz[X][Y] == 0 and X+1 == Xp and Y == Yp:
+        if (G or V) and X+1 == Xp and Y == Yp:
+            if G:
+                Gun.Pick_Weapon(GN, pl)
             #Adiciona o player no novo lugar
             self.matriz[X][Y] = 1
             b[X][Y].config(image=ClasseImagens.player[3])
@@ -62,7 +67,9 @@ class Mapa():
             b[Xp][Yp].image = ClasseImagens.Tiles[self.Waves]
             pl.pos = [X,Y]
             
-        if self.matriz[X][Y] == 0 and X-1 == Xp and Y == Yp:
+        if (G or V) and X-1 == Xp and Y == Yp:
+            if G:
+                Gun.Pick_Weapon(GN, pl)                
             self.matriz[X][Y] = 1
             b[X][Y].config(image=ClasseImagens.player[0])
             b[X][Y].image = ClasseImagens.player[0]
@@ -71,7 +78,9 @@ class Mapa():
             b[Xp][Yp].image = ClasseImagens.Tiles[self.Waves]
             pl.pos = [X,Y]
 
-        if self.matriz[X][Y] == 0 and Y+1 == Yp and X == Xp:
+        if (G or V) and Y+1 == Yp and X == Xp:
+            if G:
+                Gun.Pick_Weapon(GN, pl)
             self.matriz[X][Y] = 1
             b[X][Y].config(image=ClasseImagens.player[2])
             b[X][Y].image = ClasseImagens.player[2]
@@ -80,7 +89,9 @@ class Mapa():
             b[Xp][Yp].image = ClasseImagens.Tiles[self.Waves]
             pl.pos = [X,Y]
             
-        if self.matriz[X][Y] == 0 and Y-1 == Yp and X == Xp:
+        if (G or V) == 0 and Y-1 == Yp and X == Xp:
+            if G:
+                Gun.Pick_Weapon(GN, pl)
             self.matriz[X][Y] = 1
             b[X][Y].config(image= ClasseImagens.player[1])
             b[X][Y].image = ClasseImagens.player[1]
@@ -89,7 +100,7 @@ class Mapa():
             b[Xp][Yp].image = ClasseImagens.Tiles[self.Waves]
             pl.pos = [X,Y]
             
-        if self.matriz[X][Y] == 2:
+        if self.matriz[X][Y] >= 2 and self.matriz[X][Y] < 99:
             Enemys.Take_Damage([X,Y], pl, self)
         
         Mapa.Aiturn(self.LEnemys, pl ,self)
@@ -100,6 +111,12 @@ class Mapa():
             self.Waves += 1
             Enemys.cria_inimigos(self.Waves, self)
             Mapa.update_map(self, pl)        
+        
+        self.gera_itens(ClasseImagens.guns)
+            
+        
+    def gera_itens(self, imgguns):
+        Gun.Gerar_Guns(self, imgguns)
         
     def Aiturn(enemys, pl, Map):
         for i in enemys:

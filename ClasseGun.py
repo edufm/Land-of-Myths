@@ -26,8 +26,8 @@ class Gun():
             return 0
 
 
-    def Pick_Weapon(self, pl):        
-        pl.inv[self.ID-100] = self.ammo
+    def Pick_Weapon(ID, pl):        
+        pl.inv[ID] = WeaponList[ID].Ammo
     
     def Weapon_Swap(ID):
         Weapon = ID - 100
@@ -126,40 +126,46 @@ class Gun():
         #_______________________GErador armas_____________________
         
 
-    def Gerar_Guns(Map):
+    def Gerar_Guns(Map, imgguns):
         x = random.randint(1,101)
         if x <= 20:
-            Gun.Gerar_Pistol(Map)
+            Gun.Gerar_Pistol(Map, imgguns)
         x = random.randint(1,101)
         if x <= 10:
-            Gun.Gerar_Shotgun(Map)
+            Gun.Gerar_Shotgun(Map, imgguns)
         x = random.randint(1,101)
         if x <= 5:
-            Gun.Gerar_Sniper(Map)
+            Gun.Gerar_Sniper(Map, imgguns)
         
-    def Gerar_Pistol(Map):
+    def Gerar_Pistol(Map, imgguns):
         x = random.randint(0,14)
         y = random.randint(0,26)
         if Map.matriz[x][y] == 0:
             Map.matriz[x][y] = 100
+            Map.b[x][y].config(image = imgguns[0])
+            Map.b[x][y].image = imgguns[0]
         else:
-            Gun.Gerar_Pistol(Map)
+            Gun.Gerar_Pistol(Map, imgguns)
         
-    def Gerar_Shotgun(Map):
+    def Gerar_Shotgun(Map, imgguns):
         x = random.randint(0,14)
         y = random.randint(0,26)
         if Map.matriz[x][y] == 0:
             Map.matriz[x][y] = 101
+            Map.b[x][y].config(image = imgguns[1])
+            Map.b[x][y].image = imgguns[1]
         else:
-            Gun.Gerar_Shotgun(Map)
+            Gun.Gerar_Shotgun(Map, imgguns)
 
-    def Gerar_Sniper(Map):
+    def Gerar_Sniper(Map, imgguns):
         x = random.randint(0,14)
         y = random.randint(0,26)
         if Map.matriz[x][y] == 0:
             Map.matriz[x][y] = 102
+            Map.b[x][y].config(image = imgguns[2])
+            Map.b[x][y].image = imgguns[2]
         else:
-            Gun.Gerar_Sniper(Map)
+            Gun.Gerar_Sniper(Map, imgguns)
             
             #______________________Dano_______________________________________
         
