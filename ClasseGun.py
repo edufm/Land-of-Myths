@@ -27,7 +27,12 @@ class Gun():
 
 
     def Pick_Weapon(ID, pl):        
-        pl.inv[ID] = WeaponList[ID].Ammo
+        Ammo = pl.inv[ID]
+        Ammo += WeaponList[ID].Ammo
+        if Ammo >= WeaponList[ID].Ammo * 3:
+            pl.inv[ID] = WeaponList[ID].Ammo * 3
+        else:
+            pl.inv[ID] += WeaponList[ID].Ammo
     
     def Weapon_Swap(ID):
         Weapon = ID - 100
