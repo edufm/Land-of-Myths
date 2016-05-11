@@ -104,6 +104,24 @@ class Gun():
             Enemys.Take_Damage_SG(Loc, pl, Map, 1)
             
     
+    
+    #_______________________________Sniper___________________________
+    
+    def Sniper_X(loc,Map,pl):
+        x = loc[0]
+        y = loc[1]
+        Damage = 7
+        if loc[0] == x and loc[1] > y:
+            if Mapa.Matriz[0] == 0:
+                loc[1] += 1
+                Gun.Sniper_X(loc)
+            else:
+                Gun.Take_Damage_Sn(loc, pl, Map,Damage)
+                Damage -= 1
+            
+        
+            
+            
         
         #_______________________GErador armas_____________________
         
@@ -147,20 +165,22 @@ class Gun():
         
     
     def Take_Damage_P(loc, pl, Map):
+        print ("tomou")
         
         RangeTest =Gun.Check_Range(Pistol, loc, pl)
-        ammo = Gun.Ammo_Count(pl)
         
-        if RangeTest == 1 and ammo == 1:
-            for i in Map.LEnemys:
-                if i.pos == loc:
-                    i.health -= pl.weapon.Damage
-                    if i.health <= 0:
-                        Map.LEnemys.remove(i)    
-                        Map.matriz[i.pos[0]][i.pos[1]] = 0
-                        Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
-                        Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
-        Gun.Ammo_Count(pl)
+        if RangeTest == 1:
+            Ammo = Gun.Ammo_Count(pl)
+            for i in Map.LEnemys:     
+                if Ammo == 1:
+                    if i.pos == loc:
+                        i.health -= pl.weapon.Damage
+                        if i.health <= 0:
+                            Map.LEnemys.remove(i)    
+                            Map.matriz[i.pos[0]][i.pos[1]] = 0
+                            Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
+                            Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
+            
                     
             
     def Take_Damage_SG(loc, pl, Map, Damage): #Função exclusiva do shotgun
@@ -172,7 +192,7 @@ class Gun():
                        Map.matriz[i.pos[0]][i.pos[1]] = 0
                        Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
                        Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
-        Gun.Ammo_Count(pl)
+        
                     
             #________________________________Ammo__________________________________________
                     
@@ -180,10 +200,11 @@ class Gun():
         Ammo = pl.weapon.ID - 100
         if pl.inv[Ammo] > 0:    
             pl.inv[Ammo] -= 1
+            print (pl.inv[Ammo])
             return 1
         else:
             print ("acabou a munição")
-            return 0
+
         
 Pistol = Gun(100,7,7,1,"Shoot")
 
