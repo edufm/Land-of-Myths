@@ -128,12 +128,10 @@ class Gun():
 
     def Gerar_Guns(Map, imgguns):
         x = random.randint(1,101)
-        if x <= 10:
+        if x <= 17 and x >= 7:
             Gun.Gerar_Pistol(Map, imgguns)
-        x = random.randint(1,101)
-        if x <= 5:
+        if x <= 7 and x > 2:
             Gun.Gerar_Shotgun(Map, imgguns)
-        x = random.randint(1,101)
         if x <= 2:
             Gun.Gerar_Sniper(Map, imgguns)
         

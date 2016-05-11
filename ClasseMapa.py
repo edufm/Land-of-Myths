@@ -129,8 +129,9 @@ class Mapa():
     def update_map(Map, pl):
         for i in range (15):
             for j in range(27):
-                Map.b[i][j].config(image=ClasseImagens.Tiles[Map.Waves])
-                Map.b[i][j].image = ClasseImagens.Tiles[Map.Waves]
+                if Map.matriz[i][j] == 0:
+                    Map.b[i][j].config(image=ClasseImagens.Tiles[Map.Waves])
+                    Map.b[i][j].image = ClasseImagens.Tiles[Map.Waves]
                 
         Map.b[pl.pos[0]][pl.pos[1]].config(image = ClasseImagens.player[0])
         Map.b[pl.pos[0]][pl.pos[1]].image = ClasseImagens.player[0]
