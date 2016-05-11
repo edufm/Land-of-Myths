@@ -94,7 +94,7 @@ class Mapa():
         
         Mapa.Aiturn(self.LEnemys, pl ,self)
         
-        Mapa.updategui(self, self.gadjets, pl.health, pl.weapon.Ammo)
+        Mapa.updategui(self, self.gadjets, pl)
         
         if ((len(self.LEnemys)) == 0):
             self.Waves += 1
@@ -113,7 +113,21 @@ class Mapa():
                 
         Map.b[pl.pos[0]][pl.pos[1]].config(image = ClasseImagens.player[0])
         Map.b[pl.pos[0]][pl.pos[1]].image = ClasseImagens.player[0]
-
+    
+    def Botão_de_arma(pl, Map, X):
+        if X == 0:
+            pass
+            mostrarange(pl, Map)
+        if X == 1:
+            pass
+            mostrarange(pl, Map)
+        if X == 2:
+            pass
+            mostrarange(pl, Map)
+        
+    def mostrarange(pl, Map):
+        passw
+    
     def load_map(self, window, pl):
         
         for i in range(15):
@@ -128,6 +142,7 @@ class Mapa():
                         
         self.b[7][13].config(image = ClasseImagens.player[0])
         self.b[7][13].image = ClasseImagens.player[0]
+        self.b[7][13].configure(highlightbackground="red", highlightcolor="red")
                 
     def gui(window, Map):
         
@@ -139,10 +154,6 @@ class Mapa():
         botãodevida1.configure(bg="light blue")
         botãodevida1.configure(height = 2 , width = 20)
         botãodevida1.grid(row= 16,columnspan = 7)
-        munição = Label(window)
-        munição.configure(text="Ammo :   x{0}".format(20),font=("castelar"),bg = "black",foreground = "white")
-        munição.configure(height = 2, width = 15)
-        munição.grid(row= 16, columnspan = 22)
         time = Label(window)
         time.configure(text="Time : {0}s".format(2.5),font=("castelar"),bg = "black",foreground="white")
         time.configure(height = 2, width = 8)
@@ -154,15 +165,55 @@ class Mapa():
         nomejogo = Label(window)
         nomejogo.configure(text="I´ll survive" , font= ("Times",20),bg = "black",foreground="white")
         nomejogo.grid(row = 0 ,columnspan =100)
+        
         Map.gadjets.append(vida)
         Map.gadjets.append(botãodevida1)
-        Map.gadjets.append(munição)
         Map.gadjets.append(time)
         Map.gadjets.append(wave)
         Map.gadjets.append(nomejogo)
+        #Botões de armas
+        Pistolb = Button(window)
+        Pistolb.configure(height = 36, width = 36, state = 'disabled')
+        Pistolb.configure(image = ClasseImagens.guns[0])
+        Pistolb.image = ClasseImagens.guns[0]
+        Pistolb.grid(row = 5, column = 28, columnspan = 2)
+        
+        Pammo = Label(window)
+        Pammo.configure(text="Ammo :   x{0}".format(0),font=("castelar"),bg = "black",foreground = "white")
+        Pammo.configure(height = 2, width = 15)
+        Pammo.grid(row= 5, column = 30)
+        
+        shotgunb = Button(window)
+        shotgunb.configure(height = 36, width = 36, state = 'disabled')
+        shotgunb.configure(image = ClasseImagens.guns[1])
+        shotgunb.image = ClasseImagens.guns[1]
+        shotgunb.grid(row = 7, column = 28, columnspan = 2)
+        
+        shotammo = Label(window)
+        shotammo.configure(text="Ammo :   x{0}".format(0),font=("castelar"),bg = "black",foreground = "white")
+        shotammo.configure(height = 2, width = 15)
+        shotammo.grid(row= 7, column = 30)
+        
+        Sniperb = Button(window)
+        Sniperb.configure(height = 36, width = 36, state = 'disabled')
+        Sniperb.configure(image = ClasseImagens.guns[2])
+        Sniperb.image = ClasseImagens.guns[2]
+        Sniperb.grid(row = 9, column = 28, columnspan = 2)
+        
+        snipeammo = Label(window)
+        snipeammo.configure(text="Ammo :   x{0}".format(0),font=("castelar"),bg = "black",foreground = "white")
+        snipeammo.configure(height = 2, width = 15)
+        snipeammo.grid(row= 9, column = 30)
+        
+        Map.gadjets.append(Pistolb)
+        Map.gadjets.append(Pammo)
+        Map.gadjets.append(shotgunb)
+        Map.gadjets.append(shotammo)
+        Map.gadjets.append(Sniperb)
+        Map.gadjets.append(snipeammo)
          
-    def updategui(Map, gadjets, vida, ammo):
-        if vida <= 0:
+    def updategui(Map, gadjets, pl):
+        if pl.health <= 0:
             for i in range(15):
                 for j in range(27):
                     Map.b[i][j].destroy()
@@ -181,10 +232,22 @@ class Mapa():
             restart.config(text = "Restart", height = 5, width = 36, command =lambda: Mapa.Start_Game(1, [youdied, restart, giveup]))
             restart.place(x=550, y=400)
                       
-        gadjets[1].configure(height = 2 , width = vida)
-        gadjets[2].configure(text="Ammo :   x{0}".format(ammo),font=("castelar"),bg = "black",foreground = "white")         
-        gadjets[3].configure(text="Time : {0}s".format(2.5),font=("castelar"),bg = "black",foreground="white")
-        gadjets[4].configure(text="Wave : {0}".format(Map.Waves),font=("castelar"),bg = "black",foreground="white")
+        gadjets[1].configure(height = 2 , width = pl.health)
+        gadjets[2].configure(text="Time : {0}s".format(2.5),font=("castelar"),bg = "black",foreground="white")
+        gadjets[3].configure(text="Wave : {0}".format(Map.Waves),font=("castelar"),bg = "black",foreground="white")
+        
+        if pl.inv[0] > 0:
+            gadjets[5].config(state = 'active')
+        
+        if pl.inv[1] > 0:
+            gadjets[7].config(state = 'active')
+            
+        if pl.inv[2] > 0:
+            gadjets[9].config(state = 'active')
+        
+        gadjets[6].config(text = 'Ammo X{0}'.format(pl.inv[0]))        
+        gadjets[8].config(text = 'Ammo X{0}'.format(pl.inv[1]))
+        gadjets[10].config(text = 'Ammo X{0}'.format(pl.inv[2]))
         
     def Exit():
         window.destroy()
