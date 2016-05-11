@@ -12,12 +12,39 @@ class Enemys():
         
     def cria_inimigos(waves, Map):
         Map.LEnemys = []
-        for i in range(waves*3):
-            E = Enemys(1, 1, 1, [14, i])
-            Map.matriz[14][i] = 2
-            Map.b[14][i].config(image = ClasseImagens.enemy1[0])
-            Map.b[14][i].image = ClasseImagens.enemy1[0]
+        if waves < 4:
+            for i in range(waves*3):
+                E = Enemys(0, 1, 1, [14, i])
+                Map.matriz[14][i] = 2
+                Map.b[14][i].config(image = ClasseImagens.enemy1[0])
+                Map.b[14][i].image = ClasseImagens.enemy1[0]
+                Map.LEnemys.append(E)
+        if waves == 4:
+            E = Enemys(1, 7, 5, [14, 13])
+            Map.matriz[14][13] = 3
+            Map.b[14][13].config(image = ClasseImagens.boss1[0])
+            Map.b[14][13].image = ClasseImagens.boss1[0]
             Map.LEnemys.append(E)
+        if waves > 4 and waves < 8:
+            for i in range(waves*3):
+                E = Enemys(0, 2, 1, [14, i])
+                Map.matriz[14][i] = 2
+                Map.b[14][i].config(image = ClasseImagens.enemy1[0])
+                Map.b[14][i].image = ClasseImagens.enemy1[0]
+                Map.LEnemys.append(E)
+        if waves == 8:
+            E = Enemys(0, 14, 5, [14, 13])
+            Map.matriz[14][13] = 3
+            Map.b[14][13].config(image = ClasseImagens.boss1[0])
+            Map.b[14][13].image = ClasseImagens.boss1[0]
+            Map.LEnemys.append(E)
+        if waves > 8:
+            for i in range(waves*3):
+                E = Enemys(2, 3, 1, [14, i])
+                Map.matriz[14][i] = 2
+                Map.b[14][i].config(image = ClasseImagens.enemy1[0])
+                Map.b[14][i].image = ClasseImagens.enemy1[0]
+                Map.LEnemys.append(E)
                     
     def Take_Damage(loc, pl, Map):
         if pl.weapon.ID == 100:
@@ -46,16 +73,16 @@ class Enemys():
             Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
             self.right()
             Map.matriz[self.pos[0]][self.pos[1]] = 2
-            Map.b[self.pos[0]][self.pos[1]].config(image= ClasseImagens.enemy1[1])
-            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.enemy1[1]
+            Map.b[self.pos[0]][self.pos[1]].config(image= ClasseImagens.enemy[self.ID][1])
+            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.enemy[self.ID][1]
             
         elif distanciax < 0 and abs(distanciax) > abs(distanciay) and Map.matriz[self.pos[0]][self.pos[1]-1] == 0:
             Map.matriz[self.pos[0]][self.pos[1]] = 0
             Map.b[self.pos[0]][self.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
             Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[Map.Waves]            
             self.left()
-            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.enemy1[2])
-            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.enemy1[2]
+            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.enemy[self.ID][2])
+            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.enemy[self.ID][2]
             Map.matriz[self.pos[0]][self.pos[1]] = 2
             
         elif distanciay > 0 and abs(distanciay) > abs(distanciax) and Map.matriz[self.pos[0]+1][self.pos[1]+1] == 0:
@@ -63,8 +90,8 @@ class Enemys():
             Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.Tiles[Map.Waves])
             Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
             self.down()
-            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.enemy1[3])
-            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.enemy1[3]
+            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.enemy[self.ID][3])
+            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.enemy[self.ID][3]
             Map.matriz[self.pos[0]][self.pos[1]] = 2
             
         elif distanciay < 0 and abs(distanciay) > abs(distanciax) and Map.matriz[self.pos[0]-1][self.pos[1]] == 0:
@@ -72,8 +99,8 @@ class Enemys():
             Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.Tiles[Map.Waves])
             Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
             self.up()
-            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.enemy1[0])
-            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.enemy1[0]
+            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.enemy[self.ID][0])
+            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.enemy[self.ID][0]
             Map.matriz[self.pos[0]][self.pos[1]] = 2
             
         elif abs(distanciay) == abs(distanciax):
