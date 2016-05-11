@@ -127,13 +127,29 @@ class Gun():
         
 
     def Gerar_Guns(Map, imgguns):
+        a = 0
+        b = 0
+        c = 0
+        for i in range(15):
+            for j in range(27):
+                if Map.matriz[i][j] == 100:           
+                    a += 1
+                if Map.matriz[i][j] == 101:
+                    b += 1
+                if Map.matriz[i][j] == 101:
+                    c += 1
+        
         x = random.randint(1,101)
-        if x <= 17 and x >= 7:
-            Gun.Gerar_Pistol(Map, imgguns)
-        if x <= 7 and x > 2:
-            Gun.Gerar_Shotgun(Map, imgguns)
-        if x <= 2:
-            Gun.Gerar_Sniper(Map, imgguns)
+        
+        if a < 5:
+            if x <= 17 and x >= 7:
+                Gun.Gerar_Pistol(Map, imgguns)
+        if b <=3:
+            if x <= 7 and x > 2:
+                Gun.Gerar_Shotgun(Map, imgguns)
+        if c <=2:
+            if x <= 2:
+                Gun.Gerar_Sniper(Map, imgguns)
         
     def Gerar_Pistol(Map, imgguns):
         x = random.randint(0,14)
