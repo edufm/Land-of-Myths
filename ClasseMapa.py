@@ -227,14 +227,14 @@ class Mapa():
     
             giveup = Button(window)
             giveup.config(command =lambda: Mapa.Exit())
-            exiit = PhotoImage(file="C:\\Users\\Hugo\\Desktop\\Sprites\\exit.png")
+            exiit = PhotoImage(file=".\\Imagens\\Sprites\\exit.png")
             giveup.image = exiit
             giveup.config(image=exiit,bg="black")
             giveup.place(x=525, y= 300)
             
             restart = Button(window)
             restart.config(command =lambda: Mapa.Start_Game(1, [youdied, restart, giveup]))
-            restartt = PhotoImage(file="C:\\Users\\Hugo\\Desktop\\Sprites\\reset-button-hi.png")
+            restartt = PhotoImage(file=".\\Imagens\\Sprites\\reset-button-hi.png")
             restart.image = restartt
             restart.config(image=restartt,bg="black")
             restart.place(x=525, y= 500)
