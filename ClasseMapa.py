@@ -55,6 +55,7 @@ class Mapa():
         GN = int(self.matriz[X][Y]) - 100
         
         if (G or V) and X+1 == Xp and Y == Yp:
+            print("nothing2")            
             if G:
                 Gun.Pick_Weapon(GN, pl)
             #Adiciona o player no novo lugar
@@ -68,8 +69,9 @@ class Mapa():
             pl.pos = [X,Y]
             
         if (G or V) and X-1 == Xp and Y == Yp:
+            print("nothing3")
             if G:
-                Gun.Pick_Weapon(GN, pl)                
+                Gun.Pick_Weapon(GN, pl)         
             self.matriz[X][Y] = 1
             b[X][Y].config(image=ClasseImagens.player[0])
             b[X][Y].image = ClasseImagens.player[0]
@@ -79,6 +81,7 @@ class Mapa():
             pl.pos = [X,Y]
 
         if (G or V) and Y+1 == Yp and X == Xp:
+            print("nothing4")
             if G:
                 Gun.Pick_Weapon(GN, pl)
             self.matriz[X][Y] = 1
@@ -89,7 +92,8 @@ class Mapa():
             b[Xp][Yp].image = ClasseImagens.Tiles[self.Waves]
             pl.pos = [X,Y]
             
-        if (G or V) == 0 and Y-1 == Yp and X == Xp:
+        if (G or V) and Y-1 == Yp and X == Xp:
+            print("nothing5")
             if G:
                 Gun.Pick_Weapon(GN, pl)
             self.matriz[X][Y] = 1

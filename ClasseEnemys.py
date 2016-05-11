@@ -24,9 +24,6 @@ class Enemys():
             Gun.Take_Damage_P(loc,pl,Map)
         elif pl.weapon.ID == 101:
             Gun.Take_Damage_SG(loc,pl,Map)
-        
-                    
-
     
     def left(self):
         self.pos[1] -= 1
