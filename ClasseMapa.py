@@ -221,16 +221,23 @@ class Mapa():
                 i.destroy()
             
             youdied = Label(window)
-            youdied.config(text = "You Died", height = 5, width = 36)
-            youdied.place(x=550, y=100)
+            youdied.config(text = "Whatta shame, you died!!", height = 5, width = 36,bg="black",foreground="red",font=("castelar",40))
+            
+            youdied.place(x=130, y=40)
     
             giveup = Button(window)
-            giveup.config(text = "Giveup", height = 5, width = 36, command =lambda: Mapa.Exit())
-            giveup.place(x=550, y= 300)
+            giveup.config(command =lambda: Mapa.Exit())
+            exiit = PhotoImage(file="C:\\Users\\Hugo\\Desktop\\Sprites\\exit.png")
+            giveup.image = exiit
+            giveup.config(image=exiit,bg="black")
+            giveup.place(x=525, y= 300)
             
             restart = Button(window)
-            restart.config(text = "Restart", height = 5, width = 36, command =lambda: Mapa.Start_Game(1, [youdied, restart, giveup]))
-            restart.place(x=550, y=400)
+            restart.config(command =lambda: Mapa.Start_Game(1, [youdied, restart, giveup]))
+            restartt = PhotoImage(file="C:\\Users\\Hugo\\Desktop\\Sprites\\reset-button-hi.png")
+            restart.image = restartt
+            restart.config(image=restartt,bg="black")
+            restart.place(x=525, y= 500)
                       
         gadjets[1].configure(height = 2 , width = pl.health)
         gadjets[2].configure(text="Time : {0}s".format(2.5),font=("castelar"),bg = "black",foreground="white")
