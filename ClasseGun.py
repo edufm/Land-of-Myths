@@ -51,60 +51,60 @@ class Gun():
         x = loc[0]
         y = loc[1]
         if Map.Matriz[x][y] < 100 and Map.Matriz[x][y] != 0:
-            Enemys.Take_Damage_SG(Loc, pl, Map, 3)
+            Enemys.Take_Damage_SG(loc, pl, Map, 3)
         else:
             loc[1] -= 1
             loc[0] -= 1
-            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            Enemys.Take_Damage_SG(loc, pl, Map, 1)
             loc[0] += 1
-            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            Enemys.Take_Damage_SG(loc, pl, Map, 1)
             loc[0] += 1
-            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            Enemys.Take_Damage_SG(loc, pl, Map, 1)
             
     def Shotgun_Right(loc,Map,pl):
         x = loc[0]
         y = loc[1]
         if Map.Matriz[x][y] < 100 and Map.Matriz[x][y] != 0:
-            Enemys.Take_Damage_SG(Loc, pl, Map, 3)
+            Enemys.Take_Damage_SG(loc, pl, Map, 3)
         else:
             loc[1] += 1
             loc[0] -= 1
-            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            Enemys.Take_Damage_SG(loc, pl, Map, 1)
             loc[0] += 1
-            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            Enemys.Take_Damage_SG(loc, pl, Map, 1)
             loc[0] += 1
-            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            Enemys.Take_Damage_SG(loc, pl, Map, 1)
             
     def Shotgun_Down(loc,Map,pl):
         x = loc[0]
         y = loc[1]
         if Map.Matriz[x][y] < 100 and Map.Matriz[x][y] != 0:
-            Enemys.Take_Damage_SG(Loc, pl, Map, 3)
+            Enemys.Take_Damage_SG(loc, pl, Map, 3)
         else:
             loc[0] += 1
             loc[1] -= 1
-            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            Enemys.Take_Damage_SG(loc, pl, Map, 1)
             loc[1] += 1
-            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            Enemys.Take_Damage_SG(loc, pl, Map, 1)
             loc[1] += 1
-            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            Enemys.Take_Damage_SG(loc, pl, Map, 1)
             
     def Shotgun_Up(loc,Map,pl):
         x = loc[0]
         y = loc[1]
         if Map.Matriz[x][y] < 100 and Map.Matriz[x][y] != 0:
-            Enemys.Take_Damage_SG(Loc, pl, Map, 3)
+            Enemys.Take_Damage_SG(loc, pl, Map, 3)
         else:
             loc[0] -= 1
             loc[1] -= 1
-            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            Enemys.Take_Damage_SG(loc, pl, Map, 1)
             loc[1] += 1
-            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            Enemys.Take_Damage_SG(loc, pl, Map, 1)
             loc[1] += 1
-            Enemys.Take_Damage_SG(Loc, pl, Map, 1)
+            Enemys.Take_Damage_SG(loc, pl, Map, 1)
             
     
-    
+
     #_______________________________Sniper___________________________
     
     def Sniper_X(loc,Map,pl):
