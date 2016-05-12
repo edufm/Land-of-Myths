@@ -9,7 +9,7 @@ class Gun():
         self.Ammo = Ammo
         self.Range = Range
         self.Damage = Damage
-    
+
     def Check_Range(self ,loc, pl):
         distanciax = pl.pos[1] - loc[1]
         if distanciax < 0:
@@ -24,8 +24,7 @@ class Gun():
         else:
             return 0
 
-
-    def Pick_Weapon(ID, pl):        
+    def Pick_Weapon(ID, pl):
         Ammo = pl.inv[ID]
         Ammo += WeaponList[ID].Ammo
         if Ammo >= WeaponList[ID].Ammo * 3:
@@ -142,17 +141,19 @@ class Gun():
                     b += 1
                 if Map.matriz[i][j] == 101:
                     c += 1
-        
+                
         x = random.randint(1,101)
         
-        if a < 5:
-            if x <= 17 and x >= 7:
+        if a < 3:
+            if x <= 10:
                 Gun.Gerar_Pistol(Map, imgguns)
-        if b <=3:
-            if x <= 7 and x > 2:
+        x = random.randint(1,101)
+        if b <=2:
+            if x <= 4:
                 Gun.Gerar_Shotgun(Map, imgguns)
-        if c <=2:
-            if x <= 2:
+        x = random.randint(1,101)
+        if c <=1:
+            if x <= 1:
                 Gun.Gerar_Sniper(Map, imgguns)
         
     def Gerar_Pistol(Map, imgguns):
@@ -189,8 +190,6 @@ class Gun():
         
     
     def Take_Damage_P(loc, pl, Map):
-        print ("tomou")
-        
         RangeTest =Gun.Check_Range(Pistol, loc, pl)
         
         if RangeTest == 1:
@@ -224,10 +223,7 @@ class Gun():
         Ammo = pl.weapon.ID - 100
         if pl.inv[Ammo] > 0:    
             pl.inv[Ammo] -= 1
-            print (pl.inv[Ammo])
             return 1
-        else:
-            print ("acabou a munição")
 
         
 Pistol = Gun(100,7,7,1,"Shoot")
