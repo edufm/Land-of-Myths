@@ -5,11 +5,11 @@ from ClasseGun import Gun
 
 class Enemys():
     def __init__(self, ID, health, damage, pos):
-        self.ID = ID        
+        self.ID = ID
         self.health = health
         self.damage = damage
         self.pos = pos
-        
+
     def cria_inimigos(waves, Map):
         Map.LEnemys = []
         if waves < 4:
@@ -26,7 +26,7 @@ class Enemys():
             Map.b[14][13].image = ClasseImagens.boss1[0]
             Map.LEnemys.append(E)
         if waves > 4 and waves < 8:
-            for i in range(waves*3):
+            for i in range((waves-4)*3):
                 E = Enemys(0, 2, 1, [14, i])
                 Map.matriz[14][i] = 2
                 Map.b[14][i].config(image = ClasseImagens.enemy1[0])
@@ -39,7 +39,7 @@ class Enemys():
             Map.b[14][13].image = ClasseImagens.boss1[0]
             Map.LEnemys.append(E)
         if waves > 8:
-            for i in range(waves*3):
+            for i in range((waves-8)*3):
                 E = Enemys(2, 3, 1, [14, i])
                 Map.matriz[14][i] = 2
                 Map.b[14][i].config(image = ClasseImagens.enemy1[0])
@@ -51,6 +51,8 @@ class Enemys():
             Gun.Take_Damage_P(loc,pl,Map)
         elif pl.weapon.ID == 101:
             Gun.Take_Damage_SG(loc,pl,Map)
+        elif pl.weapon.ID == 102:
+            Gun.Take_Damage_SN(loc,pl,Map)
     
     def left(self):
         self.pos[1] -= 1

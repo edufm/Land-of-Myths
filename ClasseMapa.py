@@ -1,6 +1,7 @@
 
 from tkinter import *
 import numpy as np
+import random
 
 window = Tk()
 window.title("Magic Trap")
@@ -21,12 +22,11 @@ class Mapa():
         self.LEnemys = LEnemys
     
     def Start_Game(X, L):
-        
         if X == 1:
             L[0].destroy()
             L[1].destroy()
             L[2].destroy()
-            
+
         Map = Mapa(np.zeros([15, 27]), [], [], 0, [])    
         
         Pistol = ClasseGun.Gun(100,7,7,1,"Shoot")        
@@ -254,23 +254,24 @@ class Mapa():
             restart.image = restartt
             restart.config(image=restartt,bg="black")
             restart.place(x=525, y= 500)
-                      
-        gadjets[1].configure(height = 2 , width = pl.health)
-        gadjets[2].configure(text="Time : {0}s".format(2.5),font=("castelar"),bg = "black",foreground="white")
-        gadjets[3].configure(text="Wave : {0}".format(Map.Waves),font=("castelar"),bg = "black",foreground="white")
         
-        if pl.inv[0] > 0:
-            gadjets[5].config(state = 'active')
-        
-        if pl.inv[1] > 0:
-            gadjets[7].config(state = 'active')
+        else:
+            gadjets[1].configure(height = 2 , width = pl.health)
+            gadjets[2].configure(text="Time : {0}s".format(2.5),font=("castelar"),bg = "black",foreground="white")
+            gadjets[3].configure(text="Wave : {0}".format(Map.Waves),font=("castelar"),bg = "black",foreground="white")
             
-        if pl.inv[2] > 0:
-            gadjets[9].config(state = 'active')
-        
-        gadjets[6].config(text = 'Ammo X{0}'.format(pl.inv[0]))        
-        gadjets[8].config(text = 'Ammo X{0}'.format(pl.inv[1]))
-        gadjets[10].config(text = 'Ammo X{0}'.format(pl.inv[2]))
+            if pl.inv[0] > 0:
+                gadjets[5].config(state = 'active')
+            
+            if pl.inv[1] > 0:
+                gadjets[7].config(state = 'active')
+                
+            if pl.inv[2] > 0:
+                gadjets[9].config(state = 'active')
+            
+            gadjets[6].config(text = 'Ammo X{0}'.format(pl.inv[0]))        
+            gadjets[8].config(text = 'Ammo X{0}'.format(pl.inv[1]))
+            gadjets[10].config(text = 'Ammo X{0}'.format(pl.inv[2]))
         
     def Exit():
         window.destroy()
