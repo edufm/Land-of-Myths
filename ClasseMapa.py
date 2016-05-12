@@ -8,7 +8,7 @@ window.configure(bg="black")
 window.geometry('1366x728')
 
 from ClasseEnemys import Enemys
-from ClasseGun import Gun
+import ClasseGun
 from ClassePlayer import Player
 import ClasseImagens
 
@@ -29,16 +29,15 @@ class Mapa():
             
         Map = Mapa(np.zeros([15, 27]), [], [], 0, [])    
         
-        Pistol = Gun(100,7,7,1,"Shoot")        
-        Lguns = [Pistol]
+        Pistol = ClasseGun.Gun(100,7,7,1,"Shoot")        
         
-        pl = Player(20, Lguns[0], [7,13], [7, 0, 0])
+        pl = Player(20, Pistol, [7,13], [7, 0, 0])
         
         Map.matriz[7][13] = 1
         Mapa.load_map(Map, window, pl)
         Player.set_player(pl)
         
-        Mapa.gui(window, Map)
+        Mapa.gui(window, Map, pl)
         
         window.mainloop()
 
@@ -57,7 +56,7 @@ class Mapa():
         if (G or V) and X+1 == Xp and Y == Yp:
             print("nothing2")            
             if G:
-                Gun.Pick_Weapon(GN, pl)
+                ClasseGun.Gun.Pick_Weapon(GN, pl)
             #Adiciona o player no novo lugar
             self.matriz[X][Y] = 1
             b[X][Y].config(image=ClasseImagens.player[3])
@@ -71,7 +70,7 @@ class Mapa():
         if (G or V) and X-1 == Xp and Y == Yp:
             print("nothing3")
             if G:
-                Gun.Pick_Weapon(GN, pl)         
+                ClasseGun.Gun.Pick_Weapon(GN, pl)         
             self.matriz[X][Y] = 1
             b[X][Y].config(image=ClasseImagens.player[0])
             b[X][Y].image = ClasseImagens.player[0]
@@ -83,7 +82,7 @@ class Mapa():
         if (G or V) and Y+1 == Yp and X == Xp:
             print("nothing4")
             if G:
-                Gun.Pick_Weapon(GN, pl)
+                ClasseGun.Gun.Pick_Weapon(GN, pl)
             self.matriz[X][Y] = 1
             b[X][Y].config(image=ClasseImagens.player[2])
             b[X][Y].image = ClasseImagens.player[2]
@@ -95,7 +94,7 @@ class Mapa():
         if (G or V) and Y-1 == Yp and X == Xp:
             print("nothing5")
             if G:
-                Gun.Pick_Weapon(GN, pl)
+                ClasseGun.Gun.Pick_Weapon(GN, pl)
             self.matriz[X][Y] = 1
             b[X][Y].config(image= ClasseImagens.player[1])
             b[X][Y].image = ClasseImagens.player[1]
@@ -120,7 +119,7 @@ class Mapa():
             
         
     def gera_itens(self, imgguns):
-        Gun.Gerar_Guns(self, imgguns)
+        ClasseGun.Gun.Gerar_Guns(self, imgguns)
         
     def Aiturn(enemys, pl, Map):
         for i in enemys:
@@ -136,19 +135,19 @@ class Mapa():
         Map.b[pl.pos[0]][pl.pos[1]].config(image = ClasseImagens.player[0])
         Map.b[pl.pos[0]][pl.pos[1]].image = ClasseImagens.player[0]
     
-    def Botão_de_arma(pl, Map, X):
+    def Botão_de_arma(Map, pl, X):
         if X == 0:
-            pass
-            mostrarange(pl, Map)
+            pl.weapon == ClasseGun.WeaponList[0]
+            Mapa.mostrarange(pl, Map, 0)
         if X == 1:
-            pass
-            mostrarange(pl, Map)
+            pl.weapon == ClasseGun.WeaponList[1]
+            Mapa.mostrarange(pl, Map, 1)
         if X == 2:
-            pass
-            mostrarange(pl, Map)
+            pl.weapon == ClasseGun.WeaponList[2]
+            Mapa.mostrarange(pl, Map, 2)
         
-    def mostrarange(pl, Map):
-        passw
+    def mostrarange(pl, Map, X):
+        pass
     
     def load_map(self, window, pl):
         
@@ -166,7 +165,7 @@ class Mapa():
         self.b[7][13].image = ClasseImagens.player[0]
         self.b[7][13].configure(highlightbackground="red", highlightcolor="red")
                 
-    def gui(window, Map):
+    def gui(window, Map, pl):
         
         vida = Label(window)
         vida.configure(text="Life:",font=("castelar"),bg = "black",foreground = "white")
@@ -196,7 +195,7 @@ class Mapa():
         #Botões de armas
         Pistolb = Button(window)
         Pistolb.configure(height = 36, width = 36, state = 'disabled')
-        Pistolb.configure(image = ClasseImagens.guns[0])
+        Pistolb.configure(image = ClasseImagens.guns[0], command= lambda: Mapa.Botão_de_arma(Map, pl, 0))
         Pistolb.image = ClasseImagens.guns[0]
         Pistolb.grid(row = 5, column = 28, columnspan = 2)
         
@@ -207,7 +206,7 @@ class Mapa():
         
         shotgunb = Button(window)
         shotgunb.configure(height = 36, width = 36, state = 'disabled')
-        shotgunb.configure(image = ClasseImagens.guns[1])
+        shotgunb.configure(image = ClasseImagens.guns[1], command= lambda: Mapa.Botão_de_arma(Map, pl, 1))
         shotgunb.image = ClasseImagens.guns[1]
         shotgunb.grid(row = 7, column = 28, columnspan = 2)
         
@@ -218,7 +217,7 @@ class Mapa():
         
         Sniperb = Button(window)
         Sniperb.configure(height = 36, width = 36, state = 'disabled')
-        Sniperb.configure(image = ClasseImagens.guns[2])
+        Sniperb.configure(image = ClasseImagens.guns[2], command= lambda: Mapa.Botão_de_arma(Map, pl, 2))
         Sniperb.image = ClasseImagens.guns[2]
         Sniperb.grid(row = 9, column = 28, columnspan = 2)
         
