@@ -53,8 +53,7 @@ class Mapa():
         G = self.matriz[X][Y] > 99
         GN = int(self.matriz[X][Y]) - 100
         
-        if (G or V) and X+1 == Xp and Y == Yp:
-            print("nothing2")            
+        if (G or V) and X+1 == Xp and Y == Yp:           
             if G:
                 ClasseGun.Gun.Pick_Weapon(GN, pl)
             #Adiciona o player no novo lugar
@@ -68,7 +67,6 @@ class Mapa():
             pl.pos = [X,Y]
             
         if (G or V) and X-1 == Xp and Y == Yp:
-            print("nothing3")
             if G:
                 ClasseGun.Gun.Pick_Weapon(GN, pl)         
             self.matriz[X][Y] = 1
@@ -80,7 +78,6 @@ class Mapa():
             pl.pos = [X,Y]
 
         if (G or V) and Y+1 == Yp and X == Xp:
-            print("nothing4")
             if G:
                 ClasseGun.Gun.Pick_Weapon(GN, pl)
             self.matriz[X][Y] = 1
@@ -92,7 +89,6 @@ class Mapa():
             pl.pos = [X,Y]
             
         if (G or V) and Y-1 == Yp and X == Xp:
-            print("nothing5")
             if G:
                 ClasseGun.Gun.Pick_Weapon(GN, pl)
             self.matriz[X][Y] = 1
@@ -116,7 +112,6 @@ class Mapa():
             Mapa.update_map(self, pl)        
         
         self.gera_itens(ClasseImagens.guns)
-            
         
     def gera_itens(self, imgguns):
         ClasseGun.Gun.Gerar_Guns(self, imgguns)
