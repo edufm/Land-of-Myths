@@ -45,13 +45,38 @@ enemy2 = [enemy2_front, enemy2_right, enemy2_left, enemy2_back]
 
 enemy=[enemy1, boss1, enemy2]
 
+wood = PhotoImage(file=".//Imagens//Tiles//wood.png")
+log = PhotoImage(file=".//Imagens//Tiles//log.png")
 grass = PhotoImage(file=".//Imagens//Tiles//grass.png")
 dirt = PhotoImage(file=".//Imagens//Tiles//dirt.png")
+sand = PhotoImage(file=".//Imagens//Tiles//sand.png")
 stone = PhotoImage(file=".//Imagens//Tiles//stone.png")
 snow = PhotoImage(file=".//Imagens//Tiles//snow.png")
-wood = PhotoImage(file=".//Imagens//Tiles//wood.png")
+final = PhotoImage(file=".//Imagens//Tiles//Final.png")
 
-Tiles = [grass, grass, dirt, stone, snow, wood, wood, wood, wood, wood]
+Tiles = [wood, wood, log, grass, grass, dirt, sand, stone, snow, final]
+
+rangedwood = PhotoImage(file=".//Imagens//Tiles//woodranged.png")
+rangedlog = PhotoImage(file=".//Imagens//Tiles//logranged.png")
+rangedgrass = PhotoImage(file=".//Imagens//Tiles//grassranged.png")
+rangeddirt = PhotoImage(file=".//Imagens//Tiles//dirtranged.png")
+rangedsand = PhotoImage(file=".//Imagens//Tiles//sandranged.png")
+rangedstone = PhotoImage(file=".//Imagens//Tiles//stoneranged.png")
+rangedsnow = PhotoImage(file=".//Imagens//Tiles//snowranged.png")
+rangedfinal = PhotoImage(file=".//Imagens//Tiles//Finalranged.png")
+
+rangedTiles = [rangedwood, rangedwood, rangedlog, rangedgrass, rangedgrass, rangeddirt, rangedsand, rangedstone, rangedsnow, rangedfinal]
+
+woodsubranged = PhotoImage(file=".//Imagens//Tiles//woodsubranged.png")
+logsubranged = PhotoImage(file=".//Imagens//Tiles//logsubranged.png")
+grasssubranged = PhotoImage(file=".//Imagens//Tiles//grasssubranged.png")
+dirtsubranged = PhotoImage(file=".//Imagens//Tiles//dirtsubranged.png")
+sandsubranged = PhotoImage(file=".//Imagens//Tiles//sandsubranged.png")
+stonesubranged = PhotoImage(file=".//Imagens//Tiles//stonesubranged.png")
+snowsubranged = PhotoImage(file=".//Imagens//Tiles//snowsubranged.png")
+finalsubranged = PhotoImage(file=".//Imagens//Tiles//Finalsubranged.png")
+
+subrangedTiles = [woodsubranged, woodsubranged, logsubranged, grasssubranged, grasssubranged, dirtsubranged, sandsubranged, stonesubranged, snowsubranged, finalsubranged]
 
 Pistol = PhotoImage(file=".//Imagens//Sprites//revolver.png")
 Shotgun = PhotoImage(file=".//Imagens//Sprites//shotgun.png")

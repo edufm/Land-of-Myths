@@ -126,24 +126,68 @@ class Mapa():
                 if Map.matriz[i][j] == 0:
                     Map.b[i][j].config(image=ClasseImagens.Tiles[Map.Waves])
                     Map.b[i][j].image = ClasseImagens.Tiles[Map.Waves]
-                
-        Map.b[pl.pos[0]][pl.pos[1]].config(image = ClasseImagens.player[0])
-        Map.b[pl.pos[0]][pl.pos[1]].image = ClasseImagens.player[0]
     
-    def Botão_de_arma(Map, pl, X):
-        if X == 0:
-            pl.weapon == ClasseGun.WeaponList[0]
-            Mapa.mostrarange(pl, Map, 0)
-        if X == 1:
-            pl.weapon == ClasseGun.WeaponList[1]
-            Mapa.mostrarange(pl, Map, 1)
-        if X == 2:
-            pl.weapon == ClasseGun.WeaponList[2]
-            Mapa.mostrarange(pl, Map, 2)
+    def Botão_de_arma(Map, pl, X, wave):
+        pl.weapon = ClasseGun.WeaponList[X]
+        Mapa.mostrarange(pl, Map, X, wave)
         
-    def mostrarange(pl, Map, X):
-        pass
-    
+    def mostrarange(pl, Map, X, Wave):
+        if X == 0:
+            for i in range(7):
+                for j in range(7):
+                    if i + j < 7 and Map.matriz[pl.pos[0]- i][pl.pos[1]-j] == 0 and pl.pos[0]-i >= 0 and pl.pos[1]-j >= 0:
+                        Map.b[pl.pos[0]-i][pl.pos[1]-j].config(image = ClasseImagens.rangedTiles[Wave])
+                        Map.b[pl.pos[0]-i][pl.pos[1]-j].image = ClasseImagens.rangedTiles[Wave]
+                    if i + j < 7 and pl.pos[0] + i < 15 and Map.matriz[pl.pos[0]+i][pl.pos[1]-j] == 0 and pl.pos[0]+i >= 0 and pl.pos[1]-j >= 0:
+                        Map.b[pl.pos[0]+i][pl.pos[1]-j].config(image = ClasseImagens.rangedTiles[Wave])
+                        Map.b[pl.pos[0]+i][pl.pos[1]-j].image = ClasseImagens.rangedTiles[Wave]
+                    if i + j < 7 and pl.pos[1]+j < 27 and Map.matriz[pl.pos[0]-i][pl.pos[1]+j] == 0 and pl.pos[0]-i >= 0 and pl.pos[1]-j >= 0:
+                        Map.b[pl.pos[0]-i][pl.pos[1]+j].config(image = ClasseImagens.rangedTiles[Wave])
+                        Map.b[pl.pos[0]-i][pl.pos[1]+j].image = ClasseImagens.rangedTiles[Wave]
+                    if i + j < 7 and pl.pos[0] + i < 15 and pl.pos[1]+j < 27 and Map.matriz[pl.pos[0]+i][pl.pos[0]+j] == 0 and pl.pos[0]+i >= 0 and pl.pos[1]-j >= 0:
+                        Map.b[pl.pos[0]+i][pl.pos[1]+j].config(image = ClasseImagens.rangedTiles[Wave])
+                        Map.b[pl.pos[0]+i][pl.pos[1]+j].image = ClasseImagens.rangedTiles[Wave]
+            Map.b[pl.pos[0]][pl.pos[1]].config(image = ClasseImagens.player[0])
+            Map.b[pl.pos[0]][pl.pos[1]].image = ClasseImagens.player[0]
+            
+        if X == 1:
+            if Map.matriz[pl.pos[0]+1][pl.pos[1]] == 0 and pl.pos[0]+1 < 27 and pl.pos[1]:
+                Map.b[pl.pos[0]+1][pl.pos[1]].config(image = ClasseImagens.rangedTiles[Wave])
+                Map.b[pl.pos[0]+1][pl.pos[1]].image = ClasseImagens.rangedTiles[Wave]
+            if Map.matriz[pl.pos[0]+2][pl.pos[1]-1] == 0 and pl.pos[0]+2 < 27 and pl.pos[1]-1 >= 0:
+                Map.b[pl.pos[0]+2][pl.pos[1]-1].config(image = ClasseImagens.subrangedTiles[Wave])
+                Map.b[pl.pos[0]+2][pl.pos[1]-1].image = ClasseImagens.subrangedTiles[Wave]
+            if Map.matriz[pl.pos[0]+2][pl.pos[1]+1] == 0 and pl.pos[0]+2 < 27 and pl.pos[1]+1 < 15:
+                Map.b[pl.pos[0]+2][pl.pos[1]+1].config(image = ClasseImagens.subrangedTiles[Wave])
+                Map.b[pl.pos[0]+2][pl.pos[1]+1].image = ClasseImagens.subrangedTiles[Wave]
+            if Map.matriz[pl.pos[0]-1][pl.pos[1]] == 0 and pl.pos[0]-1 >= 0:
+                Map.b[pl.pos[0]-1][pl.pos[1]].config(image = ClasseImagens.rangedTiles[Wave])
+                Map.b[pl.pos[0]-1][pl.pos[1]].image = ClasseImagens.rangedTiles[Wave]
+            if Map.matriz[pl.pos[0]-2][pl.pos[1]-1] == 0 and pl.pos[0]-2 >= 0 and pl.pos[1]-1 >= 0:
+                Map.b[pl.pos[0]-2][pl.pos[1]-1].config(image = ClasseImagens.subrangedTiles[Wave])
+                Map.b[pl.pos[0]-2][pl.pos[1]-1].image = ClasseImagens.subrangedTiles[Wave]
+            if Map.matriz[pl.pos[0]-2][pl.pos[1]+1] == 0 and pl.pos[0]-2 >= 0 and pl.pos[1]+1 < 15:
+                Map.b[pl.pos[0]-2][pl.pos[1]+1].config(image = ClasseImagens.subrangedTiles[Wave])
+                Map.b[pl.pos[0]-2][pl.pos[1]+1].image = ClasseImagens.subrangedTiles[Wave]
+            if Map.matriz[pl.pos[0]][pl.pos[1]+1] == 0 and pl.pos[1]+1 < 15:
+                Map.b[pl.pos[0]][pl.pos[1]+1].config(image = ClasseImagens.rangedTiles[Wave])
+                Map.b[pl.pos[0]][pl.pos[1]+1].image = ClasseImagens.rangedTiles[Wave]
+            if Map.matriz[pl.pos[0]+1][pl.pos[1]+2] == 0 and pl.pos[0]+1 < 27 and pl.pos[1]+2 < 15:
+                Map.b[pl.pos[0]+1][pl.pos[1]+2].config(image = ClasseImagens.subrangedTiles[Wave])
+                Map.b[pl.pos[0]+1][pl.pos[1]+2].image = ClasseImagens.subrangedTiles[Wave]
+            if Map.matriz[pl.pos[0]-1][pl.pos[1]+2] == 0 and pl.pos[0]-1 >= 0 and pl.pos[1]+2 < 15:
+                Map.b[pl.pos[0]-1][pl.pos[1]+2].config(image = ClasseImagens.subrangedTiles[Wave])
+                Map.b[pl.pos[0]-1][pl.pos[1]+2].image = ClasseImagens.subrangedTiles[Wave]
+            if Map.matriz[pl.pos[0]][pl.pos[1]-1] == 0 and pl.pos[1]-1 >= 0:                
+                Map.b[pl.pos[0]][pl.pos[1]-1].config(image = ClasseImagens.rangedTiles[Wave])
+                Map.b[pl.pos[0]][pl.pos[1]-1].image = ClasseImagens.rangedTiles[Wave]
+            if Map.matriz[pl.pos[0]-1][pl.pos[1]-2] == 0 and pl.pos[0]-1 >= 0 and pl.pos[1]-2 >= 0:
+                Map.b[pl.pos[0]-1][pl.pos[1]-2].config(image = ClasseImagens.subrangedTiles[Wave])
+                Map.b[pl.pos[0]-1][pl.pos[1]-2].image = ClasseImagens.subrangedTiles[Wave]
+            if Map.matriz[pl.pos[0]+1][pl.pos[1]-2] == 0 and pl.pos[0]+1 < 27 and pl.pos[1]-2 >= 0:
+                Map.b[pl.pos[0]+1][pl.pos[1]-2].config(image = ClasseImagens.subrangedTiles[Wave])
+                Map.b[pl.pos[0]+1][pl.pos[1]-2].image = ClasseImagens.subrangedTiles[Wave]
+                
     def load_map(self, window, pl):
         
         for i in range(15):
@@ -190,7 +234,7 @@ class Mapa():
         #Botões de armas
         Pistolb = Button(window)
         Pistolb.configure(height = 36, width = 36, state = 'disabled')
-        Pistolb.configure(image = ClasseImagens.guns[0], command= lambda: Mapa.Botão_de_arma(Map, pl, 0))
+        Pistolb.configure(image = ClasseImagens.guns[0], command= lambda: Mapa.Botão_de_arma(Map, pl, 0, Map.Waves))
         Pistolb.image = ClasseImagens.guns[0]
         Pistolb.grid(row = 5, column = 28, columnspan = 2)
         
@@ -201,7 +245,7 @@ class Mapa():
         
         shotgunb = Button(window)
         shotgunb.configure(height = 36, width = 36, state = 'disabled')
-        shotgunb.configure(image = ClasseImagens.guns[1], command= lambda: Mapa.Botão_de_arma(Map, pl, 1))
+        shotgunb.configure(image = ClasseImagens.guns[1], command= lambda: Mapa.Botão_de_arma(Map, pl, 1, Map.Waves))
         shotgunb.image = ClasseImagens.guns[1]
         shotgunb.grid(row = 7, column = 28, columnspan = 2)
         
@@ -212,7 +256,7 @@ class Mapa():
         
         Sniperb = Button(window)
         Sniperb.configure(height = 36, width = 36, state = 'disabled')
-        Sniperb.configure(image = ClasseImagens.guns[2], command= lambda: Mapa.Botão_de_arma(Map, pl, 2))
+        Sniperb.configure(image = ClasseImagens.guns[2], command= lambda: Mapa.Botão_de_arma(Map, pl, 2, Map.Waves))
         Sniperb.image = ClasseImagens.guns[2]
         Sniperb.grid(row = 9, column = 28, columnspan = 2)
         

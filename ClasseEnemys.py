@@ -50,7 +50,7 @@ class Enemys():
         if pl.weapon.ID == 100:
             Gun.Take_Damage_P(loc,pl,Map)
         elif pl.weapon.ID == 101:
-            Gun.Take_Damage_SG(loc,pl,Map)
+            Gun.Shotgun_Shot(pl, loc, Map)
         elif pl.weapon.ID == 102:
             Gun.Take_Damage_SN(loc,pl,Map)
     
@@ -139,9 +139,9 @@ class Enemys():
                 if Op == 2:
                     self.down()
                     a = 3
-            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.enemy1[a])
-            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.enemy1[a]
+            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.enemy[self.ID][a])
+            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.enemy[self.ID][a]
             Map.matriz[self.pos[0]][self.pos[1]] = 2
-            
+    
     def atack(self, pl):
         pl.health -= self.damage
