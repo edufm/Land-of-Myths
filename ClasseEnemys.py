@@ -1,7 +1,8 @@
 from numpy import random as ran
-import ClasseImagens
 
+import ClasseImagens
 from ClasseGun import Gun
+import ClasseTrack
 
 class Enemys():
     def __init__(self, ID, health, damage, pos):
@@ -71,8 +72,8 @@ class Enemys():
         
         elif distanciax > 0 and abs(distanciax) > abs(distanciay) and Map.matriz[self.pos[0]][self.pos[1]+1] == 0:
             Map.matriz[self.pos[0]][self.pos[1]] = 0
-            Map.b[self.pos[0]][self.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
-            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
+            Map.b[self.pos[0]][self.pos[1]].config(image= ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
             self.right()
             Map.matriz[self.pos[0]][self.pos[1]] = 2
             Map.b[self.pos[0]][self.pos[1]].config(image= ClasseImagens.enemy[self.ID][1])
@@ -80,8 +81,8 @@ class Enemys():
             
         elif distanciax < 0 and abs(distanciax) > abs(distanciay) and Map.matriz[self.pos[0]][self.pos[1]-1] == 0:
             Map.matriz[self.pos[0]][self.pos[1]] = 0
-            Map.b[self.pos[0]][self.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
-            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[Map.Waves]            
+            Map.b[self.pos[0]][self.pos[1]].config(image= ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]            
             self.left()
             Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.enemy[self.ID][2])
             Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.enemy[self.ID][2]
@@ -89,8 +90,8 @@ class Enemys():
             
         elif distanciay > 0 and abs(distanciay) > abs(distanciax) and Map.matriz[self.pos[0]+1][self.pos[1]+1] == 0:
             Map.matriz[self.pos[0]][self.pos[1]] = 0
-            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.Tiles[Map.Waves])
-            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
+            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
             self.down()
             Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.enemy[self.ID][3])
             Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.enemy[self.ID][3]
@@ -98,8 +99,8 @@ class Enemys():
             
         elif distanciay < 0 and abs(distanciay) > abs(distanciax) and Map.matriz[self.pos[0]-1][self.pos[1]] == 0:
             Map.matriz[self.pos[0]][self.pos[1]] = 0            
-            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.Tiles[Map.Waves])
-            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
+            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
             self.up()
             Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.enemy[self.ID][0])
             Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.enemy[self.ID][0]
@@ -107,8 +108,8 @@ class Enemys():
             
         elif abs(distanciay) == abs(distanciax):
             Map.matriz[self.pos[0]][self.pos[1]] = 0
-            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.Tiles[Map.Waves])
-            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
+            Map.b[self.pos[0]][self.pos[1]].config(image=ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+            Map.b[self.pos[0]][self.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
             Op = ran.randint(1,3)
             a=0
             if distanciay < 0 and distanciax < 0 and Map.matriz[self.pos[0]-1][self.pos[1]] == 0 and Map.matriz[self.pos[0]][self.pos[1]-1] == 0:

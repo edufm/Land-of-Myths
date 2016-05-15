@@ -1,7 +1,7 @@
-import numpy as np
 import random
 
 import ClasseImagens
+import ClasseTrack
 
 class Gun():
     def __init__(self, ID, Ammo, Range, Damage,Type):
@@ -129,7 +129,7 @@ class Gun():
         #_______________________GErador armas_____________________
         
 
-    def Gerar_Guns(Map, imgguns):
+    def Gerar_Guns(Map):
         a = 0
         b = 0
         c = 0
@@ -146,45 +146,45 @@ class Gun():
         
         if a < 3:
             if x <= 10:
-                Gun.Gerar_Pistol(Map, imgguns)
+                Gun.Gerar_Pistol(Map)
         x = random.randint(1,101)
         if b <=2:
             if x <= 4:
-                Gun.Gerar_Shotgun(Map, imgguns)
+                Gun.Gerar_Shotgun(Map)
         x = random.randint(1,101)
         if c <=1:
             if x <= 1:
-                Gun.Gerar_Sniper(Map, imgguns)
+                Gun.Gerar_Sniper(Map)
         
-    def Gerar_Pistol(Map, imgguns):
+    def Gerar_Pistol(Map):
         x = random.randint(0,14)
         y = random.randint(0,26)
         if Map.matriz[x][y] == 0:
             Map.matriz[x][y] = 100
-            Map.b[x][y].config(image = imgguns[0])
-            Map.b[x][y].image = imgguns[0]
+            Map.b[x][y].config(image = ClasseImagens.guns[0])
+            Map.b[x][y].image = ClasseImagens.guns[0]
         else:
-            Gun.Gerar_Pistol(Map, imgguns)
+            Gun.Gerar_Pistol(Map)
         
-    def Gerar_Shotgun(Map, imgguns):
+    def Gerar_Shotgun(Map):
         x = random.randint(0,14)
         y = random.randint(0,26)
         if Map.matriz[x][y] == 0:
             Map.matriz[x][y] = 101
-            Map.b[x][y].config(image = imgguns[1])
-            Map.b[x][y].image = imgguns[1]
+            Map.b[x][y].config(image = ClasseImagens.guns[1])
+            Map.b[x][y].image = ClasseImagens.guns[1]
         else:
-            Gun.Gerar_Shotgun(Map, imgguns)
+            Gun.Gerar_Shotgun(Map)
 
-    def Gerar_Sniper(Map, imgguns):
+    def Gerar_Sniper(Map):
         x = random.randint(0,14)
         y = random.randint(0,26)
         if Map.matriz[x][y] == 0:
             Map.matriz[x][y] = 102
-            Map.b[x][y].config(image = imgguns[2])
-            Map.b[x][y].image = imgguns[2]
+            Map.b[x][y].config(image = ClasseImagens.guns[2])
+            Map.b[x][y].image = ClasseImagens.guns[2]
         else:
-            Gun.Gerar_Sniper(Map, imgguns)
+            Gun.Gerar_Sniper(Map)
             
             #______________________Dano_______________________________________
         
@@ -201,11 +201,9 @@ class Gun():
                         if i.health <= 0:
                             Map.LEnemys.remove(i)    
                             Map.matriz[i.pos[0]][i.pos[1]] = 0
-                            Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
-                            Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
-            
-                    
-            
+                            Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                            Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+
     def Take_Damage_SG(loc, pl, Map, Damage): #Função exclusiva do shotgun
         for i in Map.LEnemys:
             if i.pos == loc:
@@ -213,8 +211,8 @@ class Gun():
                 if i.health <= 0:
                        Map.LEnemys.remove(i)    
                        Map.matriz[i.pos[0]][i.pos[1]] = 0
-                       Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[Map.Waves])
-                       Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[Map.Waves]
+                       Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                       Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
         
                     
             #________________________________Ammo__________________________________________
