@@ -286,16 +286,16 @@ class Mapa():
         for i in range(8):
             for j in range(8):
                 if i + j != 0:
-                    if pl.pos[0]-i >= 0 and pl.pos[1]-j >= 0 and self.matriz[pl.pos[0]- i][pl.pos[1]-j] == 0:
+                    if pl.pos[0] - i >= 0 and pl.pos[1] - j >= 0 and self.matriz[pl.pos[0]-i][pl.pos[1]-j] == 0:
                         self.b[pl.pos[0]-i][pl.pos[1]-j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                         self.b[pl.pos[0]-i][pl.pos[1]-j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-                    if pl.pos[0] + i < 15 and pl.pos[1]-j >= 0 and self.matriz[pl.pos[0]+i][pl.pos[1]-j] == 0:
+                    if pl.pos[0] + i < 15 and pl.pos[1] - j >= 0 and self.matriz[pl.pos[0]+i][pl.pos[1]-j] == 0:
                         self.b[pl.pos[0]+i][pl.pos[1]-j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                         self.b[pl.pos[0]+i][pl.pos[1]-j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-                    if pl.pos[1]+j < 27 and pl.pos[0]-i >= 0 and self.matriz[pl.pos[0]-i][pl.pos[1]+j] == 0:
+                    if pl.pos[1] + j < 27 and pl.pos[0] - i >= 0 and self.matriz[pl.pos[0]-i][pl.pos[1]+j] == 0:
                         self.b[pl.pos[0]-i][pl.pos[1]+j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                         self.b[pl.pos[0]-i][pl.pos[1]+j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-                    if pl.pos[0] + i < 15 and pl.pos[1]+j < 27 and self.matriz[pl.pos[0]+i][pl.pos[0]+j] == 0:
+                    if pl.pos[0] + i < 15 and pl.pos[1] + j < 27 and self.matriz[pl.pos[0]+i][pl.pos[1]+j] == 0:
                         self.b[pl.pos[0]+i][pl.pos[1]+j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                         self.b[pl.pos[0]+i][pl.pos[1]+j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
         ClasseTrack.Tracker.Weaponselected = 0
@@ -305,16 +305,16 @@ class Mapa():
         if X == 0:
             for i in range(7):
                 for j in range(7):
-                    if i + j < 7 and pl.pos[0]-i >= 0 and pl.pos[1]-j >= 0 and Map.matriz[pl.pos[0]- i][pl.pos[1]-j] == 0:
+                    if i + j < 7 and pl.pos[0] - i >= 0 and pl.pos[1] - j >= 0 and Map.matriz[pl.pos[0]-i][pl.pos[1]-j] == 0:
                         Map.b[pl.pos[0]-i][pl.pos[1]-j].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
                         Map.b[pl.pos[0]-i][pl.pos[1]-j].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-                    if i + j < 7 and pl.pos[0] + i < 15 and pl.pos[1]-j >= 0 and Map.matriz[pl.pos[0]+i][pl.pos[1]-j] == 0:
+                    if i + j < 7 and pl.pos[0] + i < 15 and pl.pos[1] - j >= 0 and Map.matriz[pl.pos[0]+i][pl.pos[1]-j] == 0:
                         Map.b[pl.pos[0]+i][pl.pos[1]-j].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
                         Map.b[pl.pos[0]+i][pl.pos[1]-j].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-                    if i + j < 7 and pl.pos[1]+j < 27 and pl.pos[0]-i >= 0 and Map.matriz[pl.pos[0]-i][pl.pos[1]+j] == 0:
+                    if i + j < 7 and pl.pos[1] + j < 27 and pl.pos[0] - i >= 0 and Map.matriz[pl.pos[0]-i][pl.pos[1]+j] == 0:
                         Map.b[pl.pos[0]-i][pl.pos[1]+j].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
                         Map.b[pl.pos[0]-i][pl.pos[1]+j].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-                    if i + j < 7 and pl.pos[0] + i < 15 and pl.pos[1]+j < 27 and Map.matriz[pl.pos[0]+i][pl.pos[0]+j] == 0:
+                    if i + j < 7 and pl.pos[0] + i < 15 and pl.pos[1] + j < 27 and Map.matriz[pl.pos[0]+i][pl.pos[1]+j] == 0:
                         Map.b[pl.pos[0]+i][pl.pos[1]+j].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
                         Map.b[pl.pos[0]+i][pl.pos[1]+j].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
             Map.b[pl.pos[0]][pl.pos[1]].config(image = ClasseImagens.player[0])
