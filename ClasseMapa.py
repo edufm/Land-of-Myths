@@ -216,9 +216,12 @@ class Mapa():
         snipeammo.grid(row= 9, column = 30)
         
         musicbutton = Button(window)
-        som = sound.Choose_music()
-        musicbutton.configure(text = " Play Music",bg = "white",font=("castelar"),command = lambda : sound.play_music(som) )
+        musicbutton.configure(text = " Play Music",bg = "white",font=("castelar"),command = lambda : sound.play_music(sound.Choose_music()) )
         musicbutton.grid(row =12,column = 30)
+        
+        exitbutton = Button(window)
+        exitbutton.configure(text = "Exit",bg = "white",font=("castelar"),command = lambda : Mapa.Exit())
+        exitbutton.grid(row = 16,column = 30)
         
         Map.gadjets.append(Pistolb)
         Map.gadjets.append(Pammo)
@@ -286,13 +289,13 @@ class Mapa():
                     if pl.pos[0]-i >= 0 and pl.pos[1]-j >= 0 and self.matriz[pl.pos[0]- i][pl.pos[1]-j] == 0:
                         self.b[pl.pos[0]-i][pl.pos[1]-j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                         self.b[pl.pos[0]-i][pl.pos[1]-j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-                    if pl.pos[0] + i < 15 and self.matriz[pl.pos[0]+i][pl.pos[1]-j] == 0 and pl.pos[0]+i >= 0 and pl.pos[1]-j >= 0:
+                    if pl.pos[0] + i < 15 and pl.pos[1]-j >= 0 and self.matriz[pl.pos[0]+i][pl.pos[1]-j] == 0:
                         self.b[pl.pos[0]+i][pl.pos[1]-j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                         self.b[pl.pos[0]+i][pl.pos[1]-j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-                    if pl.pos[1]+j < 27 and self.matriz[pl.pos[0]-i][pl.pos[1]+j] == 0 and pl.pos[0]-i >= 0 and pl.pos[1]-j >= 0:
+                    if pl.pos[1]+j < 27 and pl.pos[0]-i >= 0 and self.matriz[pl.pos[0]-i][pl.pos[1]+j] == 0:
                         self.b[pl.pos[0]-i][pl.pos[1]+j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                         self.b[pl.pos[0]-i][pl.pos[1]+j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-                    if pl.pos[0] + i < 15 and pl.pos[1]+j < 27 and self.matriz[pl.pos[0]+i][pl.pos[0]+j] == 0 and pl.pos[0]+i >= 0 and pl.pos[1]-j >= 0:
+                    if pl.pos[0] + i < 15 and pl.pos[1]+j < 27 and self.matriz[pl.pos[0]+i][pl.pos[0]+j] == 0:
                         self.b[pl.pos[0]+i][pl.pos[1]+j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                         self.b[pl.pos[0]+i][pl.pos[1]+j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
         ClasseTrack.Tracker.Weaponselected = 0
@@ -384,4 +387,5 @@ class Mapa():
                     Map.b[pl.pos[0]][pl.pos[1]-i].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
         
     def Exit():
+        sound.Stop_All()
         window.destroy()

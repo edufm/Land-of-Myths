@@ -6,10 +6,11 @@ Created on Sun May 15 13:48:42 2016
 """
 
 class Track():
-    def __init__(self, Turn, Weaponselected, Enemies, Boss):
+    def __init__(self, Turn, Enemies, Boss, Weaponselected, Music):
         self.Turn = Turn 
-        self.Weaponselected = Weaponselected
         self.Enemies = Enemies
         self.Boss = Boss
+        self.Weaponselected = Weaponselected
+        self.Music = Music
         
-Tracker = Track(0, 0, 0, 0)
+Tracker = Track(0, 0, 0, 0, 0)
