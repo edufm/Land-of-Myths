@@ -12,6 +12,7 @@ import ClasseGun
 from ClassePlayer import Player
 import ClasseImagens
 import ClasseTrack
+from ClassSound import *
 
 class Mapa():
     def __init__(self, matriz, b, gadjets, Waves, LEnemys):
@@ -213,6 +214,11 @@ class Mapa():
         snipeammo.configure(text="Ammo :   x{0}".format(0),font=("castelar"),bg = "black",foreground = "white")
         snipeammo.configure(height = 2, width = 15)
         snipeammo.grid(row= 9, column = 30)
+        
+        musicbutton = Button(window)
+        som = sound.Choose_music()
+        musicbutton.configure(text = " Play Music",bg = "white",font=("castelar"),command = lambda : sound.play_music(som) )
+        musicbutton.grid(row =12,column = 30)
         
         Map.gadjets.append(Pistolb)
         Map.gadjets.append(Pammo)
