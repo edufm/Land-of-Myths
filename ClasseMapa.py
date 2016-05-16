@@ -116,6 +116,9 @@ class Mapa():
             b[Xp][Yp].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
             pl.pos = [X,Y]
             
+        elif ClasseTrack.Tracker.Aim == 1:
+            Enemys.Take_Damage([X,Y], pl, self, ClasseTrack.Tracker.Aim)
+        
         elif self.matriz[X][Y] >= 2 and self.matriz[X][Y] < 99:
             Enemys.Take_Damage([X,Y], pl, self, ClasseTrack.Tracker.Aim)
 
