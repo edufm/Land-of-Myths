@@ -3,6 +3,7 @@ from numpy import random as ran
 import ClasseImagens
 from ClasseGun import Gun
 import ClasseTrack
+from ClassSound import *
 
 class Enemys():
     def __init__(self, ID, health, damage, pos):
@@ -50,10 +51,13 @@ class Enemys():
     def Take_Damage(loc, pl, Map, Aim):
         if pl.weapon.ID == 100:
             Gun.Take_Damage_P(loc,pl,Map)
+            
         elif pl.weapon.ID == 101:
             Gun.Shotgun_Shot(pl, loc, Map, Aim)
+            
         elif pl.weapon.ID == 102:
             Gun.Take_Damage_SN(loc,pl,Map,Aim)
+            
     
     def left(self):
         self.pos[1] -= 1
