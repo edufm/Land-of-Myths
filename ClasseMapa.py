@@ -21,7 +21,7 @@ class Mapa():
         self.gadjets = gadjets
         self.Waves = Waves
         self.LEnemys = LEnemys
-    
+        
     def Start_Game(X, L):
         if X == 1:
             L[0].destroy()
@@ -34,11 +34,16 @@ class Mapa():
         
         pl = Player(20, ClasseGun.Pistol, [7,13], [7, 0, 0])
         
+        ClasseTrack.Tracker.Map = Map
+        ClasseTrack.Tracker.pl = pl
+        
         Map.matriz[7][13] = 1
         Mapa.load_map(Map, window, pl)
         Player.set_player(pl)
         
         Mapa.gui(window, Map, pl)
+        
+        window.bind("<Key>", Mapa.key)
         
         window.mainloop()
         
@@ -57,9 +62,33 @@ class Mapa():
         self.b[7][13].config(image = ClasseImagens.player[0])
         self.b[7][13].image = ClasseImagens.player[0]
 
+    def key(event):
+        print("pressed", repr(event.char))
+        if repr(event.char) == "'w'":
+            m = [ClasseTrack.Tracker.pl.pos[0]-1, ClasseTrack.Tracker.pl.pos[1]]
+            Mapa.detect_click(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+        if repr(event.char) == "'s'":
+            m = [ClasseTrack.Tracker.pl.pos[0]+1, ClasseTrack.Tracker.pl.pos[1]]
+            Mapa.detect_click(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+        if repr(event.char) == "'a'":
+            m = [ClasseTrack.Tracker.pl.pos[0], ClasseTrack.Tracker.pl.pos[1]-1]
+            Mapa.detect_click(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+        if repr(event.char) == "'d'":
+            m = [ClasseTrack.Tracker.pl.pos[0], ClasseTrack.Tracker.pl.pos[1]+1]
+            Mapa.detect_click(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+        if repr(event.char) == "'x'":
+            m = [ClasseTrack.Tracker.pl.pos[0], ClasseTrack.Tracker.pl.pos[1]]
+            Mapa.detect_click(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+        if repr(event.char) == "'1'":
+            Mapa.Botão_de_arma(ClasseTrack.Tracker.Map, ClasseTrack.Tracker.pl, 0)
+        if repr(event.char) == "'2'":
+            Mapa.Botão_de_arma(ClasseTrack.Tracker.Map, ClasseTrack.Tracker.pl, 1)
+        if repr(event.char) == "'3'":
+            Mapa.Botão_de_arma(ClasseTrack.Tracker.Map, ClasseTrack.Tracker.pl, 2)
+            
     def detect_click(self, m, pl):
         
-        click_errado = 0        
+        click_errado = 0  
         X = m[0]
         Y = m[1]
         Xp = pl.pos[0]
@@ -159,7 +188,7 @@ class Mapa():
                         Map.b[i][j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
                 
     def gui(window, Map, pl):
-        
+
         vida = Label(window)
         vida.configure(text="Life:",font=("castelar"),bg = "black",foreground = "white")
         vida.configure(height = 2 , width = 4)
@@ -179,7 +208,7 @@ class Mapa():
         nomejogo = Label(window)
         nomejogo.configure(text="I´ll survive" , font= ("Times",20),bg = "black",foreground="white")
         nomejogo.grid(row = 0 ,columnspan =100)
-        
+
         Map.gadjets.append(vida)
         Map.gadjets.append(botãodevida1)
         Map.gadjets.append(time)
@@ -191,29 +220,29 @@ class Mapa():
         Pistolb.configure(image = ClasseImagens.guns[0], command= lambda: Mapa.Botão_de_arma(Map, pl, 0))
         Pistolb.image = ClasseImagens.guns[0]
         Pistolb.grid(row = 5, column = 28, columnspan = 2)
-        
+
         Pammo = Label(window)
         Pammo.configure(text="Ammo :   x{0}".format(0),font=("castelar"),bg = "black",foreground = "white")
         Pammo.configure(height = 2, width = 15)
         Pammo.grid(row= 5, column = 30)
-        
+
         shotgunb = Button(window)
         shotgunb.configure(height = 36, width = 36, state = 'disabled')
         shotgunb.configure(image = ClasseImagens.guns[1], command= lambda: Mapa.Botão_de_arma(Map, pl, 1))
         shotgunb.image = ClasseImagens.guns[1]
         shotgunb.grid(row = 7, column = 28, columnspan = 2)
-        
+
         shotammo = Label(window)
         shotammo.configure(text="Ammo :   x{0}".format(0),font=("castelar"),bg = "black",foreground = "white")
         shotammo.configure(height = 2, width = 15)
         shotammo.grid(row= 7, column = 30)
-        
+
         Sniperb = Button(window)
         Sniperb.configure(height = 36, width = 36, state = 'disabled')
         Sniperb.configure(image = ClasseImagens.guns[2], command= lambda: Mapa.Botão_de_arma(Map, pl, 2))
         Sniperb.image = ClasseImagens.guns[2]
         Sniperb.grid(row = 9, column = 28, columnspan = 2)
-        
+
         snipeammo = Label(window)
         snipeammo.configure(text="Ammo :   x{0}".format(0),font=("castelar"),bg = "black",foreground = "white")
         snipeammo.configure(height = 2, width = 15)
