@@ -110,17 +110,19 @@ class Gun():
 
     #_______________________________Sniper___________________________
     
-    def Sniper_X(loc,Map,pl):
-        x = loc[0]
-        y = loc[1]
-        Damage = 7
-        if loc[0] == x and loc[1] > y:
-            if Map.matriz[0] == 0:
-                loc[1] += 1
-                Gun.Sniper_X(loc)
-            else:
-                Gun.Take_Damage_Sn(loc, pl, Map,Damage)
-                Damage -= 1
+    def Sniper_X(loc,Map,pl,Damage):
+        RangeTest =Gun.Check_Range(Shotgun, loc, pl)        
+        if RangeTest == 1:           
+            x = pl.pos[0]
+            y = pl.pos[1]
+            Damage = 7
+            if loc[0] == x and loc[1] > y: # right
+                if Map.matriz[x][y] == 0:
+                    loc[1] += 1
+                    Gun.Sniper_X(loc,Map,pl,Damage)
+                else:
+                    Piercing = Gun.Take_Damage_Sn(loc, pl, Map,Damage)
+                    Damage -= Piercing
         
         #_______________________GErador armas_____________________
         
@@ -215,10 +217,12 @@ class Gun():
             if i.pos == loc:
                 i.health -= Damage
                 if i.health <= 0:
+                       Damage -= i.health
                        Map.LEnemys.remove(i)    
                        Map.matriz[i.pos[0]][i.pos[1]] = 0
                        Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                        Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+                return Damage
                     
             #________________________________Ammo__________________________________________
                     
@@ -233,6 +237,6 @@ Pistol = Gun(100,7,7,1,"Shoot")
 
 Shotgun = Gun(101,6,3,3,"Burst")
 
-Sniper = Gun(102,3,50,5,"LongWatch")
+Sniper = Gun(102,3,1,5,"LongWatch")
 
 WeaponList = [Pistol,Shotgun,Sniper]
