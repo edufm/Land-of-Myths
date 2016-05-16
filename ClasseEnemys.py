@@ -48,15 +48,15 @@ class Enemys():
                 Map.b[14][i].image = ClasseImagens.enemy1[0]
                 Map.LEnemys.append(E)
                     
-    def Take_Damage(loc, pl, Map, Aim):
+    def Take_Damage(loc, pl, Map):
         if pl.weapon.ID == 100:
             Gun.Take_Damage_P(loc,pl,Map)
             
         elif pl.weapon.ID == 101:
-            Gun.Shotgun_Shot(pl, loc, Map, Aim)
+            Gun.Shotgun_Shot(pl, loc, Map)
             
         elif pl.weapon.ID == 102:
-            Gun.Take_Damage_SN(loc,pl,Map,Aim)
+            Gun.Take_Damage_SN(loc,pl,Map)
             
     
     def left(self):

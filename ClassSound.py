@@ -17,8 +17,6 @@ class sound():
         if ClasseTrack.Tracker.Music == 0:
             ws.PlaySound(play, ws.SND_ASYNC)
             ClasseTrack.Tracker.Music = 1
-            
-            
         else:
             ws.PlaySound(None, ws.SND_PURGE)
             ClasseTrack.Tracker.Music = 0
@@ -32,8 +30,7 @@ class sound():
         a = random.randint(0, 2)
         
         return musics[a]
-        
-shot = sound(".\\sounds\\tiro.wav")    
+    
 got = sound(".\\sounds\\got.wav")
 skyrim = sound(".\\sounds\\skyrim.wav")
 pirates = sound(".\\sounds\\pirates.wav")

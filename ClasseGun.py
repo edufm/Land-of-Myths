@@ -36,26 +36,25 @@ class Gun():
         Weapon = ID - 100
         pl.Weapon = WeaponList[Weapon]        
             
-    def Shotgun_Shot(pl, loc, Map, Aim):
-        if Aim == 1:
-            if loc[1] == (pl.pos[1] - 1) and loc[0] == pl.pos[0]:
-                Gun.Shotgun_Left([loc[0], pl.pos[1] - 1],Map,pl,Aim)
-            if loc[1] == (pl.pos[1] + 1) and loc[0] == pl.pos[0]:
-                Gun.Shotgun_Right([loc[0], pl.pos[1] + 1],Map,pl,Aim)
-            if loc[0] == (pl.pos[0] - 1) and loc[1] == pl.pos[1]:
-                Gun.Shotgun_Up([pl.pos[0] - 1, loc[1]],Map,pl,Aim)
-            if loc[0] == (pl.pos[0] + 1) and loc[1] == pl.pos[1]:
-                Gun.Shotgun_Down([pl.pos[0] + 1, loc[1]],Map,pl,Aim)
+    def Shotgun_Shot(pl, loc, Map):
+    
+        if loc[1] == (pl.pos[1] - 1) and loc[0] == pl.pos[0]:
+            Gun.Shotgun_Left([loc[0], pl.pos[1] - 1], Map, pl)
+        if loc[1] == (pl.pos[1] + 1) and loc[0] == pl.pos[0]:
+            Gun.Shotgun_Right([loc[0], pl.pos[1] + 1], Map, pl)
+        if loc[0] == (pl.pos[0] - 1) and loc[1] == pl.pos[1]:
+            Gun.Shotgun_Up([pl.pos[0] - 1, loc[1]], Map, pl)
+        if loc[0] == (pl.pos[0] + 1) and loc[1] == pl.pos[1]:
+            Gun.Shotgun_Down([pl.pos[0] + 1, loc[1]], Map, pl)
         
 #___________________________________________Shotgun____________________________
     
-    def Shotgun_Left(loc,Map,pl,Aim):
+    def Shotgun_Left(loc,Map,pl):
         x = loc[0]
         y = loc[1]
         if Map.matriz[x][y] < 100 and Map.matriz[x][y] != 0:
             Gun.Take_Damage_SG(loc, pl, Map, 3)
-            print (Aim)
-        elif Aim == 1:
+        else:
             loc[1] -= 1
             loc[0] -= 1
             Gun.Take_Damage_SG(loc, pl, Map, 1)
@@ -65,12 +64,12 @@ class Gun():
             Gun.Take_Damage_SG(loc, pl, Map, 1)
             print ("Tomou")
             
-    def Shotgun_Right(loc,Map,pl,Aim):
+    def Shotgun_Right(loc,Map,pl):
         x = loc[0]
         y = loc[1]
         if Map.matriz[x][y] < 100 and Map.matriz[x][y] != 0:
             Gun.Take_Damage_SG(loc, pl, Map, 3)
-        elif Aim == 1:
+        else:
             loc[1] += 1
             loc[0] -= 1
             Gun.Take_Damage_SG(loc, pl, Map, 1)
@@ -79,12 +78,12 @@ class Gun():
             loc[0] += 1
             Gun.Take_Damage_SG(loc, pl, Map, 1)
             
-    def Shotgun_Down(loc,Map,pl,Aim):
+    def Shotgun_Down(loc,Map,pl):
         x = loc[0]
         y = loc[1]
         if Map.matriz[x][y] < 100 and Map.matriz[x][y] != 0:
             Gun.Take_Damage_SG(loc, pl, Map, 3)
-        elif Aim == 1:
+        else:
             loc[0] += 1
             loc[1] -= 1
             Gun.Take_Damage_SG(loc, pl, Map, 1)
@@ -93,12 +92,12 @@ class Gun():
             loc[1] += 1
             Gun.Take_Damage_SG(loc, pl, Map, 1)
             
-    def Shotgun_Up(loc, Map, pl,Aim):
+    def Shotgun_Up(loc, Map, pl):
         x = loc[0]
         y = loc[1]
         if Map.matriz[x][y] < 100 and Map.matriz[x][y] != 0:
             Gun.Take_Damage_SG(loc, pl, Map, 3)
-        elif Aim == 1:
+        else:
             loc[0] -= 1
             loc[1] -= 1
             Gun.Take_Damage_SG(loc, pl, Map, 1)
@@ -111,7 +110,7 @@ class Gun():
 
     #_______________________________Sniper___________________________
     
-    def Sniper_X(loc,Map,pl,Aim):
+    def Sniper_X(loc,Map,pl):
         x = loc[0]
         y = loc[1]
         Damage = 7

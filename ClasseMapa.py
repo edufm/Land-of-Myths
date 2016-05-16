@@ -28,8 +28,6 @@ class Mapa():
             L[1].destroy()
             L[2].destroy()
         
-        ClasseTrack.Tracker.Aim = 0
-        
         Map = Mapa(np.zeros([15, 27]), [], [], 0, [])   
         
         pl = Player(20, ClasseGun.Pistol, [7,13], [7, 0, 0])
@@ -52,7 +50,7 @@ class Mapa():
         for i in range(15):
             self.b.append([])
             for j in range(27):
-                button = Button(window, text=' ',command= lambda m=[i,j]: self.detect_click(m, pl))
+                button = Button(window, text=' ',command= lambda m=[i,j]: self.Atira(m, pl))
                 button.grid(row=i+1, column=j, sticky=W+E+S+N)
                 button.config(image=ClasseImagens.Tiles[0])
                 button.configure(height = 36, width = 36,bg = "black")
@@ -66,19 +64,19 @@ class Mapa():
         print("pressed", repr(event.char))
         if repr(event.char) == "'w'":
             m = [ClasseTrack.Tracker.pl.pos[0]-1, ClasseTrack.Tracker.pl.pos[1]]
-            Mapa.detect_click(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+            Mapa.Andar(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
         if repr(event.char) == "'s'":
             m = [ClasseTrack.Tracker.pl.pos[0]+1, ClasseTrack.Tracker.pl.pos[1]]
-            Mapa.detect_click(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+            Mapa.Andar(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
         if repr(event.char) == "'a'":
             m = [ClasseTrack.Tracker.pl.pos[0], ClasseTrack.Tracker.pl.pos[1]-1]
-            Mapa.detect_click(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+            Mapa.Andar(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
         if repr(event.char) == "'d'":
             m = [ClasseTrack.Tracker.pl.pos[0], ClasseTrack.Tracker.pl.pos[1]+1]
-            Mapa.detect_click(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+            Mapa.Andar(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
         if repr(event.char) == "'x'":
             m = [ClasseTrack.Tracker.pl.pos[0], ClasseTrack.Tracker.pl.pos[1]]
-            Mapa.detect_click(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+            Mapa.Andar(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
         if repr(event.char) == "'1'":
             Mapa.Botão_de_arma(ClasseTrack.Tracker.Map, ClasseTrack.Tracker.pl, 0)
         if repr(event.char) == "'2'":
@@ -86,7 +84,7 @@ class Mapa():
         if repr(event.char) == "'3'":
             Mapa.Botão_de_arma(ClasseTrack.Tracker.Map, ClasseTrack.Tracker.pl, 2)
             
-    def detect_click(self, m, pl):
+    def Andar(self, m, pl):
         
         click_errado = 0  
         X = m[0]
@@ -99,10 +97,7 @@ class Mapa():
         G = self.matriz[X][Y] > 99
         GN = int(self.matriz[X][Y]) - 100
 
-        if ClasseTrack.Tracker.Aim == 1:
-            Enemys.Take_Damage([X,Y], pl, self, ClasseTrack.Tracker.Aim)
-
-        elif (G or V) and X+1 == Xp and Y == Yp:
+        if (G or V) and X+1 == Xp and Y == Yp:
             if G:
                 ClasseGun.Gun.Pick_Weapon(GN, pl)
             #Adiciona o player no novo lugar
@@ -156,6 +151,13 @@ class Mapa():
         
         if click_errado == 0:
             self.Roda_jogo(pl)
+            
+    def Atira(self, m, pl):
+        X = m[0]
+        Y = m[1]
+        Enemys.Take_Damage([X,Y], pl, self)
+        
+        self.Roda_jogo(pl)
     
     def Roda_jogo(self, pl):
         # Limpa o range se ele estiver ligado        
@@ -175,8 +177,6 @@ class Mapa():
             Mapa.update_map(self, pl)        
         #Gera aos itens no mapa
         ClasseGun.Gun.Gerar_Guns(self)
-        #seta aim para 0
-        ClasseTrack.Tracker.Aim = 0
 
     def update_map(Map, pl):
         if (Map.Waves) % 4 == 1:
@@ -313,7 +313,6 @@ class Mapa():
             Map.Limpa_range(pl)
         else:
             Mapa.mostrarange(pl, Map, X)
-            ClasseTrack.Tracker.Aim = 1
         pl.weapon = ClasseGun.WeaponList[X]
         
         
@@ -334,7 +333,6 @@ class Mapa():
                         self.b[pl.pos[0]+i][pl.pos[1]+j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                         self.b[pl.pos[0]+i][pl.pos[1]+j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
         ClasseTrack.Tracker.Weaponselected = 0
-        ClasseTrack.Tracker.Aim = 0
 
     def mostrarange(pl, Map, X):
         ClasseTrack.Tracker.Weaponselected = 1
