@@ -27,7 +27,9 @@ class Mapa():
             L[0].destroy()
             L[1].destroy()
             L[2].destroy()
-
+        
+        ClasseTrack.Tracker.Aim = 0
+        
         Map = Mapa(np.zeros([15, 27]), [], [], 0, [])   
         
         pl = Player(20, ClasseGun.Pistol, [7,13], [7, 0, 0])
@@ -115,7 +117,7 @@ class Mapa():
             pl.pos = [X,Y]
             
         elif self.matriz[X][Y] >= 2 and self.matriz[X][Y] < 99:
-            Enemys.Take_Damage([X,Y], pl, self)
+            Enemys.Take_Damage([X,Y], pl, self, ClasseTrack.Tracker.Aim)
 
         elif self.matriz[X][Y] == 1:
             click_errado = 0
@@ -144,6 +146,8 @@ class Mapa():
             Mapa.update_map(self, pl)        
         #Gera aos itens no mapa
         ClasseGun.Gun.Gerar_Guns(self)
+        #seta aima para 0
+        ClasseTrack.Tracker.Aim = 0
 
     def update_map(Map, pl):
         if (Map.Waves) % 4 == 1:
@@ -281,6 +285,8 @@ class Mapa():
         else:
             Mapa.mostrarange(pl, Map, X)
         pl.weapon = ClasseGun.WeaponList[X]
+        ClasseTrack.Tracker.Aim = 1
+        
         
     def Limpa_range(self, pl):
         for i in range(8):

@@ -38,15 +38,16 @@ class Gun():
         
         
             
-    def Shotgun_Shot(pl, loc, Map):
-        if loc[1] == (pl.pos[1] - 1) and loc[0] == pl.pos[0]:
-            Gun.Shotgun_Left([loc[0], pl.pos[1] - 1],Map,pl)
-        if loc[1] == (pl.pos[1] + 1) and loc[0] == pl.pos[0]:
-            Gun.Shotgun_Right([loc[0], pl.pos[1] + 1],Map,pl)
-        if loc[0] == (pl.pos[0] - 1) and loc[1] == pl.pos[1]:
-            Gun.Shotgun_Up([pl.pos[0] - 1, loc[1]],Map,pl)
-        if loc[0] == (pl.pos[0] + 1) and loc[1] == pl.pos[1]:
-            Gun.Shotgun_Down([pl.pos[0] + 1, loc[1]],Map,pl)
+    def Shotgun_Shot(pl, loc, Map, Aim):
+        if Aim == 1:
+            if loc[1] == (pl.pos[1] - 1) and loc[0] == pl.pos[0]:
+                Gun.Shotgun_Left([loc[0], pl.pos[1] - 1],Map,pl)
+            if loc[1] == (pl.pos[1] + 1) and loc[0] == pl.pos[0]:
+                Gun.Shotgun_Right([loc[0], pl.pos[1] + 1],Map,pl)
+            if loc[0] == (pl.pos[0] - 1) and loc[1] == pl.pos[1]:
+                Gun.Shotgun_Up([pl.pos[0] - 1, loc[1]],Map,pl)
+            if loc[0] == (pl.pos[0] + 1) and loc[1] == pl.pos[1]:
+                Gun.Shotgun_Down([pl.pos[0] + 1, loc[1]],Map,pl)
         
 #___________________________________________Shotgun____________________________
     
