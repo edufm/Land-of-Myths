@@ -34,9 +34,7 @@ class Gun():
     
     def Weapon_Swap(ID,pl):
         Weapon = ID - 100
-        pl.Weapon = WeaponList[Weapon]
-        
-        
+        pl.Weapon = WeaponList[Weapon]        
             
     def Shotgun_Shot(pl, loc, Map, Aim):
         if Aim == 1:
@@ -124,10 +122,6 @@ class Gun():
             else:
                 Gun.Take_Damage_Sn(loc, pl, Map,Damage)
                 Damage -= 1
-            
-        
-            
-            
         
         #_______________________GErador armas_____________________
         
@@ -151,12 +145,12 @@ class Gun():
             if x <= 10:
                 Gun.Gerar_Pistol(Map)
         x = random.randint(1,101)
-        if b <=2:
+        if b <= 2:
             if x <= 4:
                 Gun.Gerar_Shotgun(Map)
         x = random.randint(1,101)
-        if c <=1:
-            if x <= 1:
+        if c <= 1:
+            if x <= 2:
                 Gun.Gerar_Sniper(Map)
         
     def Gerar_Pistol(Map):
@@ -216,7 +210,16 @@ class Gun():
                        Map.matriz[i.pos[0]][i.pos[1]] = 0
                        Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                        Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-        
+    
+    def Take_Damage_SN(loc, pl, Map, Damage):
+        for i in Map.LEnemys:
+            if i.pos == loc:
+                i.health -= Damage
+                if i.health <= 0:
+                       Map.LEnemys.remove(i)    
+                       Map.matriz[i.pos[0]][i.pos[1]] = 0
+                       Map.b[i.pos[0]][i.pos[1]].config(image= ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                       Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
                     
             #________________________________Ammo__________________________________________
                     

@@ -69,8 +69,11 @@ class Mapa():
         V = self.matriz[X][Y] == 0
         G = self.matriz[X][Y] > 99
         GN = int(self.matriz[X][Y]) - 100
-        
-        if (G or V) and X+1 == Xp and Y == Yp:           
+
+        if ClasseTrack.Tracker.Aim == 1:
+            Enemys.Take_Damage([X,Y], pl, self, ClasseTrack.Tracker.Aim)
+
+        elif (G or V) and X+1 == Xp and Y == Yp:
             if G:
                 ClasseGun.Gun.Pick_Weapon(GN, pl)
             #Adiciona o player no novo lugar
@@ -115,12 +118,6 @@ class Mapa():
             b[Xp][Yp].config(image= ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
             b[Xp][Yp].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
             pl.pos = [X,Y]
-            
-        elif ClasseTrack.Tracker.Aim == 1:
-            Enemys.Take_Damage([X,Y], pl, self, ClasseTrack.Tracker.Aim)
-        
-        elif self.matriz[X][Y] >= 2 and self.matriz[X][Y] < 99:
-            Enemys.Take_Damage([X,Y], pl, self, ClasseTrack.Tracker.Aim)
 
         elif self.matriz[X][Y] == 1:
             click_errado = 0
@@ -149,7 +146,7 @@ class Mapa():
             Mapa.update_map(self, pl)        
         #Gera aos itens no mapa
         ClasseGun.Gun.Gerar_Guns(self)
-        #seta aima para 0
+        #seta aim para 0
         ClasseTrack.Tracker.Aim = 0
 
     def update_map(Map, pl):
@@ -287,8 +284,8 @@ class Mapa():
             Map.Limpa_range(pl)
         else:
             Mapa.mostrarange(pl, Map, X)
+            ClasseTrack.Tracker.Aim = 1
         pl.weapon = ClasseGun.WeaponList[X]
-        ClasseTrack.Tracker.Aim = 1
         
         
     def Limpa_range(self, pl):
@@ -308,6 +305,7 @@ class Mapa():
                         self.b[pl.pos[0]+i][pl.pos[1]+j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                         self.b[pl.pos[0]+i][pl.pos[1]+j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
         ClasseTrack.Tracker.Weaponselected = 0
+        ClasseTrack.Tracker.Aim = 0
 
     def mostrarange(pl, Map, X):
         ClasseTrack.Tracker.Weaponselected = 1
