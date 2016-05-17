@@ -156,8 +156,9 @@ class Mapa():
         X = m[0]
         Y = m[1]
         Enemys.Take_Damage([X,Y], pl, self)
-        
         self.Roda_jogo(pl)
+        sound.play_sound(shot.play)
+        
     
     def Roda_jogo(self, pl):
         # Limpa o range se ele estiver ligado        
