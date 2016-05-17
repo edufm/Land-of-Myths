@@ -18,7 +18,9 @@ class Gun():
         if distanciay < 0:
             distanciay = loc[0] - pl.pos[0]
 
+        print (distanciax, distanciay)
         Distance = distanciax +  distanciay
+        print (Distance, self.Range)
         if Distance < self.Range:
             return 1
         else:
@@ -111,18 +113,24 @@ class Gun():
     #_______________________________Sniper___________________________
     
     def Sniper_X(loc,Map,pl,Damage):
-        RangeTest =Gun.Check_Range(Shotgun, loc, pl)        
+        RangeTest =Gun.Check_Range(Sniper, loc, pl)        
         if RangeTest == 1:           
             x = pl.pos[0]
             y = pl.pos[1]
             Damage = 7
             if loc[0] == x and loc[1] > y: # right
+                print ("right")
                 if Map.matriz[x][y] == 0:
                     loc[1] += 1
                     Gun.Sniper_X(loc,Map,pl,Damage)
+                    print ("null")
                 else:
-                    Piercing = Gun.Take_Damage_Sn(loc, pl, Map,Damage)
+                    Piercing = Gun.Take_Damage_SN(loc, pl, Map,Damage)
+                    print (Piercing)
                     Damage -= Piercing
+                    Gun.Sniper_X(loc,Map,pl,Damage)
+                    print (Damage)
+        print ("fuck")
         
         #_______________________GErador armas_____________________
         
@@ -217,6 +225,7 @@ class Gun():
             if i.pos == loc:
                 i.health -= Damage
                 if i.health <= 0:
+                       print ("dano =", Damage)
                        Damage -= i.health
                        Map.LEnemys.remove(i)    
                        Map.matriz[i.pos[0]][i.pos[1]] = 0
@@ -237,6 +246,6 @@ Pistol = Gun(100,7,7,1,"Shoot")
 
 Shotgun = Gun(101,6,3,3,"Burst")
 
-Sniper = Gun(102,3,1,5,"LongWatch")
+Sniper = Gun(102,3,2,5,"LongWatch")
 
 WeaponList = [Pistol,Shotgun,Sniper]
