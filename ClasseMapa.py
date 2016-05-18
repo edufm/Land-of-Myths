@@ -13,6 +13,7 @@ from ClassePlayer import Player
 import ClasseImagens
 import ClasseTrack
 from ClassSound import *
+from ClasseMenu import *
 
 class Mapa():
     def __init__(self, matriz, b, gadjets, Waves, LEnemys):
@@ -23,6 +24,7 @@ class Mapa():
         self.LEnemys = LEnemys
         
     def Start_Game(X, L):
+        Menu.Construir_menu(window)
         if X == 1:
             L[0].destroy()
             L[1].destroy()

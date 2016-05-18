@@ -85,5 +85,5 @@ Sniper = PhotoImage(file=".//Imagens//Sprites//sniper.png")
 guns = [Pistol,Shotgun,Sniper]
 
 
-background_menu = PhotoImage ( file ="C:\\Users\\Hugo\\Desktop\\Nova pasta\\back.png")
+background_menu = PhotoImage(file =".//Imagens//Tiles//Finalsubranged.png")
 

@@ -14,8 +14,8 @@ class Menu():
         
         
     def Construir_menu(window):
-            window.configure(image = background_menu  )
-            window.image = background_menu
+#            window.configure(image = background_menu  )
+#            window.image = background_menu
             Menu = Label(window)
             Menu.config(text = "MENU", height = 5, width = 36,bg="black",foreground="red",font=("castelar",40))
             
