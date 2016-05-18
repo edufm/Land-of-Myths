@@ -8,10 +8,10 @@ from ClassePlayer import Player
 import ClasseImagens
 import ClasseTrack
 from ClassSound import *
-import ClasseMenu
 
 class Mapa():
-    def __init__(self, matriz, b, gadjets, Waves, LEnemys):
+    def __init__(self, window, matriz, b, gadjets, Waves, LEnemys):
+        self.window = window        
         self.matriz = matriz
         self.b = b
         self.gadjets = gadjets
@@ -25,7 +25,7 @@ class Mapa():
             L[1].destroy()
             L[2].destroy()
         
-        Map = Mapa(np.zeros([15, 27]), [], [], 0, [])   
+        Map = Mapa(window, np.zeros([15, 27]), [], [], 0, [])   
         
         pl = Player(20, ClasseGun.Pistol, [7,13], [7, 0, 0])
         
@@ -39,7 +39,6 @@ class Mapa():
         Mapa.gui(window, Map, pl)
         
         window.bind("<Key>", Mapa.key)
-        
         
     def load_map(self, window, pl):
         
@@ -251,7 +250,7 @@ class Mapa():
         musicbutton.grid(row =12,column = 30)
         
         exitbutton = Button(window)
-        exitbutton.configure(text = "Exit",bg = "white",font=("castelar"),command = lambda : Mapa.Exit(ClasseMenu.window))
+        exitbutton.configure(text = "Exit",bg = "white",font=("castelar"),command = lambda : Mapa.Exit(Map.window))
         exitbutton.grid(row = 16,column = 30)
         
         Map.gadjets.append(Pistolb)
@@ -269,20 +268,20 @@ class Mapa():
             for i in gadjets:
                 i.destroy()
             
-            youdied = Label(window)
+            youdied = Label(Map.window)
             youdied.config(text = "Whatta shame, you died!!", height = 5, width = 36,bg="black",foreground="red",font=("castelar",40))
             
             youdied.place(x=130, y=40)
     
-            giveup = Button(window)
-            giveup.config(command =lambda: Mapa.Exit())
+            giveup = Button(Map.window)
+            giveup.config(command =lambda: Mapa.Exit(Map.window))
             exiit = PhotoImage(file=".\\Imagens\\Sprites\\exit.png")
             giveup.image = exiit
             giveup.config(image=exiit,bg="black")
             giveup.place(x=525, y= 300)
             
-            restart = Button(window)
-            restart.config(command =lambda: Mapa.Start_Game(1, [youdied, restart, giveup]))
+            restart = Button(Map.window)
+            restart.config(command =lambda: Mapa.Start_Game(1, [youdied, restart, giveup], Map.window))
             restartt = PhotoImage(file=".\\Imagens\\Sprites\\reset-button-hi.png")
             restart.image = restartt
             restart.config(image=restartt,bg="black")
