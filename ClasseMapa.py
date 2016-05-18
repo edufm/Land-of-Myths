@@ -2,18 +2,12 @@
 from tkinter import *
 import numpy as np
 
-window = Tk()
-window.title("Magic Trap")
-window.configure(bg="black")
-window.geometry("{0}x{1}+0+0".format(window.winfo_screenwidth(),window.winfo_screenheight()))
-
 from ClasseEnemys import Enemys
 import ClasseGun
 from ClassePlayer import Player
 import ClasseImagens
 import ClasseTrack
 from ClassSound import *
-from ClasseMenu import *
 
 class Mapa():
     def __init__(self, matriz, b, gadjets, Waves, LEnemys):
@@ -22,9 +16,9 @@ class Mapa():
         self.gadjets = gadjets
         self.Waves = Waves
         self.LEnemys = LEnemys
-        
-    def Start_Game(X, L):
-        Menu.Construir_menu(window)
+    
+    
+    def Start_Game(X, L, window):
         if X == 1:
             L[0].destroy()
             L[1].destroy()
@@ -45,7 +39,6 @@ class Mapa():
         
         window.bind("<Key>", Mapa.key)
         
-        window.mainloop()
         
     def load_map(self, window, pl):
         
@@ -424,6 +417,6 @@ class Mapa():
                     Map.b[pl.pos[0]][pl.pos[1]-i].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
                     Map.b[pl.pos[0]][pl.pos[1]-i].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
         
-    def Exit():
+    def Exit(window):
         sound.Stop_All()
         window.destroy()

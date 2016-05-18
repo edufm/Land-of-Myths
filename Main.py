@@ -5,6 +5,6 @@ Created on Mon Apr 25 16:03:18 2016
 @author: Eh Nòis
 """
 
-from ClasseMapa import Mapa
+import ClasseMenu
 
-Mapa.Start_Game(0, 0)
+ClasseMenu.Menu.Construir_menu()
