@@ -16,7 +16,7 @@ class Enemys():
         Map.LEnemys = []
         if waves%4 != 0:
             N = ClasseTrack.Tracker.Boss
-            for i in range(waves*3):
+            for i in range((waves%4)*3):
                 E = Enemys(0, 1+N, 1, [14, i])
                 Map.matriz[14][i] = 2
                 Map.b[14][i].config(image = ClasseImagens.enemy1[0])

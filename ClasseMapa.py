@@ -76,11 +76,11 @@ class Mapa():
         if repr(event.char) == "'x'":
             m = [ClasseTrack.Tracker.pl.pos[0], ClasseTrack.Tracker.pl.pos[1]]
             Mapa.Andar(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
-        if repr(event.char) == "'1'":
+        if repr(event.char) == "'1'" and ClasseTrack.Tracker.pl.inv[0] > 0:
             Mapa.Botão_de_arma(ClasseTrack.Tracker.Map, ClasseTrack.Tracker.pl, 0)
-        if repr(event.char) == "'2'":
+        if repr(event.char) == "'2'" and ClasseTrack.Tracker.pl.inv[1] > 0:
             Mapa.Botão_de_arma(ClasseTrack.Tracker.Map, ClasseTrack.Tracker.pl, 1)
-        if repr(event.char) == "'3'":
+        if repr(event.char) == "'3'" and ClasseTrack.Tracker.pl.inv[2] > 0:
             Mapa.Botão_de_arma(ClasseTrack.Tracker.Map, ClasseTrack.Tracker.pl, 2)
             
     def Andar(self, m, pl):
@@ -90,8 +90,6 @@ class Mapa():
         Y = m[1]
         Xp = pl.pos[0]
         Yp = pl.pos[1]
-        
-        print(m)
         
         if (X < 15 and X >= 0) and (Y < 27 and Y >= 0):
         
