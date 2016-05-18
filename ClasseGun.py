@@ -181,7 +181,7 @@ class Gun():
                         print ("pierce",loc)
                         Gun.Sniper_X(loc,Map,pl,Damage, 0, count)
             if loc[0] > x and loc[1] == y: # down
-                if loc[0] >= 0:
+                if loc[0] >= 14:
                     if Map.matriz[loc[0]][loc[1]] == 0 or Map.matriz[loc[0]][loc[1]] > 100:
                         loc[0] += 1
                         print (loc)
