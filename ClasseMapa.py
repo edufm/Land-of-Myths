@@ -5,7 +5,7 @@ import numpy as np
 window = Tk()
 window.title("Magic Trap")
 window.configure(bg="black")
-window.geometry('1366x728')
+window.geometry("{0}x{1}+0+0".format(window.winfo_screenwidth(),window.winfo_screenheight()))
 
 from ClasseEnemys import Enemys
 import ClasseGun
