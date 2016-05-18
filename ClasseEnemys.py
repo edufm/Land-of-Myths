@@ -14,39 +14,22 @@ class Enemys():
 
     def cria_inimigos(waves, Map):
         Map.LEnemys = []
-        if waves < 4:
+        if waves%4 != 0:
+            N = ClasseTrack.Tracker.Boss
             for i in range(waves*3):
-                E = Enemys(0, 1, 1, [14, i])
+                E = Enemys(0, 1+N, 1, [14, i])
                 Map.matriz[14][i] = 2
                 Map.b[14][i].config(image = ClasseImagens.enemy1[0])
                 Map.b[14][i].image = ClasseImagens.enemy1[0]
                 Map.LEnemys.append(E)
-        if waves == 4:
-            E = Enemys(1, 7, 5, [14, 13])
+                
+        if waves%4 == 0:
+            N = ClasseTrack.Tracker.Boss
+            E = Enemys(1, 7 + N-1*3, 5, [14, 13])
             Map.matriz[14][13] = 3
             Map.b[14][13].config(image = ClasseImagens.boss1[0])
             Map.b[14][13].image = ClasseImagens.boss1[0]
             Map.LEnemys.append(E)
-        if waves > 4 and waves < 8:
-            for i in range((waves-4)*3):
-                E = Enemys(0, 2, 1, [14, i])
-                Map.matriz[14][i] = 2
-                Map.b[14][i].config(image = ClasseImagens.enemy1[0])
-                Map.b[14][i].image = ClasseImagens.enemy1[0]
-                Map.LEnemys.append(E)
-        if waves == 8:
-            E = Enemys(0, 14, 5, [14, 13])
-            Map.matriz[14][13] = 3
-            Map.b[14][13].config(image = ClasseImagens.boss1[0])
-            Map.b[14][13].image = ClasseImagens.boss1[0]
-            Map.LEnemys.append(E)
-        if waves > 8:
-            for i in range((waves-8)*3):
-                E = Enemys(2, 3, 1, [14, i])
-                Map.matriz[14][i] = 2
-                Map.b[14][i].config(image = ClasseImagens.enemy1[0])
-                Map.b[14][i].image = ClasseImagens.enemy1[0]
-                Map.LEnemys.append(E)
                     
     def Take_Damage(loc, pl, Map):
         if pl.weapon.ID == 100:

@@ -61,7 +61,6 @@ class Mapa():
         self.b[7][13].image = ClasseImagens.player[0]
 
     def key(event):
-        print("pressed", repr(event.char))
         if repr(event.char) == "'w'":
             m = [ClasseTrack.Tracker.pl.pos[0]-1, ClasseTrack.Tracker.pl.pos[1]]
             Mapa.Andar(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
@@ -92,65 +91,69 @@ class Mapa():
         Xp = pl.pos[0]
         Yp = pl.pos[1]
         
-        b = self.b
-        V = self.matriz[X][Y] == 0
-        G = self.matriz[X][Y] > 99
-        GN = int(self.matriz[X][Y]) - 100
-
-        if (G or V) and X+1 == Xp and Y == Yp:
-            if G:
-                ClasseGun.Gun.Pick_Weapon(GN, pl)
-            #Adiciona o player no novo lugar
-            self.matriz[X][Y] = 1
-            b[X][Y].config(image=ClasseImagens.player[3])
-            b[X][Y].image = ClasseImagens.player[3]
-            #Remove o "Rastro" do player
-            self.matriz[Xp][Y] = 0
-            b[Xp][Yp].config(image=ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
-            b[Xp][Yp].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-            pl.pos = [X,Y]
-            
-        elif (G or V) and X-1 == Xp and Y == Yp:
-            if G:
-                ClasseGun.Gun.Pick_Weapon(GN, pl)         
-            self.matriz[X][Y] = 1
-            b[X][Y].config(image=ClasseImagens.player[0])
-            b[X][Y].image = ClasseImagens.player[0]
-            self.matriz[Xp][Y] = 0
-            b[Xp][Yp].config(image=ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
-            b[Xp][Yp].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-            pl.pos = [X,Y]
-
-        elif (G or V) and Y+1 == Yp and X == Xp:
-            if G:
-                ClasseGun.Gun.Pick_Weapon(GN, pl)
-            self.matriz[X][Y] = 1
-            b[X][Y].config(image=ClasseImagens.player[2])
-            b[X][Y].image = ClasseImagens.player[2]
-            self.matriz[X][Yp] = 0
-            b[Xp][Yp].config(image= ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
-            b[Xp][Yp].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-            pl.pos = [X,Y]
-            
-        elif (G or V) and Y-1 == Yp and X == Xp:
-            if G:
-                ClasseGun.Gun.Pick_Weapon(GN, pl)
-            self.matriz[X][Y] = 1
-            b[X][Y].config(image= ClasseImagens.player[1])
-            b[X][Y].image = ClasseImagens.player[1]
-            self.matriz[X][Yp] = 0
-            b[Xp][Yp].config(image= ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
-            b[Xp][Yp].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-            pl.pos = [X,Y]
-
-        elif self.matriz[X][Y] == 1:
-            click_errado = 0
-            
-        else:
-            click_errado = 1
+        print(m)
         
-        if click_errado == 0:
-            self.Roda_jogo(pl)
+        if (X < 15 and X >= 0) and (Y < 27 and Y >= 0):
+        
+            b = self.b
+            V = self.matriz[X][Y] == 0
+            G = self.matriz[X][Y] > 99
+            GN = int(self.matriz[X][Y]) - 100
+
+            if (G or V) and X+1 == Xp and Y == Yp:
+                if G:
+                    ClasseGun.Gun.Pick_Weapon(GN, pl)
+                #Adiciona o player no novo lugar
+                self.matriz[X][Y] = 1
+                b[X][Y].config(image=ClasseImagens.player[3])
+                b[X][Y].image = ClasseImagens.player[3]
+                #Remove o "Rastro" do player
+                self.matriz[Xp][Y] = 0
+                b[Xp][Yp].config(image=ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                b[Xp][Yp].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+                pl.pos = [X,Y]
+                
+            elif (G or V) and X-1 == Xp and Y == Yp:
+                if G:
+                    ClasseGun.Gun.Pick_Weapon(GN, pl)         
+                self.matriz[X][Y] = 1
+                b[X][Y].config(image=ClasseImagens.player[0])
+                b[X][Y].image = ClasseImagens.player[0]
+                self.matriz[Xp][Y] = 0
+                b[Xp][Yp].config(image=ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                b[Xp][Yp].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+                pl.pos = [X,Y]
+    
+            elif (G or V) and Y+1 == Yp and X == Xp:
+                if G:
+                    ClasseGun.Gun.Pick_Weapon(GN, pl)
+                self.matriz[X][Y] = 1
+                b[X][Y].config(image=ClasseImagens.player[2])
+                b[X][Y].image = ClasseImagens.player[2]
+                self.matriz[X][Yp] = 0
+                b[Xp][Yp].config(image= ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                b[Xp][Yp].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+                pl.pos = [X,Y]
+                
+            elif (G or V) and Y-1 == Yp and X == Xp:
+                if G:
+                    ClasseGun.Gun.Pick_Weapon(GN, pl)
+                self.matriz[X][Y] = 1
+                b[X][Y].config(image= ClasseImagens.player[1])
+                b[X][Y].image = ClasseImagens.player[1]
+                self.matriz[X][Yp] = 0
+                b[Xp][Yp].config(image= ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                b[Xp][Yp].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+                pl.pos = [X,Y]
+    
+            elif self.matriz[X][Y] == 1:
+                click_errado = 0
+                
+            else:
+                click_errado = 1
+            
+            if click_errado == 0:
+                self.Roda_jogo(pl)
             
     def Atira(self, m, pl):
         X = m[0]
@@ -180,7 +183,7 @@ class Mapa():
         ClasseGun.Gun.Gerar_Guns(self)
 
     def update_map(Map, pl):
-        if (Map.Waves) % 4 == 1:
+        if (Map.Waves) % 4 == 0:
             ClasseTrack.Tracker.Boss += 1
             for i in range (15):
                 for j in range(27):
