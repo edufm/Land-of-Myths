@@ -13,6 +13,7 @@ window.geometry("{0}x{1}+0+0".format(window.winfo_screenwidth(),window.winfo_scr
 
 from ClasseMapa import Mapa
 from ClasseImagens import *
+from ClassSound import *
 
 class Menu():
     def __init__(self, lista):
@@ -20,6 +21,8 @@ class Menu():
         
         
     def Construir_menu():
+            
+            sound.menu_music()
             
             menu = Menu([])
             
@@ -58,4 +61,6 @@ class Menu():
     def clear_start(menu):
         for i in menu.lista:
             i.destroy()
+        ws.PlaySound(None,ws.SND_PURGE)
         Mapa.Start_Game(0, 0, window)
+        
