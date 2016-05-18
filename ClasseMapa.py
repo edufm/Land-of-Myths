@@ -8,6 +8,7 @@ from ClassePlayer import Player
 import ClasseImagens
 import ClasseTrack
 from ClassSound import *
+import ClasseMenu
 
 class Mapa():
     def __init__(self, matriz, b, gadjets, Waves, LEnemys):
@@ -250,7 +251,7 @@ class Mapa():
         musicbutton.grid(row =12,column = 30)
         
         exitbutton = Button(window)
-        exitbutton.configure(text = "Exit",bg = "white",font=("castelar"),command = lambda : Mapa.Exit())
+        exitbutton.configure(text = "Exit",bg = "white",font=("castelar"),command = lambda : Mapa.Exit(ClasseMenu.window))
         exitbutton.grid(row = 16,column = 30)
         
         Map.gadjets.append(Pistolb)

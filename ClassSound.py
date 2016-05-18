@@ -22,7 +22,7 @@ class sound():
             ClasseTrack.Tracker.Music = 0
             
     def play_sound(play):
-        ws.PlaySound(play, ws.SND_ASYNC,ws.SND_NOSTOP)
+        ws.PlaySound(play, ws.SND_NOSTOP)
         
        
         

@@ -15,24 +15,26 @@ from ClasseMapa import Mapa
 from ClasseImagens import *
 
 class Menu():
-    def __init__(self,criar):
-        self.criar = criar
+    def __init__(self, lista):
+        self.lista = lista
         
         
     def Construir_menu():
+            
+            menu = Menu([])
+            
             Imagemdo = Label(window)
             Imagemdo.config(image = Sniper)
             Imagemdo.image = Sniper            
             
-            Menu = Label(window)
-            Menu.config(text = "MENU", height = 5, width = 36,bg="black",foreground="red",font=("castelar",40))
-            
-            Menu.place(x=130, y=40)
+            lMenu = Label(window)
+            lMenu.config(text = "MENU", height = 5, width = 36,bg="black",foreground="red",font=("castelar",40))
+            lMenu.place(x=130, y=40)
     
             Play = Button(window)
             Play.config(text="Play",font=("castelar",20))
             Play.config(height = 2 , width = 15)
-            Play.configure(command = lambda : Mapa.Start_Game(0, 0, window))
+            Play.configure(command = lambda : Menu.clear_start(menu))
             Play.place(x=575, y= 300)
             
             Rank = Button(window)
@@ -46,6 +48,14 @@ class Menu():
             Exit.config(command =lambda: Mapa.Exit(window))
             Exit.place(x=575, y= 500)
             
+            menu.lista.append(Play)
+            menu.lista.append(Rank)
+            menu.lista.append(lMenu)
+            menu.lista.append(Exit)
+        
             window.mainloop()
     
-
+    def clear_start(menu):
+        for i in menu.lista:
+            i.destroy()
+        Mapa.Start_Game(0, 0, window)
