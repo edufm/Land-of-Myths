@@ -24,6 +24,13 @@ class Menu():
             
             sound.menu_music()
             
+#            background = Label(window)           
+#            imagem = PhotoImage(file="C://Users//Hugo//Desktop//Nova pasta//back.png")
+#            background.config(image = imagem )
+#            background.image = imagem
+#            background.grid(row=0,column = 0)
+                        
+            
             menu = Menu([])
             
             Imagemdo = Label(window)
