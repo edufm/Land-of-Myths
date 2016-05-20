@@ -39,7 +39,7 @@ class Enemys():
             Gun.Shotgun_Shot(pl, loc, Map)
             
         elif pl.weapon.ID == 102:
-            Gun.Sniper_X(loc,Map,pl,7)
+            Gun.Sniper_X(loc,Map,pl,7, 1, 0)
             
     
     def left(self):
