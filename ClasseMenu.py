@@ -24,11 +24,11 @@ class Menu():
             
             sound.menu_music()
             
-#            background = Label(window)           
-#            imagem = PhotoImage(file="C://Users//Hugo//Desktop//Nova pasta//back.png")
-#            background.config(image = imagem )
-#            background.image = imagem
-#            background.grid(row=0,column = 0)
+            background = Label(window)           
+            imagem = PhotoImage(file=".//Imagens//Sprites//background1.png")
+            background.config(image = imagem )
+            background.image = imagem
+            background.grid(row=0,column = 0)
                         
             
             menu = Menu([])
@@ -37,30 +37,32 @@ class Menu():
             Imagemdo.config(image = Sniper)
             Imagemdo.image = Sniper            
             
-            lMenu = Label(window)
-            lMenu.config(text = "MENU", height = 5, width = 36,bg="black",foreground="red",font=("castelar",40))
-            lMenu.place(x=130, y=40)
+#            lMenu = Label(window)
+#            menuzinho = PhotoImage(file=".//Imagens//Sprites//titulo.png")
+#            lMenu.config(image = menuzinho, bg = "black")
+#            lMenu.image = menuzinho
+#            lMenu.place(x=370, y=75)
     
             Play = Button(window)
-            Play.config(text="Play",font=("castelar",20))
+            Play.config(text="Play",font=("impact",20),bg = "white")
             Play.config(height = 2 , width = 15)
             Play.configure(command = lambda : Menu.clear_start(menu))
-            Play.place(x=575, y= 300)
+            Play.place(x=575, y= 330)
             
             Rank = Button(window)
-            Rank.configure(text="Rank",font=("castelar",20))
+            Rank.configure(text="Rank",font=("impact",20),bg = "white")
             Rank.config(height = 2 , width = 15)
-            Rank.place(x = 575 , y = 400)
+            Rank.place(x = 575 , y = 430)
             
             Exit = Button(window)
-            Exit.config(text="Exit",font=("castelar",20))
+            Exit.config(text="Exit",font=("impact",20),bg = "white")
             Exit.config(height = 2 , width = 15)
             Exit.config(command =lambda: Mapa.Exit(window))
-            Exit.place(x=575, y= 500)
+            Exit.place(x=575, y= 530)
             
             menu.lista.append(Play)
             menu.lista.append(Rank)
-            menu.lista.append(lMenu)
+            menu.lista.append(background)
             menu.lista.append(Exit)
         
             window.mainloop()
@@ -68,6 +70,7 @@ class Menu():
     def clear_start(menu):
         for i in menu.lista:
             i.destroy()
+
         ws.PlaySound(None,ws.SND_PURGE)
         Mapa.Start_Game(0, 0, window)
         

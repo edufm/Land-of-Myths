@@ -84,5 +84,11 @@ Sniper = PhotoImage(file=".//Imagens//Sprites//sniper.png")
 
 guns = [Pistol,Shotgun,Sniper]
 
+background = PhotoImage(file=".//Imagens//Sprites//background.png")
+background1 = PhotoImage(file=".//Imagens//Sprites//background1.png")
+background2 = PhotoImage(file=".//Imagens//Sprites//background2.png")
+background3 = PhotoImage(file=".//Imagens//Sprites//background3.png")
+
+backgrounds = [ background , background1, background2 , background3]
 #backgroundimage = PhotoImage(file=PhotoImage(file=".//Imagens//Tiles//Finalsubranged.png"))
 
