@@ -123,20 +123,12 @@ class Gun():
     def Sniper_X(loc,Map,pl,Damage,First,count):
         
         print ("count =",count)
-        ammo = pl.weapon.ID - 100
+        Ammo = 0
         count += 1
-        if pl.inv[ammo] == 0 and count == 1:
-            pl.inv[ammo] = 1
-
         if count == 1:  
-            Ammo = pl.inv[ammo]
-            if pl.inv[ammo] > 0: 
-                pl.inv[ammo] -= 1
             RangeTest =Gun.Check_Range(Sniper, loc, pl) 
         else: 
             RangeTest = 1
-            ammo = pl.weapon.ID - 100
-            Ammo = pl.inv[ammo]
             
         if RangeTest == 1:
             x = pl.pos[0]
@@ -181,12 +173,17 @@ class Gun():
                         print ("pierce",loc)
                         Gun.Sniper_X(loc,Map,pl,Damage, 0, count)
             if loc[0] > x and loc[1] == y: # down
-                if loc[0] >= 14:
+                print ("passo 0")
+                print (loc)
+                if loc[0] <= 14:
+                    print ("passo 1")
                     if Map.matriz[loc[0]][loc[1]] == 0 or Map.matriz[loc[0]][loc[1]] > 100:
+                        print ("passo 2")                        
                         loc[0] += 1
                         print (loc)
                         Gun.Sniper_X(loc,Map,pl,Damage,0,count)
                     else:
+                        print ("passo 3")
                         Gun.Take_Damage_SN(loc, pl, Map,Damage,count,Ammo)
                         Damage -= 1
                         print("DAma",Damage)
@@ -221,7 +218,7 @@ class Gun():
                 Gun.Gerar_Shotgun(Map)
         x = random.randint(1,101)
         if c < 2:
-            if x <= 2:
+            if x <= 80:
                 Gun.Gerar_Sniper(Map)
         
     def Gerar_Pistol(Map):
@@ -283,7 +280,6 @@ class Gun():
                         Map.b[i.pos[0]][i.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
     
     def Take_Damage_SN(loc, pl, Map, Damage,count,Ammo):
-        if Ammo > 0:
             for i in Map.LEnemys:
                 if i.pos == loc:
                     i.health -= Damage
