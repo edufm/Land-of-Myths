@@ -218,7 +218,7 @@ class Gun():
                 Gun.Gerar_Shotgun(Map)
         x = random.randint(1,101)
         if c < 2:
-            if x <= 80:
+            if x <= 2:
                 Gun.Gerar_Sniper(Map)
         
     def Gerar_Pistol(Map):
