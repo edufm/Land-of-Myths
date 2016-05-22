@@ -259,6 +259,8 @@ class Mapa():
         Map.gadjets.append(shotammo)
         Map.gadjets.append(Sniperb)
         Map.gadjets.append(snipeammo)
+        Map.gadjets.append(musicbutton)
+        Map.gadjets.append(exitbutton)
          
     def updategui(Map, gadjets, pl):
         if pl.health <= 0:
@@ -267,25 +269,31 @@ class Mapa():
                     Map.b[i][j].destroy()
             for i in gadjets:
                 i.destroy()
+                
+            imgdfundo = Label(Map.window)
+            imorreu = PhotoImage(file=".\\Imagens\\Sprites\\morreu.png") 
+            imgdfundo.config(image = imorreu)
+            imgdfundo.image = imorreu
+            imgdfundo.grid(row=0,column=0)
             
-            youdied = Label(Map.window)
-            youdied.config(text = "Whatta shame, you died!!", height = 5, width = 36,bg="black",foreground="red",font=("castelar",40))
             
-            youdied.place(x=130, y=40)
     
             giveup = Button(Map.window)
             giveup.config(command =lambda: Mapa.Exit(Map.window))
-            exiit = PhotoImage(file=".\\Imagens\\Sprites\\exit.png")
-            giveup.image = exiit
-            giveup.config(image=exiit,bg="black")
-            giveup.place(x=525, y= 300)
+            giveup.config(height=2 , width= 20 ,text = "Give up",font=("impact",20),bg="black",foreground="red")
+            giveup.place(x=830, y= 300)
             
             restart = Button(Map.window)
             restart.config(command =lambda: Mapa.Start_Game(1, [youdied, restart, giveup], Map.window))
-            restartt = PhotoImage(file=".\\Imagens\\Sprites\\reset-button-hi.png")
-            restart.image = restartt
-            restart.config(image=restartt,bg="black")
-            restart.place(x=525, y= 500)
+            restart.config(height=2 , width= 20 , text = "Restart",font=("impact",20),bg = "white")
+            restart.place(x=280, y= 300)
+            
+            submmit = Entry(Map.window)
+            submmit.place(x = 610 , y = 550)
+            
+            submmitscore = Button(Map.window)
+            submmitscore.config(text = "Summit score")
+            submmitscore.place(x =740, y =548)
         
         else:
             gadjets[1].configure(height = 2 , width = pl.health)
