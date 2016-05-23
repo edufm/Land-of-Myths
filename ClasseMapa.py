@@ -284,7 +284,7 @@ class Mapa():
             giveup.place(x=830, y= 300)
             
             restart = Button(Map.window)
-            restart.config(command =lambda: Mapa.Start_Game(1, [youdied, restart, giveup], Map.window))
+            restart.config(command =lambda: Mapa.Start_Game(1, [imgdfundo, restart, giveup], Map.window))
             restart.config(height=2 , width= 20 , text = "Restart",font=("impact",20),bg = "white")
             restart.place(x=280, y= 300)
             
