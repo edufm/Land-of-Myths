@@ -60,12 +60,33 @@ class Menu():
             Exit.config(command =lambda: Mapa.Exit(window))
             Exit.place(x=575, y= 530)
             
+            Music = Button(window)
+            Music.config(image = MusicOn)
+            Music.image = MusicOn
+            Music.config(height = 48 , width = 48)
+            Music.configure(command = lambda : menu.Enable_music())
+            Music.place(x=1270, y= 650)
+            
             menu.lista.append(Play)
             menu.lista.append(Rank)
             menu.lista.append(background)
             menu.lista.append(Exit)
+            menu.lista.append(Music)
         
             window.mainloop()
+            
+    def Enable_music(self):
+        if ClasseTrack.Tracker.Musicenabled:
+            ClasseTrack.Tracker.Musicenabled = False
+            self.lista[-1].config(image= MusicOff)
+            self.lista[-1].image = MusicOff
+            sound.Stop_All()
+            
+        else:
+            ClasseTrack.Tracker.Musicenabled = True
+            self.lista[-1].config(image=MusicOn)
+            self.lista[-1].image = MusicOn
+            sound.menu_music()
     
     def clear_start(menu):
         for i in menu.lista:

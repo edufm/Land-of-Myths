@@ -15,7 +15,7 @@ class sound():
         
     def play_music(play):
         if ClasseTrack.Tracker.Music == 0:
-            ws.PlaySound(play, ws.SND_ASYNC)
+            ws.PlaySound(play, ws.SND_ASYNC + ws.SND_NOSTOP)
             ClasseTrack.Tracker.Music = 1
         else:
             ws.PlaySound(None, ws.SND_PURGE)
@@ -35,11 +35,12 @@ class sound():
         return musics[a]
         
     def menu_music():
-        ws.PlaySound(menum.play,ws.SND_ASYNC)
+        ws.PlaySound(menum.play, ws.SND_ASYNC)
         
         
 
-shot = sound(".\\sounds\\tiro.wav")    
+shot = sound(".\\sounds\\tiro.wav")
+empty = sound(".\\sounds\\EmptyGun.wav")
 got = sound(".\\sounds\\got.wav")
 skyrim = sound(".\\sounds\\skyrim.wav")
 pirates = sound(".\\sounds\\pirates.wav")

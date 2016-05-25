@@ -36,6 +36,13 @@ boss1_back = PhotoImage(file=".//Imagens//Sprites//boss1_back.png")
 
 boss1 = [boss1_front,boss1_right,boss1_left,boss1_back]
 
+boss2_front = PhotoImage(file=".//Imagens//Sprites//boss2_front.png")
+boss2_right = PhotoImage(file=".//Imagens//Sprites//boss2_right.png")
+boss2_left = PhotoImage(file=".//Imagens//Sprites//boss2_left.png")
+boss2_back = PhotoImage(file=".//Imagens//Sprites//boss2_back.png")
+
+boss2 = [boss2_front,boss2_right,boss2_left,boss2_back]
+
 enemy2_front = PhotoImage(file=".//Imagens//Sprites//enemy2_front.png")
 enemy2_right = PhotoImage(file=".//Imagens//Sprites//enemy2_right.png")
 enemy2_left = PhotoImage(file=".//Imagens//Sprites//enemy2_left.png")
@@ -43,7 +50,7 @@ enemy2_back = PhotoImage(file=".//Imagens//Sprites//enemy2_back.png")
 
 enemy2 = [enemy2_front, enemy2_right, enemy2_left, enemy2_back] 
 
-enemy=[enemy1, boss1, enemy2]
+enemy=[enemy1, boss1, enemy2, boss2]
 
 wood = PhotoImage(file=".//Imagens//Tiles//wood.png")
 log = PhotoImage(file=".//Imagens//Tiles//log.png")
@@ -54,7 +61,7 @@ stone = PhotoImage(file=".//Imagens//Tiles//stone.png")
 snow = PhotoImage(file=".//Imagens//Tiles//snow.png")
 final = PhotoImage(file=".//Imagens//Tiles//Final.png")
 
-Tiles = [wood, wood, log, grass, grass, dirt, sand, stone, snow, final]
+Tiles = [wood, log, grass, grass, dirt, sand, stone, snow, final]
 
 rangedwood = PhotoImage(file=".//Imagens//Tiles//woodranged.png")
 rangedlog = PhotoImage(file=".//Imagens//Tiles//logranged.png")
@@ -65,7 +72,7 @@ rangedstone = PhotoImage(file=".//Imagens//Tiles//stoneranged.png")
 rangedsnow = PhotoImage(file=".//Imagens//Tiles//snowranged.png")
 rangedfinal = PhotoImage(file=".//Imagens//Tiles//Finalranged.png")
 
-rangedTiles = [rangedwood, rangedwood, rangedlog, rangedgrass, rangedgrass, rangeddirt, rangedsand, rangedstone, rangedsnow, rangedfinal]
+rangedTiles = [rangedwood, rangedlog, rangedgrass, rangedgrass, rangeddirt, rangedsand, rangedstone, rangedsnow, rangedfinal]
 
 woodsubranged = PhotoImage(file=".//Imagens//Tiles//woodsubranged.png")
 logsubranged = PhotoImage(file=".//Imagens//Tiles//logsubranged.png")
@@ -76,7 +83,7 @@ stonesubranged = PhotoImage(file=".//Imagens//Tiles//stonesubranged.png")
 snowsubranged = PhotoImage(file=".//Imagens//Tiles//snowsubranged.png")
 finalsubranged = PhotoImage(file=".//Imagens//Tiles//Finalsubranged.png")
 
-subrangedTiles = [woodsubranged, woodsubranged, logsubranged, grasssubranged, grasssubranged, dirtsubranged, sandsubranged, stonesubranged, snowsubranged, finalsubranged]
+subrangedTiles = [woodsubranged, logsubranged, grasssubranged, grasssubranged, dirtsubranged, sandsubranged, stonesubranged, snowsubranged, finalsubranged]
 
 Pistol = PhotoImage(file=".//Imagens//Sprites//revolver.png")
 Shotgun = PhotoImage(file=".//Imagens//Sprites//shotgun.png")
@@ -92,3 +99,5 @@ background3 = PhotoImage(file=".//Imagens//Sprites//background3.png")
 backgrounds = [ background , background1, background2 , background3]
 #backgroundimage = PhotoImage(file=PhotoImage(file=".//Imagens//Tiles//Finalsubranged.png"))
 
+MusicOn = PhotoImage(file=".//Imagens//Menu//Music_On.png")
+MusicOff = PhotoImage(file=".//Imagens//Menu//Music_Off.png")

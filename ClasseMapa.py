@@ -147,19 +147,25 @@ class Mapa():
             
             if click_errado == 0:
                 self.Roda_jogo(pl)
-            
+                          
     def Atira(self, m, pl):
+        
         X = m[0]
         Y = m[1]
         Enemys.Take_Damage([X,Y], pl, self)
         self.Roda_jogo(pl)
-        sound.play_sound(shot.play)
+        
+        if pl.inv[(pl.weapon.ID-100)] > 0:
+            sound.play_sound(shot.play)
+        else:
+            sound.play_sound(empty.play)
+        
         
     
     def Roda_jogo(self, pl):
         # Limpa o range se ele estiver ligado        
-        if ClasseTrack.Tracker.Weaponselected == 1:
-            self.Limpa_range(pl)
+        self.Limpa_range(pl)
+        self.mostrarange(pl, (pl.weapon.ID - 100))
         #informa ao tracker que passou um turno
         ClasseTrack.Tracker.Turn += 1
         #faz a jogada dos inimigos para cada inimigo vivo
@@ -206,11 +212,6 @@ class Mapa():
         nomejogo.configure(text="I´ll survive" , font= ("Times",20),bg = "black",foreground="white")
         nomejogo.grid(row = 0 ,columnspan =100)
 
-        Map.gadjets.append(vida)
-        Map.gadjets.append(botãodevida1)
-        Map.gadjets.append(time)
-        Map.gadjets.append(wave)
-        Map.gadjets.append(nomejogo)
         #Botões de armas
         Pistolb = Button(window)
         Pistolb.configure(height = 36, width = 36, state = 'disabled')
@@ -253,6 +254,11 @@ class Mapa():
         exitbutton.configure(text = "Exit",bg = "white",font=("castelar"),command = lambda : Mapa.Exit(Map.window))
         exitbutton.grid(row = 16,column = 30)
         
+        Map.gadjets.append(vida)
+        Map.gadjets.append(botãodevida1)
+        Map.gadjets.append(time)
+        Map.gadjets.append(wave)
+        Map.gadjets.append(nomejogo)
         Map.gadjets.append(Pistolb)
         Map.gadjets.append(Pammo)
         Map.gadjets.append(shotgunb)
@@ -275,8 +281,6 @@ class Mapa():
             imgdfundo.config(image = imorreu)
             imgdfundo.image = imorreu
             imgdfundo.grid(row=0,column=0)
-            
-            
     
             giveup = Button(Map.window)
             giveup.config(command =lambda: Mapa.Exit(Map.window))
@@ -296,6 +300,13 @@ class Mapa():
             submmitscore.place(x =740, y =548)
         
         else:
+            
+            if ClasseTrack.Tracker.Music == 1:
+                gadjets[11].configure(text = "Stop Music")
+            
+            else:
+                gadjets[11].configure(text = "Play Music")
+            
             gadjets[1].configure(height = 2 , width = pl.health)
             gadjets[2].configure(text="Time : {0}s".format(2.5),font=("castelar"),bg = "black",foreground="white")
             gadjets[3].configure(text="Wave : {0}".format(Map.Waves),font=("castelar"),bg = "black",foreground="white")
@@ -312,18 +323,15 @@ class Mapa():
             gadjets[6].config(text = 'Ammo X{0}'.format(pl.inv[0]))        
             gadjets[8].config(text = 'Ammo X{0}'.format(pl.inv[1]))
             gadjets[10].config(text = 'Ammo X{0}'.format(pl.inv[2]))
-            
+
     def Botão_de_arma(Map, pl, X):
-        if ClasseTrack.Tracker.Weaponselected == 1:
-            Map.Limpa_range(pl)
-        else:
-            Mapa.mostrarange(pl, Map, X)
+        Map.Limpa_range(pl)
+        Map.mostrarange(pl, X)
         pl.weapon = ClasseGun.WeaponList[X]
         
-        
     def Limpa_range(self, pl):
-        for i in range(8):
-            for j in range(8):
+        for i in range(9):
+            for j in range(9):
                 if i + j != 0:
                     if pl.pos[0] - i >= 0 and pl.pos[1] - j >= 0 and self.matriz[pl.pos[0]-i][pl.pos[1]-j] == 0:
                         self.b[pl.pos[0]-i][pl.pos[1]-j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
@@ -337,93 +345,89 @@ class Mapa():
                     if pl.pos[0] + i < 15 and pl.pos[1] + j < 27 and self.matriz[pl.pos[0]+i][pl.pos[1]+j] == 0:
                         self.b[pl.pos[0]+i][pl.pos[1]+j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                         self.b[pl.pos[0]+i][pl.pos[1]+j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-        ClasseTrack.Tracker.Weaponselected = 0
 
-    def mostrarange(pl, Map, X):
-        ClasseTrack.Tracker.Weaponselected = 1
+    def mostrarange(self, pl, X):
         if X == 0:
             for i in range(7):
                 for j in range(7):
-                    if i + j < 7 and pl.pos[0] - i >= 0 and pl.pos[1] - j >= 0 and Map.matriz[pl.pos[0]-i][pl.pos[1]-j] == 0:
-                        Map.b[pl.pos[0]-i][pl.pos[1]-j].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
-                        Map.b[pl.pos[0]-i][pl.pos[1]-j].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-                    if i + j < 7 and pl.pos[0] + i < 15 and pl.pos[1] - j >= 0 and Map.matriz[pl.pos[0]+i][pl.pos[1]-j] == 0:
-                        Map.b[pl.pos[0]+i][pl.pos[1]-j].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
-                        Map.b[pl.pos[0]+i][pl.pos[1]-j].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-                    if i + j < 7 and pl.pos[1] + j < 27 and pl.pos[0] - i >= 0 and Map.matriz[pl.pos[0]-i][pl.pos[1]+j] == 0:
-                        Map.b[pl.pos[0]-i][pl.pos[1]+j].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
-                        Map.b[pl.pos[0]-i][pl.pos[1]+j].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-                    if i + j < 7 and pl.pos[0] + i < 15 and pl.pos[1] + j < 27 and Map.matriz[pl.pos[0]+i][pl.pos[1]+j] == 0:
-                        Map.b[pl.pos[0]+i][pl.pos[1]+j].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
-                        Map.b[pl.pos[0]+i][pl.pos[1]+j].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-            Map.b[pl.pos[0]][pl.pos[1]].config(image = ClasseImagens.player[0])
-            Map.b[pl.pos[0]][pl.pos[1]].image = ClasseImagens.player[0]
+                    if i + j < 7 and pl.pos[0] - i >= 0 and pl.pos[1] - j >= 0 and self.matriz[pl.pos[0]-i][pl.pos[1]-j] == 0 and i + j != 0:
+                        self.b[pl.pos[0]-i][pl.pos[1]-j].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
+                        self.b[pl.pos[0]-i][pl.pos[1]-j].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
+                    if i + j < 7 and pl.pos[0] + i < 15 and pl.pos[1] - j >= 0 and self.matriz[pl.pos[0]+i][pl.pos[1]-j] == 0 and i + j != 0:
+                        self.b[pl.pos[0]+i][pl.pos[1]-j].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
+                        self.b[pl.pos[0]+i][pl.pos[1]-j].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
+                    if i + j < 7 and pl.pos[1] + j < 27 and pl.pos[0] - i >= 0 and self.matriz[pl.pos[0]-i][pl.pos[1]+j] == 0 and i + j != 0:
+                        self.b[pl.pos[0]-i][pl.pos[1]+j].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
+                        self.b[pl.pos[0]-i][pl.pos[1]+j].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
+                    if i + j < 7 and pl.pos[0] + i < 15 and pl.pos[1] + j < 27 and self.matriz[pl.pos[0]+i][pl.pos[1]+j] == 0 and i + j != 0:
+                        self.b[pl.pos[0]+i][pl.pos[1]+j].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
+                        self.b[pl.pos[0]+i][pl.pos[1]+j].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
             
         if X == 1:
-            if pl.pos[0]+1 < 15 and pl.pos[1] and Map.matriz[pl.pos[0]+1][pl.pos[1]] == 0:
-                Map.b[pl.pos[0]+1][pl.pos[1]].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]+1][pl.pos[1]].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[0]+2 < 15 and pl.pos[1]-1 >= 0 and Map.matriz[pl.pos[0]+2][pl.pos[1]-1] == 0:
-                Map.b[pl.pos[0]+2][pl.pos[1]-1].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]+2][pl.pos[1]-1].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[0]+2 < 15 and pl.pos[1]+1 < 27 and Map.matriz[pl.pos[0]+2][pl.pos[1]+1] == 0:
-                Map.b[pl.pos[0]+2][pl.pos[1]+1].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]+2][pl.pos[1]+1].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[0]-1 >= 0 and Map.matriz[pl.pos[0]-1][pl.pos[1]] == 0:
-                Map.b[pl.pos[0]-1][pl.pos[1]].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]-1][pl.pos[1]].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[0]-2 >= 0 and pl.pos[1]-1 >= 0 and Map.matriz[pl.pos[0]-2][pl.pos[1]-1] == 0:
-                Map.b[pl.pos[0]-2][pl.pos[1]-1].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]-2][pl.pos[1]-1].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[0]-2 >= 0 and pl.pos[1]+1 < 27 and Map.matriz[pl.pos[0]-2][pl.pos[1]+1] == 0:
-                Map.b[pl.pos[0]-2][pl.pos[1]+1].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]-2][pl.pos[1]+1].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[1]+1 < 27 and Map.matriz[pl.pos[0]][pl.pos[1]+1] == 0:
-                Map.b[pl.pos[0]][pl.pos[1]+1].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]][pl.pos[1]+1].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[0]+1 < 15 and pl.pos[1]+2 < 27 and Map.matriz[pl.pos[0]+1][pl.pos[1]+2] == 0:
-                Map.b[pl.pos[0]+1][pl.pos[1]+2].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]+1][pl.pos[1]+2].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[0]-1 >= 0 and pl.pos[1]+2 < 27 and Map.matriz[pl.pos[0]-1][pl.pos[1]+2] == 0:
-                Map.b[pl.pos[0]-1][pl.pos[1]+2].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]-1][pl.pos[1]+2].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[1]-1 >= 0 and Map.matriz[pl.pos[0]][pl.pos[1]-1] == 0:
-                Map.b[pl.pos[0]][pl.pos[1]-1].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]][pl.pos[1]-1].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[0]-1 >= 0 and pl.pos[1]-2 >= 0 and Map.matriz[pl.pos[0]-1][pl.pos[1]-2] == 0:
-                Map.b[pl.pos[0]-1][pl.pos[1]-2].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]-1][pl.pos[1]-2].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[0]+1 < 15 and pl.pos[1]-2 >= 0 and Map.matriz[pl.pos[0]+1][pl.pos[1]-2] == 0:
-                Map.b[pl.pos[0]+1][pl.pos[1]-2].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]+1][pl.pos[1]-2].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]+1 < 15 and pl.pos[1] and self.matriz[pl.pos[0]+1][pl.pos[1]] == 0:
+                self.b[pl.pos[0]+1][pl.pos[1]].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]+1][pl.pos[1]].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]+2 < 15 and pl.pos[1]-1 >= 0 and self.matriz[pl.pos[0]+2][pl.pos[1]-1] == 0:
+                self.b[pl.pos[0]+2][pl.pos[1]-1].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]+2][pl.pos[1]-1].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]+2 < 15 and pl.pos[1]+1 < 27 and self.matriz[pl.pos[0]+2][pl.pos[1]+1] == 0:
+                self.b[pl.pos[0]+2][pl.pos[1]+1].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]+2][pl.pos[1]+1].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]-1 >= 0 and self.matriz[pl.pos[0]-1][pl.pos[1]] == 0:
+                self.b[pl.pos[0]-1][pl.pos[1]].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]-1][pl.pos[1]].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]-2 >= 0 and pl.pos[1]-1 >= 0 and self.matriz[pl.pos[0]-2][pl.pos[1]-1] == 0:
+                self.b[pl.pos[0]-2][pl.pos[1]-1].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]-2][pl.pos[1]-1].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]-2 >= 0 and pl.pos[1]+1 < 27 and self.matriz[pl.pos[0]-2][pl.pos[1]+1] == 0:
+                self.b[pl.pos[0]-2][pl.pos[1]+1].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]-2][pl.pos[1]+1].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[1]+1 < 27 and self.matriz[pl.pos[0]][pl.pos[1]+1] == 0:
+                self.b[pl.pos[0]][pl.pos[1]+1].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]][pl.pos[1]+1].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]+1 < 15 and pl.pos[1]+2 < 27 and self.matriz[pl.pos[0]+1][pl.pos[1]+2] == 0:
+                self.b[pl.pos[0]+1][pl.pos[1]+2].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]+1][pl.pos[1]+2].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]-1 >= 0 and pl.pos[1]+2 < 27 and self.matriz[pl.pos[0]-1][pl.pos[1]+2] == 0:
+                self.b[pl.pos[0]-1][pl.pos[1]+2].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]-1][pl.pos[1]+2].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[1]-1 >= 0 and self.matriz[pl.pos[0]][pl.pos[1]-1] == 0:
+                self.b[pl.pos[0]][pl.pos[1]-1].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]][pl.pos[1]-1].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]-1 >= 0 and pl.pos[1]-2 >= 0 and self.matriz[pl.pos[0]-1][pl.pos[1]-2] == 0:
+                self.b[pl.pos[0]-1][pl.pos[1]-2].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]-1][pl.pos[1]-2].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]+1 < 15 and pl.pos[1]-2 >= 0 and self.matriz[pl.pos[0]+1][pl.pos[1]-2] == 0:
+                self.b[pl.pos[0]+1][pl.pos[1]-2].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]+1][pl.pos[1]-2].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
         
         if X == 2:
-            if pl.pos[0]+1 < 15 and pl.pos[1] and Map.matriz[pl.pos[0]+1][pl.pos[1]] == 0:
-                Map.b[pl.pos[0]+1][pl.pos[1]].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]+1][pl.pos[1]].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[0]-1 >= 0 and Map.matriz[pl.pos[0]-1][pl.pos[1]] == 0:
-                Map.b[pl.pos[0]-1][pl.pos[1]].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]-1][pl.pos[1]].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[1]+1 < 27 and Map.matriz[pl.pos[0]][pl.pos[1]+1] == 0:
-                Map.b[pl.pos[0]][pl.pos[1]+1].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]][pl.pos[1]+1].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
-            if pl.pos[1]-1 >= 0 and Map.matriz[pl.pos[0]][pl.pos[1]-1] == 0: 
-                Map.b[pl.pos[0]][pl.pos[1]-1].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
-                Map.b[pl.pos[0]][pl.pos[1]-1].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]+1 < 15 and pl.pos[1] and self.matriz[pl.pos[0]+1][pl.pos[1]] == 0:
+                self.b[pl.pos[0]+1][pl.pos[1]].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]+1][pl.pos[1]].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]-1 >= 0 and self.matriz[pl.pos[0]-1][pl.pos[1]] == 0:
+                self.b[pl.pos[0]-1][pl.pos[1]].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]-1][pl.pos[1]].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[1]+1 < 27 and self.matriz[pl.pos[0]][pl.pos[1]+1] == 0:
+                self.b[pl.pos[0]][pl.pos[1]+1].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]][pl.pos[1]+1].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[1]-1 >= 0 and self.matriz[pl.pos[0]][pl.pos[1]-1] == 0: 
+                self.b[pl.pos[0]][pl.pos[1]-1].config(image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]][pl.pos[1]-1].image = ClasseImagens.rangedTiles[ClasseTrack.Tracker.Boss]
                 
             for i in range(2, 8):
-                if pl.pos[0]+i < 15 and pl.pos[1] and Map.matriz[pl.pos[0]+i][pl.pos[1]] == 0:
-                    Map.b[pl.pos[0]+i][pl.pos[1]].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
-                    Map.b[pl.pos[0]+i][pl.pos[1]].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
-                if pl.pos[0]-i >= 0 and Map.matriz[pl.pos[0]-i][pl.pos[1]] == 0:
-                    Map.b[pl.pos[0]-i][pl.pos[1]].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
-                    Map.b[pl.pos[0]-i][pl.pos[1]].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
-                if pl.pos[1]+i < 27 and Map.matriz[pl.pos[0]][pl.pos[1]+i] == 0:
-                    Map.b[pl.pos[0]][pl.pos[1]+i].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
-                    Map.b[pl.pos[0]][pl.pos[1]+i].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
-                if pl.pos[1]-i >= 0 and Map.matriz[pl.pos[0]][pl.pos[1]-i] == 0: 
-                    Map.b[pl.pos[0]][pl.pos[1]-i].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
-                    Map.b[pl.pos[0]][pl.pos[1]-i].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
+                if pl.pos[0]+i < 15 and pl.pos[1] and self.matriz[pl.pos[0]+i][pl.pos[1]] == 0:
+                    self.b[pl.pos[0]+i][pl.pos[1]].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
+                    self.b[pl.pos[0]+i][pl.pos[1]].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
+                if pl.pos[0]-i >= 0 and self.matriz[pl.pos[0]-i][pl.pos[1]] == 0:
+                    self.b[pl.pos[0]-i][pl.pos[1]].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
+                    self.b[pl.pos[0]-i][pl.pos[1]].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
+                if pl.pos[1]+i < 27 and self.matriz[pl.pos[0]][pl.pos[1]+i] == 0:
+                    self.b[pl.pos[0]][pl.pos[1]+i].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
+                    self.b[pl.pos[0]][pl.pos[1]+i].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
+                if pl.pos[1]-i >= 0 and self.matriz[pl.pos[0]][pl.pos[1]-i] == 0: 
+                    self.b[pl.pos[0]][pl.pos[1]-i].config(image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss])
+                    self.b[pl.pos[0]][pl.pos[1]-i].image = ClasseImagens.subrangedTiles[ClasseTrack.Tracker.Boss]
         
     def Exit(window):
         sound.Stop_All()
