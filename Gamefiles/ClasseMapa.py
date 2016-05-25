@@ -45,11 +45,6 @@ class Mapa():
         Player.set_player(pl)
         
         Mapa.gui(window, Map, pl)
-        
-        
-        
-
-        
 
         window.bind("<Key>", Mapa.key)
         
@@ -93,6 +88,7 @@ class Mapa():
             
     def Andar(self, m, pl):
         
+        a = True        
         click_errado = 0  
         X = m[0]
         Y = m[1]
@@ -154,19 +150,20 @@ class Mapa():
     
             elif self.matriz[X][Y] == 1:
                 click_errado = 0
+                a = False
                 
             else:
                 click_errado = 1
             
             if click_errado == 0:
-                self.Roda_jogo(pl)
+                self.Roda_jogo(pl, a)
                           
     def Atira(self, m, pl):
         
         X = m[0]
         Y = m[1]
         Enemys.Take_Damage([X,Y], pl, self)
-        self.Roda_jogo(pl)
+        self.Roda_jogo(pl, False)
         
         if pl.inv[(pl.weapon.ID-100)] > 0:
             sound.play_sound(shot.play)
@@ -174,14 +171,16 @@ class Mapa():
             sound.play_sound(empty.play)
             
         
-    def Roda_jogo(self, pl):
-        Timer = threading.Timer(1.5,ClasseTimer.Timer,(pl,ClasseTrack.Tracker.Turn))
+    def Roda_jogo(self, pl, Moved):
         
+        Timer = threading.Timer(1.5, ClasseTimer.Timer, (pl,ClasseTrack.Tracker.Turn))
+        ClasseTrack.Tracker.Timername = Timer
         Timer.start()
         
-        # Limpa o range se ele estiver ligado        
-        self.Limpa_range(pl)
-        self.mostrarange(pl, (pl.weapon.ID - 100))
+        # Limpa o range se ele estiver ligado
+        if Moved:
+            self.Limpa_range(pl)
+            self.mostrarange(pl, (pl.weapon.ID - 100))
         #informa ao tracker que passou um turno
         ClasseTrack.Tracker.Turn += 1
         #faz a jogada dos inimigos para cada inimigo vivo
@@ -195,11 +194,7 @@ class Mapa():
             Enemys.cria_inimigos(self.Waves, self)
             Mapa.update_map(self, pl)        
         #Gera aos itens no mapa
-        ClasseGun.Gun.Gerar_Guns(self)
-        
-
-
-        
+        ClasseGun.Gun.Gerar_Guns(self)        
 
     def update_map(Map, pl):
         if (Map.Waves) % 4 == 0:
@@ -315,7 +310,7 @@ class Mapa():
             submmit = Entry(Map.window)
             submmit.place(x = 610 , y = 550)
             
-            submmitscore = Button(Map.window ,command = lambda : FireBase.SubmmitScore(submmit.get,Map.Waves,ClasseTrack.Tracker.Turn))
+            submmitscore = Button(Map.window ,command = lambda : FireBase.SubmmitScore(submmit.get(),Map.Waves,ClasseTrack.Tracker.Turn))
             submmitscore.config(text = "Submmit score")
             submmitscore.place(x =740, y =548)
         

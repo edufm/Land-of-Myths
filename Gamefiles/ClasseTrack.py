@@ -1,12 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun May 15 13:48:42 2016
-
-@author: Eduardo
-"""
-
 class Track():
-    def __init__(self, Turn, Enemies, Boss, Weaponselected, Music, Musicenabled, Map, pl):
+    def __init__(self, Turn, Enemies, Boss, Weaponselected, Music, Musicenabled, Map, pl, Timername):
         self.Turn = Turn 
         self.Enemies = Enemies
         self.Boss = Boss
@@ -15,7 +8,6 @@ class Track():
         self.Musicenabled = Musicenabled
         self.Map = Map
         self.pl = pl
+        self.Timername = Timername
         
-Tracker = Track(0, 0, 0, 0, 0, True, 0, 0)
-
-
+Tracker = Track(0, 0, 0, 0, 0, True, 0, 0, 0)

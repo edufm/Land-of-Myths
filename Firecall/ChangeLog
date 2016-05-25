@@ -1,0 +1,53 @@
+---------Version 1.0.1------------
+30th May 2015
+=   Fixes issue #5: async.py stop thread doesn't die on exit
+
+
+---------Version 1.0.0------------
+19th January 2015
++   module name change. firebasin is now firecall. This avoids name clashes.
+
+
+---------Version 0.1.2------------
+18th July 2014
++   Partial PEP8 Conformity
++   Added DocStrings
++   Cleaner code
++   Added unit tests
++   Added compatability with Python 2.* and 3.*
++   Multiple callbacks with the keyworded argument:
+        * callbacks=[callback1, callback2]
+
+
+----------Version 0.1.1 -----------
+[04-07-2014]
+    + **.export()** method requires the *path* and *mode*
+    + **.onChange()** has a new parameters: 
+        * *fetches* - the number of the fetches the watch should do before stopping
+        * *frequency* - number of seconds before checking for chenges in the Firebase point 
+    + **.attr()** returns a tuple e.g. (time_of_creation, url_of_firebase, authentication_token)
+
+
+---------- Version 0.1.0 ----------
+[29-05-2014]    +   '.onChange()' method and its helper function '.stop()' added. 
+                                The '.onChange()' on a Firebase instance creates a Watcher that watches a  location in Firebase for changes.
+                                The '.stop()' method on a Watcher stops the watch.
+[30-05-2014]    -   '.get_arg()' method removed. This method is no longer required in the backend.
+                        +   Optional 'auth' parameter used while creating the Firebase Instance will persist in all transactions on that firebase.
+                                There's no need to authenticate repeatedly
+                        +   'error=' parameter may be assigned to a function in asynchronous method. 
+                                Error would be passed to the function assigned.
+                                Errors: 
+                                    * "EnvironmentError": Security Rules Violation
+                                    * "KeyError": Argument for a Mandatory option has been left out 
+                                Errors (from Requests):
+                                    * "ConnectionError": maximum retries of request exceeded. Usually caused by 
+                                        Network problems
+                        +   'ignore_error=True' parameter for Watch. If set to False, the Watch will be stopped once an error occurs.
+                                Otherwise it will continue.
+                        +   'error=' parameter may be assigned to the Firebase() initializing function. 
+                                An invalid URL will make the function assign a broken instance that can not do anything.
+                                The function assigned to the parameter will be called incase a firebase instance fails to be created 
+                                successfully. See what makes a firebase URL valid.
+                                Error:
+                                    * "ValueError": an invalid firebase URL 
