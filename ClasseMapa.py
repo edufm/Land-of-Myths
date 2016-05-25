@@ -8,6 +8,8 @@ from ClassePlayer import Player
 import ClasseImagens
 import ClasseTrack
 from ClassSound import *
+import threading
+import ClasseTimer
 
 class Mapa():
     def __init__(self, window, matriz, b, gadjets, Waves, LEnemys):
@@ -38,6 +40,11 @@ class Mapa():
         
         Mapa.gui(window, Map, pl)
         
+        
+        
+
+        
+
         window.bind("<Key>", Mapa.key)
         
     def load_map(self, window, pl):
@@ -159,10 +166,13 @@ class Mapa():
             sound.play_sound(shot.play)
         else:
             sound.play_sound(empty.play)
+            
         
-        
-    
     def Roda_jogo(self, pl):
+        Timer = threading.Timer(1.5,ClasseTimer.Timer,(pl,ClasseTrack.Tracker.Turn))
+        
+        Timer.start()
+        
         # Limpa o range se ele estiver ligado        
         self.Limpa_range(pl)
         self.mostrarange(pl, (pl.weapon.ID - 100))
@@ -180,6 +190,10 @@ class Mapa():
             Mapa.update_map(self, pl)        
         #Gera aos itens no mapa
         ClasseGun.Gun.Gerar_Guns(self)
+        
+
+
+        
 
     def update_map(Map, pl):
         if (Map.Waves) % 4 == 0:
@@ -432,3 +446,4 @@ class Mapa():
     def Exit(window):
         sound.Stop_All()
         window.destroy()
+        
