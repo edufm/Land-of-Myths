@@ -10,6 +10,7 @@ import ClasseTrack
 from ClassSound import *
 import threading
 import ClasseTimer
+import FireBase
 
 class Mapa():
     def __init__(self, window, matriz, b, gadjets, Waves, LEnemys):
@@ -309,8 +310,8 @@ class Mapa():
             submmit = Entry(Map.window)
             submmit.place(x = 610 , y = 550)
             
-            submmitscore = Button(Map.window)
-            submmitscore.config(text = "Summit score")
+            submmitscore = Button(Map.window ,command = lambda : FireBase.SubmmitScore(submmit.get,Map.Waves,ClasseTrack.Tracker.Turn))
+            submmitscore.config(text = "Submmit score")
             submmitscore.place(x =740, y =548)
         
         else:
