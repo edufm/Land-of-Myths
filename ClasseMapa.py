@@ -32,6 +32,11 @@ class Mapa():
         
         pl = Player(20, ClasseGun.Pistol, [7,13], [7, 0, 0])
         
+        ClasseTrack.Tracker.Boss = 0
+        ClasseTrack.Tracker.Enemies = 0
+        ClasseTrack.Tracker.Music = 0
+        ClasseTrack.Tracker.Weaponselected = 0
+        ClasseTrack.Tracker.Turn = 0
         ClasseTrack.Tracker.Map = Map
         ClasseTrack.Tracker.pl = pl
         
