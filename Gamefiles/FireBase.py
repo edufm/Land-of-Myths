@@ -31,14 +31,19 @@ def ConstruirRank (nome,pontuação,turnos):
     for i in records:
         ranquear.append((i,records[i]['Info'][0],records[i]['Info'][1]))
     wmax = 0
-    tmax = 100
+    tmax = 1000000000000000000000000000000000000000
     primeiro = ("hugo",1,0)
+    
     for i in range(len(ranquear)):
-        if ranquear[i][1] >= wmax and ranquear[i][2] < tmax :
+        if ranquear[i][1] > wmax:
             wmax = ranquear[i][1]
             tmax=  ranquear[i][2]
             primeiro = (ranquear[i][0],ranquear[i][1],ranquear[i][2])
-            print(primeiro)
+        if ranquear[i][1] == wmax and ranquear[i][2] < tmax :
+            wmax = ranquear[i][1]
+            tmax=  ranquear[i][2]
+            primeiro = (ranquear[i][0],ranquear[i][1],ranquear[i][2])
+            
     mostrardados = Tk()
     mostrardados.config(bg="black")
     mostrardados.title("Magic Trap Scores")
