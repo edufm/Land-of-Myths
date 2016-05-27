@@ -44,5 +44,5 @@ empty = sound(".\\sounds\\EmptyGun.wav")
 got = sound(".\\sounds\\got.wav")
 skyrim = sound(".\\sounds\\skyrim.wav")
 pirates = sound(".\\sounds\\pirates.wav")
-menum = sound(".\\sounds\\menutheme.wav")
+menum = sound(".\\sounds\\menumusic.wav")
     
