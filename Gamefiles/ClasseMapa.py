@@ -63,27 +63,28 @@ class Mapa():
         self.b[7][13].image = ClasseImagens.player[0]
 
     def key(event):
+        Map = ClasseTrack.Tracker.Map
         if repr(event.char) == "'w'":
             m = [ClasseTrack.Tracker.pl.pos[0]-1, ClasseTrack.Tracker.pl.pos[1]]
-            Mapa.Andar(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+            Map.Andar(m, ClasseTrack.Tracker.pl)
         if repr(event.char) == "'s'":
             m = [ClasseTrack.Tracker.pl.pos[0]+1, ClasseTrack.Tracker.pl.pos[1]]
-            Mapa.Andar(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+            Map.Andar(m, ClasseTrack.Tracker.pl)
         if repr(event.char) == "'a'":
             m = [ClasseTrack.Tracker.pl.pos[0], ClasseTrack.Tracker.pl.pos[1]-1]
-            Mapa.Andar(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+            Map.Andar(m, ClasseTrack.Tracker.pl)
         if repr(event.char) == "'d'":
             m = [ClasseTrack.Tracker.pl.pos[0], ClasseTrack.Tracker.pl.pos[1]+1]
-            Mapa.Andar(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+            Map.Andar(m, ClasseTrack.Tracker.pl)
         if repr(event.char) == "'x'":
             m = [ClasseTrack.Tracker.pl.pos[0], ClasseTrack.Tracker.pl.pos[1]]
-            Mapa.Andar(ClasseTrack.Tracker.Map, m, ClasseTrack.Tracker.pl)
+            Map.Andar(m, ClasseTrack.Tracker.pl)
         if repr(event.char) == "'1'" and ClasseTrack.Tracker.pl.inv[0] > 0:
-            Mapa.Botão_de_arma(ClasseTrack.Tracker.Map, ClasseTrack.Tracker.pl, 0)
+            Map.Botão_de_arma(ClasseTrack.Tracker.pl, 0)
         if repr(event.char) == "'2'" and ClasseTrack.Tracker.pl.inv[1] > 0:
-            Mapa.Botão_de_arma(ClasseTrack.Tracker.Map, ClasseTrack.Tracker.pl, 1)
+            Map.Botão_de_arma(ClasseTrack.Tracker.pl, 1)
         if repr(event.char) == "'3'" and ClasseTrack.Tracker.pl.inv[2] > 0:
-            Mapa.Botão_de_arma(ClasseTrack.Tracker.Map, ClasseTrack.Tracker.pl, 2)
+            Map.Botão_de_arma(ClasseTrack.Tracker.pl, 2)
             
     def Andar(self, m, pl):
         
@@ -159,16 +160,22 @@ class Mapa():
                           
     def Atira(self, m, pl):
         
+        if pl.inv[(pl.weapon.ID-100)] > 0:
+            try:
+                sound.play_sound(shot.play)
+            except:
+                pass
+        else:
+            try:
+                sound.play_sound(empty.play)
+            except:
+                pass
+
         X = m[0]
         Y = m[1]
         Enemys.Take_Damage([X,Y], pl, self)
         self.Roda_jogo(pl)
         
-        if pl.inv[(pl.weapon.ID-100)] > 0:
-            sound.play_sound(shot.play)
-        else:
-            sound.play_sound(empty.play)
-            
         
     def Roda_jogo(self, pl):
         
@@ -347,18 +354,19 @@ class Mapa():
         if X == 0:
             for i in range(7):
                 for j in range(7):
-                    if i + j < 7 and pl.pos[0] - i >= 0 and pl.pos[1] - j >= 0 and self.matriz[pl.pos[0]-i][pl.pos[1]-j] == 0 and i + j != 0:
-                        self.b[pl.pos[0]-i][pl.pos[1]-j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
-                        self.b[pl.pos[0]-i][pl.pos[1]-j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-                    if i + j < 7 and pl.pos[0] + i < 15 and pl.pos[1] - j >= 0 and self.matriz[pl.pos[0]+i][pl.pos[1]-j] == 0 and i + j != 0:
-                        self.b[pl.pos[0]+i][pl.pos[1]-j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
-                        self.b[pl.pos[0]+i][pl.pos[1]-j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-                    if i + j < 7 and pl.pos[1] + j < 27 and pl.pos[0] - i >= 0 and self.matriz[pl.pos[0]-i][pl.pos[1]+j] == 0 and i + j != 0:
-                        self.b[pl.pos[0]-i][pl.pos[1]+j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
-                        self.b[pl.pos[0]-i][pl.pos[1]+j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
-                    if i + j < 7 and pl.pos[0] + i < 15 and pl.pos[1] + j < 27 and self.matriz[pl.pos[0]+i][pl.pos[1]+j] == 0 and i + j != 0:
-                        self.b[pl.pos[0]+i][pl.pos[1]+j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
-                        self.b[pl.pos[0]+i][pl.pos[1]+j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+                    if i + j < 7:
+                        if pl.pos[0] - i >= 0 and pl.pos[1] - j >= 0 and self.matriz[pl.pos[0]-i][pl.pos[1]-j] == 0 and i + j != 0:
+                            self.b[pl.pos[0]-i][pl.pos[1]-j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                            self.b[pl.pos[0]-i][pl.pos[1]-j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+                        if pl.pos[0] + i < 15 and pl.pos[1] - j >= 0 and self.matriz[pl.pos[0]+i][pl.pos[1]-j] == 0 and i + j != 0:
+                            self.b[pl.pos[0]+i][pl.pos[1]-j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                            self.b[pl.pos[0]+i][pl.pos[1]-j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+                        if pl.pos[1] + j < 27 and pl.pos[0] - i >= 0 and self.matriz[pl.pos[0]-i][pl.pos[1]+j] == 0 and i + j != 0:
+                            self.b[pl.pos[0]-i][pl.pos[1]+j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                            self.b[pl.pos[0]-i][pl.pos[1]+j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+                        if pl.pos[0] + i < 15 and pl.pos[1] + j < 27 and self.matriz[pl.pos[0]+i][pl.pos[1]+j] == 0 and i + j != 0:
+                            self.b[pl.pos[0]+i][pl.pos[1]+j].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                            self.b[pl.pos[0]+i][pl.pos[1]+j].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
             
         if X == 1:
             if pl.pos[0]+1 < 15 and pl.pos[1] and self.matriz[pl.pos[0]+1][pl.pos[1]] == 0:

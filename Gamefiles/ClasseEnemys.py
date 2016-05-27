@@ -91,22 +91,17 @@ class Enemys():
            self.atack(pl)
         
         elif distanciax > 0 and abs(distanciax) > abs(distanciay) and Map.matriz[self.pos[0]][self.pos[1]+1] == 0:
-            
             self.right(Map)
             
         elif distanciax < 0 and abs(distanciax) > abs(distanciay) and Map.matriz[self.pos[0]][self.pos[1]-1] == 0:
-            
             self.left(Map)
             
-        elif distanciay > 0 and abs(distanciay) > abs(distanciax) and Map.matriz[self.pos[0]+1][self.pos[1]+1] == 0:
-           
+        elif distanciay > 0 and abs(distanciay) > abs(distanciax) and Map.matriz[self.pos[0]+1][self.pos[1]] == 0:
             self.down(Map)
             
         elif distanciay < 0 and abs(distanciay) > abs(distanciax) and Map.matriz[self.pos[0]-1][self.pos[1]] == 0:
-            
             self.up(Map)
-            
-            
+
         elif abs(distanciay) == abs(distanciax):
             Op = ran.randint(1,3)
             if distanciay < 0 and distanciax < 0 and Map.matriz[self.pos[0]-1][self.pos[1]] == 0 and Map.matriz[self.pos[0]][self.pos[1]-1] == 0:
@@ -133,7 +128,7 @@ class Enemys():
                 if Op == 2:
                     self.down(Map)
             
-        else:
+        elif (distanciay != 0) and (distanciax != 0):
             if distanciay < 0 and Map.matriz[self.pos[0]-1][self.pos[1]] == 0:
                 self.up(Map)
                 
@@ -145,6 +140,33 @@ class Enemys():
             
             elif distanciax > 0 and Map.matriz[self.pos[0]][self.pos[1]+1] == 0:
                 self.right(Map)
+                
+        else:
+            Op = ran.randint(1,3)
+            if distanciay < 0 and Map.matriz[self.pos[0]-1][self.pos[1]] != 0:
+                if Op == 1:
+                    self.left(Map)
+                if Op == 2:
+                    self.right(Map)
+                
+            elif distanciay > 0 and Map.matriz[self.pos[0]+1][self.pos[1]] != 0:
+                if Op == 1:
+                    self.left(Map)
+                if Op == 2:
+                    self.right(Map)
+                
+            elif distanciax < 0 and Map.matriz[self.pos[0]][self.pos[1]-1] != 0:
+                if Op == 1:
+                    self.up(Map)
+                if Op == 2:
+                    self.down(Map)
+            
+            elif distanciax > 0 and Map.matriz[self.pos[0]][self.pos[1]+1] != 0:
+                if Op == 1:
+                    self.up(Map)
+                if Op == 2:
+                    self.down(Map)
+        
     
     def atack(self, pl):
         pl.health -= self.damage
