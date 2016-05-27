@@ -21,7 +21,7 @@ if you want the game to work properly and have shared highscores:
 	after opening yor prompt tpe the following commands
 	"""
 	cd C:\your-game-folder\Magic-Trap\Firecall
-	setup.py install
+	python setup.py install
 	"""
 
 #Congrats your game should be ready to launch
