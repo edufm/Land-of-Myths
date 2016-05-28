@@ -89,8 +89,7 @@ class Mapa():
     def Andar(self, m, pl):
         
         self.Limpa_range(pl, (pl.weapon.ID - 100))
-        
-        click_errado = 0
+
         X = m[0]
         Y = m[1]
         Xp = pl.pos[0]
@@ -149,11 +148,7 @@ class Mapa():
                 b[Xp][Yp].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
                 pl.pos = [X,Y]
                   
-            else:
-                click_errado = 1
-            
-            if click_errado == 0:
-                self.Roda_jogo(pl)
+            self.Roda_jogo(pl)
                           
     def Atira(self, m, pl):
         
