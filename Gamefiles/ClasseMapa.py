@@ -375,6 +375,9 @@ class Mapa():
             if pl.pos[0]+2 < 15 and pl.pos[1]+1 < 27 and self.matriz[pl.pos[0]+2][pl.pos[1]+1] == 0:
                 self.b[pl.pos[0]+2][pl.pos[1]+1].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                 self.b[pl.pos[0]+2][pl.pos[1]+1].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]+2 < 15 and pl.pos[1] >= 0 and self.matriz[pl.pos[0]+2][pl.pos[1]] == 0:
+                self.b[pl.pos[0]+2][pl.pos[1]].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]+2][pl.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
             if pl.pos[0]-1 >= 0 and self.matriz[pl.pos[0]-1][pl.pos[1]] == 0:
                 self.b[pl.pos[0]-1][pl.pos[1]].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                 self.b[pl.pos[0]-1][pl.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
@@ -384,6 +387,9 @@ class Mapa():
             if pl.pos[0]-2 >= 0 and pl.pos[1]+1 < 27 and self.matriz[pl.pos[0]-2][pl.pos[1]+1] == 0:
                 self.b[pl.pos[0]-2][pl.pos[1]+1].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                 self.b[pl.pos[0]-2][pl.pos[1]+1].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0]-2 < 15 and pl.pos[1] >= 0 and self.matriz[pl.pos[0]-2][pl.pos[1]] == 0:
+                self.b[pl.pos[0]-2][pl.pos[1]].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]-2][pl.pos[1]].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
             if pl.pos[1]+1 < 27 and self.matriz[pl.pos[0]][pl.pos[1]+1] == 0:
                 self.b[pl.pos[0]][pl.pos[1]+1].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                 self.b[pl.pos[0]][pl.pos[1]+1].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
@@ -393,6 +399,9 @@ class Mapa():
             if pl.pos[0]-1 >= 0 and pl.pos[1]+2 < 27 and self.matriz[pl.pos[0]-1][pl.pos[1]+2] == 0:
                 self.b[pl.pos[0]-1][pl.pos[1]+2].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                 self.b[pl.pos[0]-1][pl.pos[1]+2].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0] < 15 and pl.pos[1]+2 >= 0 and self.matriz[pl.pos[0]][pl.pos[1]+2] == 0:
+                self.b[pl.pos[0]][pl.pos[1]+2].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]][pl.pos[1]+2].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
             if pl.pos[1]-1 >= 0 and self.matriz[pl.pos[0]][pl.pos[1]-1] == 0:
                 self.b[pl.pos[0]][pl.pos[1]-1].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                 self.b[pl.pos[0]][pl.pos[1]-1].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
@@ -402,6 +411,9 @@ class Mapa():
             if pl.pos[0]+1 < 15 and pl.pos[1]-2 >= 0 and self.matriz[pl.pos[0]+1][pl.pos[1]-2] == 0:
                 self.b[pl.pos[0]+1][pl.pos[1]-2].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
                 self.b[pl.pos[0]+1][pl.pos[1]-2].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
+            if pl.pos[0] < 15 and pl.pos[1]-2 >= 0 and self.matriz[pl.pos[0]][pl.pos[1]-2] == 0:
+                self.b[pl.pos[0]][pl.pos[1]-2].config(image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss])
+                self.b[pl.pos[0]][pl.pos[1]-2].image = ClasseImagens.Tiles[ClasseTrack.Tracker.Boss]
         
         if X == 2:
             if pl.pos[0]+1 < 15 and pl.pos[1] and self.matriz[pl.pos[0]+1][pl.pos[1]] == 0:

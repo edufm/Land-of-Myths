@@ -87,81 +87,106 @@ class Enemys():
     def jogada(self, pl, Map):
         distanciax = pl.pos[1] - self.pos[1]
         distanciay = pl.pos[0] - self.pos[0]
+        
+        down = self.pos[0] + 1 < 15
+        up = self.pos[0] -1 >= 0
+        left = self.pos[1] - 1 >= 0
+        right = self.pos[1] + 1 <= 26
+        
+        left_clear = False
+        right_clear = False
+        up_clear = False
+        down_clear= False
+        
+        if left:
+            left_clear = Map.matriz[self.pos[0]][self.pos[1]-1] == 0
+            
+        if right:
+            right_clear = Map.matriz[self.pos[0]][self.pos[1]+1] == 0
+            
+        if up:
+            up_clear = Map.matriz[self.pos[0]-1][self.pos[1]] == 0
+            
+        if down:
+            down_clear = Map.matriz[self.pos[0]+1][self.pos[1]] == 0
+            
+            
+
         if (distanciax == 0 and abs(distanciay) == 1) or (distanciax == 1 and abs(distanciay) == 0):
            self.atack(pl)
         
-        elif distanciax > 0 and abs(distanciax) > abs(distanciay) and Map.matriz[self.pos[0]][self.pos[1]+1] == 0:
+        elif right_clear and distanciax > 0 and abs(distanciax) > abs(distanciay):
             self.right(Map)
             
-        elif distanciax < 0 and abs(distanciax) > abs(distanciay) and Map.matriz[self.pos[0]][self.pos[1]-1] == 0:
+        elif left_clear and distanciax < 0 and abs(distanciax) > abs(distanciay):
             self.left(Map)
             
-        elif distanciay > 0 and abs(distanciay) > abs(distanciax) and Map.matriz[self.pos[0]+1][self.pos[1]] == 0:
+        elif down_clear and distanciay > 0 and abs(distanciay) > abs(distanciax):
             self.down(Map)
             
-        elif distanciay < 0 and abs(distanciay) > abs(distanciax) and Map.matriz[self.pos[0]-1][self.pos[1]] == 0:
+        elif up_clear and distanciay < 0 and abs(distanciay) > abs(distanciax):
             self.up(Map)
 
         elif abs(distanciay) == abs(distanciax):
             Op = ran.randint(1,3)
-            if distanciay < 0 and distanciax < 0 and Map.matriz[self.pos[0]-1][self.pos[1]] == 0 and Map.matriz[self.pos[0]][self.pos[1]-1] == 0:
+            if up_clear and left_clear and distanciay < 0 and distanciax < 0:
                 if Op == 1:
                     self.left(Map)
                 if Op == 2:
                     self.up(Map)
                     
-            if distanciay > 0 and distanciax < 0 and Map.matriz[self.pos[0]+1][self.pos[1]] == 0 and Map.matriz[self.pos[0]][self.pos[1]-1] == 0:
+            if down_clear and left_clear and distanciay > 0 and distanciax < 0:
                 if Op == 1:
                     self.left(Map)
                 if Op == 2:
                     self.down(Map)
                     
-            if distanciay < 0 and distanciax > 0 and Map.matriz[self.pos[0]-1][self.pos[1]] == 0 and Map.matriz[self.pos[0]][self.pos[1]+1] == 0:
+            if right_clear and up_clear and distanciay < 0 and distanciax > 0:
                 if Op == 1:
                     self.right(Map)
                 if Op == 2:
                     self.up(Map)
 
-            if distanciay > 0 and distanciax > 0 and Map.matriz[self.pos[0]+1][self.pos[1]] == 0 and Map.matriz[self.pos[0]][self.pos[1]+1] == 0:
+            if right_clear and down_clear and distanciay > 0 and distanciax > 0:
                 if Op == 1:
                     self.right(Map)
                 if Op == 2:
                     self.down(Map)
             
         elif (distanciay != 0) and (distanciax != 0):
-            if distanciay < 0 and Map.matriz[self.pos[0]-1][self.pos[1]] == 0:
+            if up_clear and distanciay < 0:
                 self.up(Map)
                 
-            elif distanciay > 0 and Map.matriz[self.pos[0]+1][self.pos[1]] == 0:
+            elif down_clear and distanciay > 0:
                 self.down(Map)
                 
-            elif distanciax < 0 and Map.matriz[self.pos[0]][self.pos[1]-1] == 0:
+            elif left_clear and distanciax < 0:
                 self.left(Map)
             
-            elif distanciax > 0 and Map.matriz[self.pos[0]][self.pos[1]+1] == 0:
+            elif right_clear and distanciax > 0:
                 self.right(Map)
                 
         else:
             Op = ran.randint(1,3)
-            if distanciay < 0 and Map.matriz[self.pos[0]-1][self.pos[1]] != 0:
+            if left_clear and right_clear and distanciay < 0:
                 if Op == 1:
                     self.left(Map)
                 if Op == 2:
                     self.right(Map)
                 
-            elif distanciay > 0 and Map.matriz[self.pos[0]+1][self.pos[1]] != 0:
+            elif left_clear and right_clear and distanciay > 0:
                 if Op == 1:
                     self.left(Map)
                 if Op == 2:
                     self.right(Map)
                 
-            elif distanciax < 0 and Map.matriz[self.pos[0]][self.pos[1]-1] != 0:
+            elif up_clear and down_clear and distanciax < 0:
                 if Op == 1:
                     self.up(Map)
                 if Op == 2:
                     self.down(Map)
             
-            elif distanciax > 0 and Map.matriz[self.pos[0]][self.pos[1]+1] != 0:
+            elif up_clear and down_clear and distanciax > 0:
                 if Op == 1:
                     self.up(Map)
                 if Op == 2:

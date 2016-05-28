@@ -17,10 +17,9 @@ class Gun():
         distanciay = pl.pos[0] - loc[0]
         if distanciay < 0:
             distanciay = loc[0] - pl.pos[0]
-
-        print (distanciax, distanciay)
+            
         Distance = distanciax +  distanciay
-        print (Distance, self.Range)
+
         if Distance < self.Range:
             return 1
         else:
@@ -121,8 +120,7 @@ class Gun():
     #_______________________________Sniper___________________________
     
     def Sniper_X(loc,Map,pl,Damage,First,count):
-        
-        print ("count =",count)
+
         Ammo = 0
         count += 1
         if count == 1:  
@@ -137,58 +135,41 @@ class Gun():
                 if loc[1] < 27:
                     if Map.matriz[loc[0]][loc[1]] == 0 or Map.matriz[loc[0]][loc[1]] > 100:
                         loc[1] += 1
-                        print (loc)
                         Gun.Sniper_X(loc,Map,pl,Damage,0,count)
                     else:
                         Gun.Take_Damage_SN(loc, pl, Map,Damage,count,Ammo)
                         Damage -= 1
-                        print (Damage)
                         loc[1] += 1
-                        print ("pierce",loc)
                         Gun.Take_Damage_SN(loc, pl, Map,Damage,count,Ammo)
             if loc[0] == x and loc[1] < y: # left
                 if loc[1] >= 0:
                     if Map.matriz[loc[0]][loc[1]] == 0 or Map.matriz[loc[0]][loc[1]] > 100:
                         loc[1] -= 1
-                        print (loc)
                         Gun.Sniper_X(loc,Map,pl,Damage,0,count)
                     else:
                         Gun.Take_Damage_SN(loc, pl, Map,Damage,count,Ammo)
                         Damage -= 1
-                        print("DAma",Damage)
                         loc[1] -= 1
-                        print ("pierce",loc)
                         Gun.Sniper_X(loc,Map,pl,Damage, 0, count)
             if loc[0] < x and loc[1] == y: # up
                 if loc[0] >= 0:
                     if Map.matriz[loc[0]][loc[1]] == 0 or Map.matriz[loc[0]][loc[1]] > 100:
                         loc[0] -= 1
-                        print (loc)
                         Gun.Sniper_X(loc,Map,pl,Damage,0,count)
                     else:
                         Gun.Take_Damage_SN(loc, pl, Map,Damage,count,Ammo)
                         Damage -= 1
-                        print("DAma",Damage)
                         loc[0] -= 1
-                        print ("pierce",loc)
                         Gun.Sniper_X(loc,Map,pl,Damage, 0, count)
             if loc[0] > x and loc[1] == y: # down
-                print ("passo 0")
-                print (loc)
                 if loc[0] <= 14:
-                    print ("passo 1")
-                    if Map.matriz[loc[0]][loc[1]] == 0 or Map.matriz[loc[0]][loc[1]] > 100:
-                        print ("passo 2")                        
+                    if Map.matriz[loc[0]][loc[1]] == 0 or Map.matriz[loc[0]][loc[1]] > 100:                    
                         loc[0] += 1
-                        print (loc)
                         Gun.Sniper_X(loc,Map,pl,Damage,0,count)
                     else:
-                        print ("passo 3")
                         Gun.Take_Damage_SN(loc, pl, Map,Damage,count,Ammo)
                         Damage -= 1
-                        print("DAma",Damage)
                         loc[0] += 1
-                        print ("pierce",loc)
                         Gun.Sniper_X(loc,Map,pl,Damage, 0, count)
                         
         #_______________________GErador armas_____________________
@@ -284,7 +265,6 @@ class Gun():
                 if i.pos == loc:
                     i.health -= Damage
                     if i.health <= 0:
-                        print ("dano =", Damage)
                         Damage -= i.health
                         Map.LEnemys.remove(i)    
                         Map.matriz[i.pos[0]][i.pos[1]] = 0
