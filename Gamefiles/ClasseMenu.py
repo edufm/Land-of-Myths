@@ -14,6 +14,7 @@ window.geometry("{0}x{1}+0+0".format(window.winfo_screenwidth(),window.winfo_scr
 from ClasseMapa import Mapa
 from ClasseImagens import *
 from ClassSound import *
+import FireBase
 
 class Menu():
     def __init__(self, lista):
@@ -50,7 +51,7 @@ class Menu():
             Play.place(x=575, y= 330)
             
             Rank = Button(window)
-            Rank.configure(text="Rank",font=("impact",20),bg = "white")
+            Rank.configure(text="Rank",font=("impact",20),bg = "white", command = lambda : FireBase.Construir_Rank_Menu())
             Rank.config(height = 2 , width = 15)
             Rank.place(x = 575 , y = 430)
             
