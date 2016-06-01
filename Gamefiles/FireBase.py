@@ -53,8 +53,8 @@ def ConstruirRank (nome,pontuação,turnos):
     seuscore= Label(mostrardados)
     seuscore.config(text= "Seu Score : {0} : {1} waves : {2} turns".format(nome,pontuação,turnos),font = ("Impact",20),bg="black",foreground="red")
     seuscore.grid(row=1,column=0)
-    ClasseMapa.updategui.submmit.destroy()
-    ClasseMapa.updategui.submmitscore.destroy()
+    ClasseMapa.Mapa.updategui.submmit.destroy()
+    ClasseMapa.Mapa.updategui.submmitscore.destroy()
     
     mostrardados.mainloop()
     
