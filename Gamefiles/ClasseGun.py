@@ -47,6 +47,26 @@ class Gun():
             Gun.Shotgun_Up([pl.pos[0] - 1, loc[1]], Map, pl)
         if loc[0] == (pl.pos[0] + 1) and loc[1] == pl.pos[1]:
             Gun.Shotgun_Down([pl.pos[0] + 1, loc[1]], Map, pl)
+            
+#______________________________Upgrades____________________________
+            def Up_Pistol(self,pl):
+                if pl.inv[0] == 33 and ClasseTrack.Tracker.Pistol_up != ClasseTrack.Tracker.Turno:
+                    pl.inv[0] = 0
+                    Pistol.Damage += 1
+                    ClasseTrack.Tracker.Pistol_up = ClasseTrack.Tracker.Turno
+                    
+            def Up_Shotgun(self,pl):
+                if pl.inv[1] == 12 and ClasseTrack.Tracker.Shotgun_up != ClasseTrack.Tracker.Turno:
+                    pl.inv[1] = 0
+                    Shotgun.Damage += 1
+                    ClasseTrack.Tracker.Shotgun_up = ClasseTrack.Tracker.Turno
+            
+            def Up_Sniper(self,pl):
+                if pl.inv[2] == 9 and ClasseTrack.Tracker.Sniper_up != ClasseTrack.Tracker.Turno:
+                    pl.inv[2] = 0
+                    Sniper.Damage += 1
+                    ClasseTrack.Tracker.Sniper_up = ClasseTrack.Tracker.Turno
+                    
         
 #___________________________________________Shotgun____________________________
     
@@ -56,24 +76,24 @@ class Gun():
             x = loc[0]
             y = loc[1]
             if Map.matriz[x][y] < 100 and Map.matriz[x][y] != 0:
-                Gun.Take_Damage_SG(loc, pl, Map, 5)
+                Gun.Take_Damage_SG(loc, pl, Map, 5 + Shotgun.Damage)
                 
                 loc[1] -= 1
                 loc[0] -= 1
-                Gun.Take_Damage_SG(loc, pl, Map, 2)
+                Gun.Take_Damage_SG(loc, pl, Map, 2 + Shotgun.Damage)
                 loc[0] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 1)
+                Gun.Take_Damage_SG(loc, pl, Map, 1 + Shotgun.Damage)
                 loc[0] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 2)
+                Gun.Take_Damage_SG(loc, pl, Map, 2 + Shotgun.Damage)
                 
             else:
                 loc[1] -= 1
                 loc[0] -= 1
-                Gun.Take_Damage_SG(loc, pl, Map, 3)
+                Gun.Take_Damage_SG(loc, pl, Map, 3 + Shotgun.Damage)
                 loc[0] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 4)
+                Gun.Take_Damage_SG(loc, pl, Map, 4 + Shotgun.Damage)
                 loc[0] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 3)
+                Gun.Take_Damage_SG(loc, pl, Map, 3 + Shotgun.Damage)
                 
             
     def Shotgun_Right(loc,Map,pl):
@@ -82,23 +102,23 @@ class Gun():
             x = loc[0]
             y = loc[1]
             if Map.matriz[x][y] < 100 and Map.matriz[x][y] != 0:
-                Gun.Take_Damage_SG(loc, pl, Map, 5)
+                Gun.Take_Damage_SG(loc, pl, Map, 5 + Shotgun.Damage)
                 
                 loc[1] += 1
                 loc[0] -= 1
-                Gun.Take_Damage_SG(loc, pl, Map, 2)
+                Gun.Take_Damage_SG(loc, pl, Map, 2 + Shotgun.Damage)
                 loc[0] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 1)
+                Gun.Take_Damage_SG(loc, pl, Map, 1 + Shotgun.Damage)
                 loc[0] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 2)
+                Gun.Take_Damage_SG(loc, pl, Map, 2 + Shotgun.Damage)
             else:
                 loc[1] += 1
                 loc[0] -= 1
-                Gun.Take_Damage_SG(loc, pl, Map, 3)
+                Gun.Take_Damage_SG(loc, pl, Map, 3 + Shotgun.Damage)
                 loc[0] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 4)
+                Gun.Take_Damage_SG(loc, pl, Map, 4 + Shotgun.Damage)
                 loc[0] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 3)
+                Gun.Take_Damage_SG(loc, pl, Map, 3 + Shotgun.Damage)
             
     def Shotgun_Down(loc,Map,pl):
         Ammo = Gun.Ammo_Count(pl)
@@ -106,23 +126,23 @@ class Gun():
             x = loc[0]
             y = loc[1]
             if Map.matriz[x][y] < 100 and Map.matriz[x][y] != 0:
-                Gun.Take_Damage_SG(loc, pl, Map, 5)
+                Gun.Take_Damage_SG(loc, pl, Map, 5 + Shotgun.Damage)
                 
                 loc[0] += 1
                 loc[1] -= 1
-                Gun.Take_Damage_SG(loc, pl, Map, 2)
+                Gun.Take_Damage_SG(loc, pl, Map, 2 + Shotgun.Damage)
                 loc[1] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 1)
+                Gun.Take_Damage_SG(loc, pl, Map, 1 + Shotgun.Damage)
                 loc[1] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 2)
+                Gun.Take_Damage_SG(loc, pl, Map, 2 + Shotgun.Damage)
             else:
                 loc[0] += 1
                 loc[1] -= 1
-                Gun.Take_Damage_SG(loc, pl, Map, 3)
+                Gun.Take_Damage_SG(loc, pl, Map, 3 + Shotgun.Damage)
                 loc[1] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 4)
+                Gun.Take_Damage_SG(loc, pl, Map, 4 + Shotgun.Damage)
                 loc[1] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 3)
+                Gun.Take_Damage_SG(loc, pl, Map, 3 + Shotgun.Damage)
             
     def Shotgun_Up(loc, Map, pl):
         Ammo = Gun.Ammo_Count(pl)
@@ -130,23 +150,23 @@ class Gun():
             x = loc[0]
             y = loc[1]
             if Map.matriz[x][y] < 100 and Map.matriz[x][y] != 0:
-                Gun.Take_Damage_SG(loc, pl, Map, 5)
+                Gun.Take_Damage_SG(loc, pl, Map, 5 + Shotgun.Damage)
                 
                 loc[0] -= 1
                 loc[1] -= 1
-                Gun.Take_Damage_SG(loc, pl, Map, 2)
+                Gun.Take_Damage_SG(loc, pl, Map, 2 + Shotgun.Damage)
                 loc[1] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 1)
+                Gun.Take_Damage_SG(loc, pl, Map, 1 + Shotgun.Damage)
                 loc[1] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 2)
+                Gun.Take_Damage_SG(loc, pl, Map, 2 + Shotgun.Damage)
             else:
                 loc[0] -= 1
                 loc[1] -= 1
-                Gun.Take_Damage_SG(loc, pl, Map, 3)
+                Gun.Take_Damage_SG(loc, pl, Map, 3 + Shotgun.Damage)
                 loc[1] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 4)
+                Gun.Take_Damage_SG(loc, pl, Map, 4 + Shotgun.Damage)
                 loc[1] += 1
-                Gun.Take_Damage_SG(loc, pl, Map, 3)
+                Gun.Take_Damage_SG(loc, pl, Map, 3 + Shotgun.Damage)
             
     
 
@@ -319,8 +339,8 @@ class Gun():
         
 Pistol = Gun(100,11,7,1,"Shoot")
 
-Shotgun = Gun(101,4,3,3,"Burst")
+Shotgun = Gun(101,4,3,0,"Burst")
 
-Sniper = Gun(102,3,2,5,"LongWatch")
+Sniper = Gun(102,3,2,0,"LongWatch")
 
 WeaponList = [Pistol,Shotgun,Sniper]

@@ -78,7 +78,7 @@ class Enemys():
         elif pl.weapon.ID == 102:
             if pl.inv[2] > 0: 
                 pl.inv[2] -= 1
-                Gun.Sniper_X(loc,Map,pl,7, 1, 0)
+                Gun.Sniper_X(loc,Map,pl,(7 + ClasseGun.Sniper.Damage), 1, 0)
             
     
     def left(self, Map):
