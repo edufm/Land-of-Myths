@@ -215,9 +215,9 @@ class Mapa():
         botãodevida1.configure(height = 2 , width = 20)
         botãodevida1.grid(row= 16,columnspan = 7)
         time = Label(window)
-        time.configure(text="Time : {0}s".format(2.5),font=("castelar"),bg = "black",foreground="white")
-        time.configure(height = 2, width = 8)
-        time.grid(row= 16, column = 11,columnspan=100)
+        time.configure(text="You will die!".format(2.5),font=("castelar"),bg = "black",foreground="white")
+        time.configure(height = 2, width = 10)
+        time.grid(row= 16, column = 11, columnspan=100)
         wave = Label(window)
         wave.configure(text="Wave : {0}".format(1),font=("castelar"),bg = "black",foreground="white")
         wave.configure(height = 2, width = 7)
@@ -340,7 +340,7 @@ class Mapa():
                 gadjets[11].configure(text = "Play Music")
             
             gadjets[1].configure(height = 2 , width = pl.health)
-            gadjets[2].configure(text = "You will die!!!",bg = "black",foreground="white")
+            gadjets[2].configure(text = "You will die!",bg = "black",foreground="white")
             gadjets[3].configure(text="Wave : {0}".format(Map.Waves),font=("castelar"),bg = "black",foreground="white")
             
             if pl.inv[0] > 0:
