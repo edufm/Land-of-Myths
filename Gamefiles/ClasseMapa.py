@@ -29,7 +29,7 @@ class Mapa():
         
         Map = Mapa(window, np.zeros([15, 27]), [], [], 0, [])   
         
-        pl = Player(20, ClasseGun.Pistol, [7,13], [7, 0, 0])
+        pl = Player(20, ClasseGun.Pistol, [7,13], [11, 0, 0])
         
         ClasseTrack.Tracker.Boss = 0
         ClasseTrack.Tracker.Enemies = 0

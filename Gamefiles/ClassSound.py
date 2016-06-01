@@ -29,8 +29,8 @@ class sound():
         ClasseTrack.Tracker.Music = 0
         
     def Choose_music():
-        musics = [got.play, skyrim.play, pirates.play]
-        a = random.randint(0, 2)
+        musics = [got.play, skyrim.play, pirates.play, stains.play, thisway.play, iwillsurvive.play, rules.play, strange.play, megalovania.play]
+        a = random.randint(0, 8)
         
         return musics[a]
         
@@ -45,4 +45,11 @@ got = sound(".\\sounds\\got.wav")
 skyrim = sound(".\\sounds\\skyrim.wav")
 pirates = sound(".\\sounds\\pirates.wav")
 menum = sound(".\\sounds\\menumusic.wav")
+
+stains = sound(".\\sounds\\Stainsoftime.wav")
+thisway = sound(".\\sounds\\ithastobethisway.wav")
+iwillsurvive = sound(".\\sounds\\Iwillsurvive.wav")
+rules = sound(".\\sounds\\Rulesofnature.wav")
+strange = sound(".\\sounds\\Strangeriremain.wav")
+megalovania = sound(".\\sounds\\Megalovania.wav")
     
