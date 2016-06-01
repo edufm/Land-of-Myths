@@ -170,9 +170,8 @@ class Mapa():
         Enemys.Take_Damage([X,Y], pl, self)
         self.Roda_jogo(pl)
         
-        
     def Roda_jogo(self, pl):
-        
+
         Timer = threading.Timer(1.5, ClasseTimer.Timer, (pl,ClasseTrack.Tracker.Turn))
         ClasseTrack.Tracker.Timername = Timer
         Timer.start()
@@ -182,8 +181,6 @@ class Mapa():
         #faz a jogada dos inimigos para cada inimigo vivo
         for i in self.LEnemys:
             Enemys.jogada(i, pl, self)
-        # atualiza as informações do Gui
-        Mapa.updategui(self, self.gadjets, pl)
         #se acabaram os inimigos, gera uma nova onda
         if ((len(self.LEnemys)) == 0):
             self.Waves += 1
@@ -191,9 +188,10 @@ class Mapa():
             Mapa.update_map(self, pl)
         #Gera aos itens no mapa
         ClasseGun.Gun.Gerar_Guns(self)        
-        
         # Corrige o Range
         self.mostrarange(pl, (pl.weapon.ID - 100))
+        # atualiza as informações do Gui
+        Mapa.updategui(self, self.gadjets, pl)
 
     def update_map(Map, pl):
         if (Map.Waves) % 4 == 0:
