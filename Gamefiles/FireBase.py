@@ -64,7 +64,6 @@ def Ranquear(ranquear):
     a = len(ranquear)
     primeiro = ("Hugo",1,900)
     for i in range(0,a):
-        print(i,len(ranquear))
         if ranquear[i][1] > wmax:
             wmax = ranquear[i][1]
             tmax=  ranquear[i][2]
@@ -83,12 +82,15 @@ def Construir_Rank_Menu():
     for i in records:
         ranquear.append((i,records[i]['Info'][0],records[i]['Info'][1]))    
     primeiro = Ranquear(ranquear)
+    ranquear.remove(primeiro)
     segundo= Ranquear(ranquear)
+    ranquear.remove(segundo)
     terceiro = Ranquear(ranquear)
+    ranquear.remove(terceiro)
     quarto= Ranquear(ranquear)
+    ranquear.remove(quarto)
     quinto = Ranquear(ranquear)
-    print(primeiro)
-    Ranking = Tk()      
+    Ranking = Tk()
     l1 = Label(Ranking)
     l1.config(text=" 1º Place : {0} : {1} waves : {2} turns".format(primeiro[0],primeiro[1],primeiro[2]) ,font = ("Impact",20),bg="black",foreground="red")
     l1.grid(row=0,column =0)
