@@ -1,2 +1,2 @@
 cd .\Gamefiles\
-Main.py
+python Main.py
