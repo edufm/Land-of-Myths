@@ -333,6 +333,8 @@ class Gun():
         if pl.inv[Ammo] > 0:    
             pl.inv[Ammo] -= 1
             return 1
+        else:
+            return 0
             
             #__________________________Trap and torret_____________________________________
 #    def Torret_Shot(pl,Map)
