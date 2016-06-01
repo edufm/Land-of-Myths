@@ -20,11 +20,45 @@ class Enemys():
         if waves%4 != 0:
             N = ClasseTrack.Tracker.Boss
             for i in range((waves%4)*3):
-                E = Enemys(0+level, 1+N, 1, [14, i])
-                Map.matriz[14][i] = 2
-                Map.b[14][i].config(image = ClasseImagens.enemy1[0])
-                Map.b[14][i].image = ClasseImagens.enemy1[0]
-                Map.LEnemys.append(E)
+                b = True
+                while b:
+                    a = ran.randint(1,4)
+                    if a == 1:
+                        x = ran.randint(0,14)
+                        if Map.matriz[x][26] == 0:
+                            b = False
+                            E = Enemys(0+level, 1+N, 1, [x, 26])
+                            Map.matriz[x][26] = 2
+                            Map.b[x][26].config(image = ClasseImagens.enemy1[0])
+                            Map.b[x][26].image = ClasseImagens.enemy1[0]
+                            Map.LEnemys.append(E)
+                    elif a == 2:
+                        x = ran.randint(0,14)
+                        if Map.matriz[x][0] == 0:
+                            b = False
+                            E = Enemys(0+level, 1+N, 1, [x, 0])
+                            Map.matriz[x][0] = 2
+                            Map.b[x][0].config(image = ClasseImagens.enemy1[0])
+                            Map.b[x][0].image = ClasseImagens.enemy1[0]
+                            Map.LEnemys.append(E)
+                    elif a == 3:
+                        x = ran.randint(0,26)
+                        if Map.matriz[14][x] == 0:
+                            b = False
+                            E = Enemys(0+level, 1+N, 1, [14, x])
+                            Map.matriz[14][x] = 2
+                            Map.b[14][x].config(image = ClasseImagens.enemy1[0])
+                            Map.b[14][x].image = ClasseImagens.enemy1[0]
+                            Map.LEnemys.append(E)
+                    elif a == 4:
+                        x = ran.randint(0,26)
+                        if Map.matriz[0][x] == 0:
+                            b = False
+                            E = Enemys(0+level, 1+N, 1, [0, x])
+                            Map.matriz[0][x] = 2
+                            Map.b[0][x].config(image = ClasseImagens.enemy1[0])
+                            Map.b[0][x].image = ClasseImagens.enemy1[0]
+                            Map.LEnemys.append(E)
                 
         if waves%4 == 0:
             N = ClasseTrack.Tracker.Boss

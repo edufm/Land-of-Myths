@@ -186,7 +186,7 @@ class Mapa():
         if ((len(self.LEnemys)) == 0):
             self.Waves += 1
             Enemys.cria_inimigos(self.Waves, self)
-            Mapa.update_map(self, pl)        
+            Mapa.update_map(self, pl)
         #Gera aos itens no mapa
         ClasseGun.Gun.Gerar_Guns(self)        
         
