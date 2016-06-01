@@ -343,10 +343,10 @@ class Gun():
 #    def Torret_Shot(pl,Map)
 
         
-Pistol = Gun(100,11,7,1,"Shoot")
+Pistol = Gun(100,11,7, 1,"Shoot")
 
-Shotgun = Gun(101,4,3,0,"Burst")
+Shotgun = Gun(101,4,3, 0,"Burst")
 
-Sniper = Gun(102,3,2,0,"LongWatch")
+Sniper = Gun(102,3,2, 0,"LongWatch")
 
 WeaponList = [Pistol,Shotgun,Sniper]

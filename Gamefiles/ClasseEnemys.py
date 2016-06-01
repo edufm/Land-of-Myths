@@ -18,7 +18,7 @@ class Enemys():
             level = 2
         Map.LEnemys = []
         if waves%4 != 0:
-            N = ClasseTrack.Tracker.Boss
+            N = waves // 4
             for i in range((waves%4)*3):
                 b = True
                 while b:

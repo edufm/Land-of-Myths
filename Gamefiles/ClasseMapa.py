@@ -206,6 +206,7 @@ class Mapa():
             Map.gadjets[15].config(state = 'active')
             
             ClasseTrack.Tracker.Boss += 1
+            
             for i in range (15):
                 for j in range(27):
                     if Map.matriz[i][j] == 0:
@@ -373,6 +374,8 @@ class Mapa():
         pl.weapon = ClasseGun.WeaponList[X]
         
     def Limpa_range(self, pl, X):
+        if  ClasseTrack.Tracker.Boss%9 == 0:
+            ClasseTrack.Tracker.Boss = 0
         if X == 0:
             for i in range(7):
                 for j in range(7):
