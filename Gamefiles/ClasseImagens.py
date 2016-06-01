@@ -87,8 +87,9 @@ background = PhotoImage(file=".//Imagens//Sprites//background.png")
 background1 = PhotoImage(file=".//Imagens//Sprites//background1.png")
 background2 = PhotoImage(file=".//Imagens//Sprites//background2.png")
 background3 = PhotoImage(file=".//Imagens//Sprites//background3.png")
+lore = PhotoImage(file=".//Imagens//Sprites//lore.png")
 
-backgrounds = [ background , background1, background2 , background3]
+backgrounds = [ background , background1, background2 , background3,lore]
 #backgroundimage = PhotoImage(file=PhotoImage(file=".//Imagens//Tiles//Finalsubranged.png"))
 
 MusicOn = PhotoImage(file=".//Imagens//Menu//Music_On.png")
