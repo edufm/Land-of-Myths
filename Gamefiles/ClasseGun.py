@@ -49,23 +49,26 @@ class Gun():
             Gun.Shotgun_Down([pl.pos[0] + 1, loc[1]], Map, pl)
             
 #______________________________Upgrades____________________________
-            def Up_Pistol(self,pl):
-                if pl.inv[0] == 33 and ClasseTrack.Tracker.Pistol_up != ClasseTrack.Tracker.Turno:
-                    pl.inv[0] = 0
-                    Pistol.Damage += 1
-                    ClasseTrack.Tracker.Pistol_up = ClasseTrack.Tracker.Turno
-                    
-            def Up_Shotgun(self,pl):
-                if pl.inv[1] == 12 and ClasseTrack.Tracker.Shotgun_up != ClasseTrack.Tracker.Turno:
-                    pl.inv[1] = 0
-                    Shotgun.Damage += 1
-                    ClasseTrack.Tracker.Shotgun_up = ClasseTrack.Tracker.Turno
+    def Up_Pistol(pl, button):
+        if pl.inv[0] == 33 and ClasseTrack.Tracker.Pistol_up != ClasseTrack.Tracker.Map.Waves:
+            button.config(state = 'disabled')
+            pl.inv[0] = 0
+            Pistol.Damage += 1
+            ClasseTrack.Tracker.Pistol_up = ClasseTrack.Tracker.Map.Waves
             
-            def Up_Sniper(self,pl):
-                if pl.inv[2] == 9 and ClasseTrack.Tracker.Sniper_up != ClasseTrack.Tracker.Turno:
-                    pl.inv[2] = 0
-                    Sniper.Damage += 1
-                    ClasseTrack.Tracker.Sniper_up = ClasseTrack.Tracker.Turno
+    def Up_Shotgun(pl, button):
+        if pl.inv[1] == 12 and ClasseTrack.Tracker.Shotgun_up != ClasseTrack.Tracker.Map.Waves:
+            button.config(state = 'disabled')
+            pl.inv[1] = 0
+            Shotgun.Damage += 1
+            ClasseTrack.Tracker.Shotgun_up = ClasseTrack.Tracker.Map.Waves
+    
+    def Up_Sniper(pl, button):
+        if pl.inv[2] == 9 and ClasseTrack.Tracker.Sniper_up != ClasseTrack.Tracker.Map.Waves:
+            button.config(state = 'disabled')
+            pl.inv[2] = 0
+            Sniper.Damage += 1
+            ClasseTrack.Tracker.Sniper_up = ClasseTrack.Tracker.Map.Waves
                     
         
 #___________________________________________Shotgun____________________________

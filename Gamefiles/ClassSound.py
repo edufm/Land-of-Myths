@@ -41,11 +41,11 @@ class sound():
 
 shot = sound(".\\sounds\\tiro.wav")
 empty = sound(".\\sounds\\EmptyGun.wav")
+menum = sound(".\\sounds\\menumusic.wav")
+
 got = sound(".\\sounds\\got.wav")
 skyrim = sound(".\\sounds\\skyrim.wav")
 pirates = sound(".\\sounds\\pirates.wav")
-menum = sound(".\\sounds\\menumusic.wav")
-
 stains = sound(".\\sounds\\Stainsoftime.wav")
 thisway = sound(".\\sounds\\ithastobethisway.wav")
 iwillsurvive = sound(".\\sounds\\Iwillsurvive.wav")

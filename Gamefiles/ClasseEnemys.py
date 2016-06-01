@@ -146,7 +146,7 @@ class Enemys():
             
             
 
-        if (distanciax == 0 and abs(distanciay) == 1) or (distanciax == 1 and abs(distanciay) == 0):
+        if (abs(distanciax) == 0 and abs(distanciay) == 1) or (abs(distanciax) == 1 and abs(distanciay) == 0):
            self.atack(pl)
         
         elif right_clear and distanciax > 0 and abs(distanciax) > abs(distanciay):

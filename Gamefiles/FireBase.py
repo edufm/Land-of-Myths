@@ -24,7 +24,7 @@ def SubmmitScore (nome,pontuação, turnos):
     if a == False:
         messagebox.showinfo("Attention", "This name already exists!")
         
-def ConstruirRank (nome,pontuação,turnos):
+def ConstruirRank (nome, pontuação, turnos, L):
     records = eval(my_firebase.get_sync(point="/records"))   
     ranquear = []
     for i in records:
@@ -53,8 +53,9 @@ def ConstruirRank (nome,pontuação,turnos):
     seuscore= Label(mostrardados)
     seuscore.config(text= "Seu Score : {0} : {1} waves : {2} turns".format(nome,pontuação,turnos),font = ("Impact",20),bg="black",foreground="red")
     seuscore.grid(row=1,column=0)
-    ClasseMapa.Mapa.updategui.submmit.destroy()
-    ClasseMapa.Mapa.updategui.submmitscore.destroy()
+    
+    for i in L:
+        i.destroy()
     
     mostrardados.mainloop()
     

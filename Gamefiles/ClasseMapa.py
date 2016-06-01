@@ -20,8 +20,7 @@ class Mapa():
         self.gadjets = gadjets
         self.Waves = Waves
         self.LEnemys = LEnemys
-    
-    
+
     def Start_Game(X, L, window):
         if X == 1:
             for i in L:
@@ -229,23 +228,33 @@ class Mapa():
         Pistolb.configure(height = 36, width = 36, state = 'disabled')
         Pistolb.configure(image = ClasseImagens.guns[0], command= lambda: Mapa.Botão_de_arma(Map, pl, 0))
         Pistolb.image = ClasseImagens.guns[0]
-        Pistolb.grid(row = 5, column = 28, columnspan = 2)
+        Pistolb.grid(row = 3, column = 28, columnspan = 2)
 
         Pammo = Label(window)
         Pammo.configure(text="Ammo :   x{0}".format(0),font=("castelar"),bg = "black",foreground = "white")
         Pammo.configure(height = 2, width = 15)
-        Pammo.grid(row= 5, column = 30)
-
+        Pammo.grid(row= 3, column = 30)
+        
+        Pistolup = Button(window)
+        Pistolup.configure(command= lambda: ClasseGun.Gun.Up_Pistol(pl, Pistolup))
+        Pistolup.configure(bg = "black", foreground = 'red', text = 'UP')
+        Pistolup.grid(row = 4, column = 28, columnspan = 2)
+        
         shotgunb = Button(window)
         shotgunb.configure(height = 36, width = 36, state = 'disabled')
         shotgunb.configure(image = ClasseImagens.guns[1], command= lambda: Mapa.Botão_de_arma(Map, pl, 1))
         shotgunb.image = ClasseImagens.guns[1]
-        shotgunb.grid(row = 7, column = 28, columnspan = 2)
+        shotgunb.grid(row = 6, column = 28, columnspan = 2)
 
         shotammo = Label(window)
         shotammo.configure(text="Ammo :   x{0}".format(0),font=("castelar"),bg = "black",foreground = "white")
         shotammo.configure(height = 2, width = 15)
-        shotammo.grid(row= 7, column = 30)
+        shotammo.grid(row= 6, column = 30)
+        
+        shotgunup = Button(window)
+        shotgunup.configure(command= lambda: ClasseGun.Gun.Up_Shotgun(pl, shotgunup))
+        shotgunup.configure(bg = "black", foreground = 'red', text = 'UP')
+        shotgunup.grid(row = 7, column = 28, columnspan = 2)
 
         Sniperb = Button(window)
         Sniperb.configure(height = 36, width = 36, state = 'disabled')
@@ -257,6 +266,11 @@ class Mapa():
         snipeammo.configure(text="Ammo :   x{0}".format(0),font=("castelar"),bg = "black",foreground = "white")
         snipeammo.configure(height = 2, width = 15)
         snipeammo.grid(row= 9, column = 30)
+        
+        sniperup = Button(window)
+        sniperup.configure(command= lambda: ClasseGun.Gun.Up_Shotgun(pl, sniperup))
+        sniperup.configure(bg = "black", foreground = 'red', text = 'UP')
+        sniperup.grid(row = 10, column = 28, columnspan = 2)
         
         musicbutton = Button(window)
         musicbutton.configure(text = " Play Music",bg = "white",font=("castelar"),command = lambda : sound.play_music(sound.Choose_music()) )
@@ -282,9 +296,11 @@ class Mapa():
          
     def updategui(Map, gadjets, pl):
         if pl.health <= 0:
+            sound.Stop_All()
             for i in range(15):
                 for j in range(27):
                     Map.b[i][j].destroy()
+                    
             for i in gadjets:
                 i.destroy()
                 
@@ -303,7 +319,7 @@ class Mapa():
             submmit = Entry(Map.window)
             submmit.place(x = 610 , y = 550)
             
-            submmitscore = Button(Map.window ,command = lambda : FireBase.SubmmitScore(submmit.get(),Map.Waves,ClasseTrack.Tracker.Turn))
+            submmitscore = Button(Map.window ,command = lambda : FireBase.SubmmitScore(submmit.get(),Map.Waves,ClasseTrack.Tracker.Turn, [submmit, submmitscore]))
             submmitscore.config(text = "Submmit score")
             submmitscore.place(x =740, y =548)
             
