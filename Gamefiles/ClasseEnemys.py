@@ -22,7 +22,7 @@ class Enemys():
             for i in range((waves%4)*3):
                 b = True
                 while b:
-                    a = ran.randint(1,4)
+                    a = ran.randint(1,5)
                     if a == 1:
                         x = ran.randint(0,14)
                         if Map.matriz[x][26] == 0:

@@ -4,15 +4,7 @@ Created on Fri May  6 07:34:13 2016
 
 @author: Hugo
 """
-from tkinter import *
-
-class Imagem:
-    def __init__(self,ImagemFront,ImagemRight,ImagemLeft,ImagemBack):
-        self.Imagem = Imagem
-        self.ImagemDir= ImagemDir
-        self.ImagemEsq = ImagemEsq
-        self.ImagemCost = ImagemCost
-        
+from tkinter import PhotoImage
 
 
 player_front = PhotoImage(file=".//Imagens//Sprites//player_front.png")
