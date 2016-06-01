@@ -7,7 +7,7 @@ import ClasseMapa
 
 my_firebase = firecall.Firebase("https://resplendent-inferno-7886.firebaseio.com/")
 
-def SubmmitScore (nome,pontuação, turnos):
+def SubmmitScore (nome,pontuação, turnos, L):
     
     dicio = {'Info': [pontuação , turnos]}
     a = True
@@ -20,7 +20,7 @@ def SubmmitScore (nome,pontuação, turnos):
         a = False
     if a == True:
         my_firebase.put_sync(point="/records/{0}".format(nome) , data = dicio)
-        ConstruirRank(nome,pontuação,turnos)
+        ConstruirRank(nome,pontuação,turnos, L)
     if a == False:
         messagebox.showinfo("Attention", "This name already exists!")
         

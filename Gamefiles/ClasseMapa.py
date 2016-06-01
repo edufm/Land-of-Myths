@@ -340,7 +340,7 @@ class Mapa():
                 gadjets[11].configure(text = "Play Music")
             
             gadjets[1].configure(height = 2 , width = pl.health)
-            gadjets[2].configure(text="Time : {0}s".format(2.5),font=("castelar"),bg = "black",foreground="white")
+            gadjets[2].configure(text = "You will die!!!",bg = "black",foreground="white")
             gadjets[3].configure(text="Wave : {0}".format(Map.Waves),font=("castelar"),bg = "black",foreground="white")
             
             if pl.inv[0] > 0:
