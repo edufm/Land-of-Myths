@@ -37,6 +37,9 @@ class Mapa():
         ClasseTrack.Tracker.Turn = 0
         ClasseTrack.Tracker.Map = Map
         ClasseTrack.Tracker.pl = pl
+        ClasseTrack.Tracker.Pistol_up = 0
+        ClasseTrack.Tracker.Shotgun_up = 0
+        ClasseTrack.Tracker.Sniper_up = 0
         
         Map.matriz[7][13] = 1
         Mapa.load_map(Map, window, pl)
@@ -268,7 +271,7 @@ class Mapa():
         snipeammo.grid(row= 9, column = 30)
         
         sniperup = Button(window)
-        sniperup.configure(command= lambda: ClasseGun.Gun.Up_Shotgun(pl, sniperup))
+        sniperup.configure(command= lambda: ClasseGun.Gun.Up_Sniper(pl, sniperup))
         sniperup.configure(bg = "black", foreground = 'red', text = 'UP')
         sniperup.grid(row = 10, column = 28, columnspan = 2)
         
