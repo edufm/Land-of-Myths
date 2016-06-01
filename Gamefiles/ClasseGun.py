@@ -178,6 +178,7 @@ class Gun():
         count += 1
         if count == 1:  
             RangeTest =Gun.Check_Range(Sniper, loc, pl) 
+            Damage += Sniper.Damage
         else: 
             RangeTest = 1
             
@@ -193,7 +194,7 @@ class Gun():
                         Gun.Take_Damage_SN(loc, pl, Map,Damage,count,Ammo)
                         Damage -= 1
                         loc[1] += 1
-                        Gun.Take_Damage_SN(loc, pl, Map,Damage,count,Ammo)
+                        Gun.Sniper_X(loc,Map,pl,Damage, 0, count)
             if loc[0] == x and loc[1] < y: # left
                 if loc[1] >= 0:
                     if Map.matriz[loc[0]][loc[1]] == 0 or Map.matriz[loc[0]][loc[1]] > 100:

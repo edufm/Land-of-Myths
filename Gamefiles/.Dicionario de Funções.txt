@@ -65,6 +65,43 @@ Dicionario de funções e classes:
 		- Ammo = Munição da arma
 		- Range = Alcance da arma
 		- Damage = Dano da arma
+		
+		-Check_Range(self ,loc, pl)
+			- Checa a distancia de um objeto até o player
+			
+		-Pick_Weapon(ID, pl)
+			- adiciona munição ao jogador
+			
+		-Weapon_Swap(ID,pl)
+			- Altera a arma equipada pelo jogador
+		
+		-Shotgun_Shot(pl, loc, Map)
+			- testa a direção do tiro da Doze e chama a função correspondente
+			
+		- Up_Pistol(self,pl) ;  Up_Shotgun(self,pl) ;  Up_Sniper(self,pl)
+			- aumenta o dano da arma correspondente
+			- retira todo a munição atual da arma correspondente
+		
+		- Shotgun_Left(loc,Map,pl) ; Shotgun_Right(loc,Map,pl) ; Shotgun_Up(loc,Map,pl) ; Shotgun_Down(loc,Map,pl)
+			- chama a função de ataque da shotgun para os quadrados correspondentes
+			
+		- Sniper_X(loc,Map,pl,Damage,First,count)
+			- Usa Recursividade e ageita todo o dano da Sniper, reduzindo 1 de dano sempre que passa por um inimigo
+		
+		- Gerar_Guns(Map)
+			- gera aleatoriamente armas no mapa e contem um limite de armas que podem existir ao mesmo tempo no mapa
+			
+		- Gerar_Pistol(Map) ; Gerar_Shotgun(Map) ; Gerar_Sniper(Map)
+			- Muda a imagem do botao correspondente para a arma correspondente
+			- Gera o ID da arma na matriz
+			- Contem um teste para não gerar uma arma em cima de outro objeto do mapa
+			
+		- Take_Damage_P(loc, pl, Map) ; Take_Damage_SG(loc, pl, Map, Damage) ; Take_Damage_SN(loc, pl, Map, Damage,count,Ammo)
+			(correspondem a Pistol, Shotgun e Sniper, respectivamente)
+			- Cuida de checar qual dos inimigos no mapa esta sendo atingido e alterar a vida do mesmo.
+			
+		- Ammo_Count(pl)
+			- Retorna 1 e diminue o vaor da munição caso o jogador tenha munição para atacar
 
 4 - Classe Player = Arquivo responsavel pelo player
 
