@@ -194,7 +194,17 @@ class Mapa():
         Mapa.updategui(self, self.gadjets, pl)
 
     def update_map(Map, pl):
+        
         if (Map.Waves) % 4 == 0:
+        
+            ClasseTrack.Tracker.Pistol_up = 0
+            ClasseTrack.Tracker.Shotgun_up = 0
+            ClasseTrack.Tracker.Sniper_up = 0
+        
+            Map.gadjets[13].config(state = 'active')
+            Map.gadjets[14].config(state = 'active')
+            Map.gadjets[15].config(state = 'active')
+            
             ClasseTrack.Tracker.Boss += 1
             for i in range (15):
                 for j in range(27):
@@ -294,6 +304,9 @@ class Mapa():
         Map.gadjets.append(snipeammo)
         Map.gadjets.append(musicbutton)
         Map.gadjets.append(exitbutton)
+        Map.gadjets.append(Pistolup)
+        Map.gadjets.append(shotgunup)
+        Map.gadjets.append(sniperup)
          
     def updategui(Map, gadjets, pl):
         if pl.health <= 0:
